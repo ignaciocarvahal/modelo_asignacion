@@ -12,7 +12,7 @@ import pandas as pd
 import os
 from datetime import datetime
 import matplotlib.pyplot as plt
-from utils import merge, delete
+from utils2 import merge, delete
 from gantt import *
 
 

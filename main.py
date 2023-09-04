@@ -145,7 +145,7 @@ class Assignament:
         print("dict")
         self.model_dict()
 
-"""
+
 
 # Input date string
 start_string = '2023-09-04 00:00:00'
@@ -163,7 +163,7 @@ df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
 
 
-
+"""
 WHERE
   /* 1 en transito 2 cerrado */
   ser.estado = 1
