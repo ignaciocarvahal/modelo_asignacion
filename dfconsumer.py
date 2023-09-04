@@ -11,10 +11,10 @@ import os
 import shutil
 from scrapper import download_secuences
 
-dpw_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/dpw"
-tps_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/tps"
-sti_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/sti"
-
+directorio_actual = os.getcwd()
+dpw_dir = directorio_actual + "\secuencias\\dpw"
+tps_dir = directorio_actual + "\secuencias\\tps"
+sti_dir = directorio_actual + "\secuencias\\sti"
 
 
 def eliminar_contenido_directorio(ruta_directorio):
@@ -86,6 +86,7 @@ def transform_sti(input_df):
     Returns:
         pandas.DataFrame: Transformed DataFrame with columns "contenedor", "fecha", and "comuna".
     """
+    
     input_df = input_df.dropna(subset=['Programacion Despacho'])
     transformed_df = pd.DataFrame()
     #input_df['Dv'] = input_df['Sigla'] + input_df['Numero'].astype(str)
@@ -94,15 +95,26 @@ def transform_sti(input_df):
     #input_df['Dv'] = input_df['Dv'].apply(calcular_verificador_contenedor)
 
     # Combine "Sigla" and "Numero" columns into "contenedor"
+    
     transformed_df['contenedor'] = input_df['Sigla'] + input_df['Numero'].astype(str) + input_df['Dv'].astype(str) 
+    # Combine "Sigla" and "Numero" columns into "contenedor" and fill "Numero" with leading zeros
+    transformed_df['contenedor'] = input_df['Sigla'] + input_df['Numero'].astype(str).str.zfill(6) + input_df['Dv'].astype(str)
+
     
     # Format "Programacion Despacho" column and add "fecha" column
+    # Elimina espacios en blanco adicionales en los valores de la columna 'Programacion Despacho'
+    # Utiliza .loc para eliminar espacios en blanco adicionales en los valores de la columna 'Programacion Despacho'
+    input_df.loc[:, 'Programacion Despacho'] = input_df['Programacion Despacho'].str.strip()
+
+    
+
     transformed_df['fecha'] = pd.to_datetime(input_df['Programacion Despacho'], format="%d/%m/%Y %H:%M", errors='coerce')
+ 
     
     # Add "comuna" column with constant value 'San Antonio'
     transformed_df['comuna'] = 'San Antonio'
     transformed_df['empresa'] = 'sti'
-   # print(transformed_df)
+
     return transformed_df
 
 def transform_tps(input_df):
@@ -168,11 +180,38 @@ def transform_dpw(input_df):
     
     return transformed_df
 
+import pandas as pd
+import difflib
+
+def calcular_similitud(texto1, texto2):
+    # Elimina espacios y convierte a minúsculas
+    texto1 = texto1.replace(" ", "").lower()
+    texto2 = texto2.replace(" ", "").lower()
+
+    # Calcula la similitud entre las cadenas
+    similaridad = difflib.SequenceMatcher(None, texto1, texto2).ratio()
+
+    return similaridad
+
+def encontrar_fila_con_similitud(df, patron):
+    mejor_similitud = 0
+    numero_de_fila = None
+
+    for index, row in df.iterrows():
+        header = " ".join(map(str, row))
+        similitud = calcular_similitud(patron, header)
+        
+        if similitud > mejor_similitud:
+            mejor_similitud = similitud
+            numero_de_fila = index   # Suma 1 porque el índice comienza en 0
+
+    return numero_de_fila
 
 def excel_to_df():
-    dpw_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/dpw"
-    tps_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/tps"
-    sti_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/sti"
+    directorio_actual = os.getcwd()
+    dpw_dir = directorio_actual + "\secuencias\dpw"
+    tps_dir = directorio_actual + "\secuencias\\tps"
+    sti_dir = directorio_actual + "\secuencias\sti"
     
     dfs = {}
     dfs["sti"] = []
@@ -192,13 +231,24 @@ def excel_to_df():
         if archivo.endswith(".xlsx"):
             print(archivo)
             archivo_ruta = os.path.join(tps_dir, archivo)
-            df = pd.read_excel(archivo_ruta, header=3)  # Leer el archivo Excel y convertirlo en DataFrame
             
+            df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
+            # Patrón a buscar en el encabezado
+            patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
+            # Encuentra el número de fila con la mejor similitud
+            numero_de_fila = encontrar_fila_con_similitud(df, patron)
+            df = pd.read_excel(archivo_ruta, header=3)
             dfs["tps"].append(df)
+            
         elif archivo.endswith(".xls"):
             print(archivo)
             archivo_ruta = os.path.join(tps_dir, archivo)
-            df = pd.read_excel(archivo_ruta, header=3)  # Leer el archivo Excel y convertirlo en DataFrame
+            df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
+            
+            patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
+            # Encuentra el número de fila con la mejor similitud
+            numero_de_fila = encontrar_fila_con_similitud(df, patron)
+            df = pd.read_excel(archivo_ruta, header=3)
             
             dfs["tps"].append(df)
 
@@ -330,10 +380,11 @@ def df_portuarios(start_date, end_date, download=True):
     filter_containersretiros.to_excel("retiros//retiros_puerto.xlsx", index=False)
     return filter_containersretiros
 
-"""
+
+
 # Input date string
-start_string = '2023-08-22 00:00:00'
-end_string = '2023-08-22 23:59:00'
+start_string = '2023-09-05 00:00:00'
+end_string = '2023-09-05 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
@@ -342,8 +393,7 @@ df = df_portuarios(start_date, end_date, True)
 #dfs = excel_to_df()
 
 #print(df)
-
-
+"""
 
 #print(len(df))
 """

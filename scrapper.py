@@ -21,16 +21,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import shutil
+from datetime import datetime, timedelta
 
-dpw_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/dpw"
-tps_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/tps"
-sti_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/sti"
 
+directorio_actual = os.getcwd()
+dpw_dir = directorio_actual + "\secuencias\dpw"
+tps_dir = directorio_actual + "\secuencias\tps"
+sti_dir = directorio_actual + "\secuencias\sti"
+print(dpw_dir)
 
 def delete_dir_content():
-    dpw_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/dpw"
-    tps_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/tps"
-    sti_dir = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/sti"
+    directorio_actual = os.getcwd()
+    dpw_dir = directorio_actual + "\secuencias\dpw"
+    tps_dir = directorio_actual + "\secuencias\tps"
+    sti_dir = directorio_actual + "\secuencias\sti"
     
     rutas = [tps_dir, sti_dir, dpw_dir]
     for ruta_directorio in rutas:
@@ -49,10 +53,11 @@ def delete_dir_content():
 
 
 def download_dpw():
+    directorio_actual = os.getcwd()
     options = Options()
     options.add_argument("start-maximized")
     options.add_experimental_option("prefs", {
-        "download.default_directory": "C:\\Users\\Usuario\\OneDrive - Transportes Nuevo Mundo SpA\\Escritorio\\secuencias\\dpw",
+        "download.default_directory": directorio_actual + "\secuencias\dpw",
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
         "safebrowsing.enabled": True
@@ -95,33 +100,6 @@ def download_dpw():
 
     
     driver.quit()
-"""
-
-    for element in elementos:
-        time.sleep(1)
-        print(element.text)
-        element.click()
-        time.sleep(1)
-    #print(element.text)
-    #element.click()
-
-
-
-
-
-
-try:
-    time.sleep(3)
-    # Esperar hasta 1 segundos para que aparezca el elemento
-    wait = WebDriverWait(driver, 5)
-    element2 = wait.until(EC.presence_of_element_located((By.XPATH, '//html/body/div/div[@class="elementor-element elementor-element-94e5164 e-con-full e-flex e-con"]/div/div/div/a')))
-    #element2 = =driver.find_element(By.XPATH, '//html/body/div/div[class="elementor-element elementor-element-94e5164 e-con-full e-flex e-con"]/div/div/div/a')))
-    element2.click()
-    
-    
-except:
-    pass
-"""
     
 
 def query_NAVES():
@@ -158,14 +136,56 @@ def query_NAVES():
         NAVES.append(row[0])
     
     return NAVES
-    
+
+from datetime import datetime, timedelta
+
+def esta_dentro_del_rango(fecha_hora_str):
+    try:
+        # Convierte la cadena de fecha y hora en un objeto de fecha y hora
+        fecha_hora_obj = datetime.strptime(fecha_hora_str, "%d/%m/%Y %H:%M")
+
+        # Obtiene la fecha de hoy
+        hoy = datetime.now()
+
+        # Calcula la fecha de hace un mes desde hoy
+        hace_un_mes = hoy - timedelta(days=30)
+
+        # Compara si la fecha y hora está entre hoy y hace un mes
+        return hace_un_mes <= fecha_hora_obj <= hoy
+    except ValueError:
+        # En caso de que la cadena no tenga el formato correcto
+        return False
+
+import difflib
+
+def calcular_similitud(texto1, texto2):
+    texto1 = texto1.replace(" ", "").lower()
+    texto2 = texto2.replace(" ", "").lower()
+    return difflib.SequenceMatcher(None, texto1, texto2).ratio()
+
+def tiene_similitud_con_lista(texto, lista):
+    for elemento in lista:
+        similitud = calcular_similitud(texto, elemento)
+        if similitud > 0.5:
+            return True
+    return False
+
+
+
 from connection import connectionDB
 
+
+
+
+
+
+
 def download_sti():
+    directorio_actual = os.getcwd()
     options = Options()
     options.add_argument("start-maximized")
     options.add_experimental_option("prefs", {
-        "download.default_directory": "C:\\Users\\Usuario\\OneDrive - Transportes Nuevo Mundo SpA\\Escritorio\\secuencias\\sti",
+        "download.default_directory": directorio_actual + "\secuencias\sti" ,
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
         "safebrowsing.enabled": True
@@ -205,28 +225,34 @@ def download_sti():
     
     # Utilizar XPath para extraer los enlaces
     links = tree.xpath('//tr/td/a')
-
+    arrivals = tree.xpath('//tr/td[4]')
+    
     NAVES = query_NAVES()
+    print(len(NAVES))
+          
     count = 0
     # Imprimir los enlaces
-    for link in links:
-        if count<200:
+    for link, arrival in zip(links, arrivals):
+        if count <= len(NAVES):
             href = link.get('href')
             text = link.text_content()
-            print((str(text) in NAVES))
-            
-        
-            download_page = "https://www.stiport.com" + str(href)
-            enlace = driver.get(download_page)
-            time.sleep(1)
-            descargar =  wait.until(EC.presence_of_element_located((By.XPATH, '//html/body/div/div/div/div/a[@class="tipo_excel"]')))
-            descargar.click()
-            time.sleep(1)
-            driver.back()
-            count += 1
+            if esta_dentro_del_rango(str(arrival.text_content())):
+                if tiene_similitud_con_lista(str(text), NAVES):
+                    print(str(100*count/len(NAVES))[:4]+"%")
+                    download_page = "https://www.stiport.com" + str(href)
+                    enlace = driver.get(download_page)
+                    time.sleep(1)
+                    descargar =  wait.until(EC.presence_of_element_located((By.XPATH, '//html/body/div/div/div/div/a[@class="tipo_excel"]')))
+                    
+                    
+                    descargar.click()
+                    time.sleep(1)
+                    driver.back()
+                    count += 1
         else:
+            print(count)
             break
-    print(NAVES)
+    
     driver.quit()
 
 
@@ -236,9 +262,9 @@ def download_tps():
     
     # URL de la página que deseas scrape
     url = "https://www.tps.cl/tps/site/edic/base/port/entregac.html"
-
+    directorio_actual = os.getcwd()
     # Carpeta donde guardar los archivos descargados
-    directorio_descargas = "C:/Users/Usuario/OneDrive - Transportes Nuevo Mundo SpA/Escritorio/secuencias/tps"
+    directorio_descargas = directorio_actual + "\secuencias\\tps"
     
     
     # Crear la carpeta de descargas si no existe

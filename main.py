@@ -155,15 +155,15 @@ end_string = '2023-09-05 23:59:00'
 start_date = pd.to_datetime(start_string)
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(60*0, start_date, end_date, "+56988876774", False, True)
+assignament = Assignament(60*0, start_date, end_date, "+56998900893", False, True)
 
 assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
-
-
 """
+
+
 WHERE
   /* 1 en transito 2 cerrado */
   ser.estado = 1
