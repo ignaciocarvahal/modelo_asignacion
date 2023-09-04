@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Planificador</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Agregar animación de fade-in */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInAnimation 1s ease-in forwards;
+        }
+
+        @keyframes fadeInAnimation {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Agregar estilo para la imagen del logo */
+        .logo-image {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+        }
+
+        /* Agregar estilo para la animación de carga */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            display: none; /* Ocultar inicialmente */
+        }
+
+        /* Agregar animación de rotación */
+        @keyframes spinAnimation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 fade-in">
+        <!-- Agregar la imagen del logo en la esquina superior derecha -->
+        <img src="{{ url_for('static', filename='tmp/logo.png') }}" alt="Logo" class="logo-image">
+        <style>
+            /* Agregar estilo para la imagen del logo */
+            .logo-image {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 200px; /* Ajustar el ancho deseado aquí */
+                height: auto; /* Mantener la proporción de altura */
+            }
+        </style>
+
+        <h1 class="mb-4">Planificador</h1>
+
+        <form action="/process_data" method="post" onsubmit="showLoadingAnimation()">
+            <div class="mb-3">
+                <label for="olugra" class="form-label">Olgura en minutos:</label>
+                <input type="range" class="form-range" name="olugra" id="olugra" min="0" max="60" value="30">
+                <span id="olugra_value">30</span>
+            </div>
+
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date:</label>
+                <input type="date" class="form-control" name="start_date" id="start_date">
+            </div>
+
+            <div class="mb-3">
+                <label for="start_time" class="form-label">Start Time:</label>
+                <input type="time" class="form-control" name="start_time" id="start_time">
+            </div>
+
+            <div class="mb-3">
+                <label for="end_time" class="form-label">End Time:</label>
+                <input type="time" class="form-control" name="end_time" id="end_time">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Process</button>    
+        </form>
+
+        <!-- Agregar la capa de animación de carga -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mostrar el valor actual del slider
+        const olugraInput = document.getElementById('olugra');
+        const olugraValueSpan = document.getElementById('olugra_value');
+        olugraValueSpan.innerText = olugraInput.value;
+
+        olugraInput.addEventListener('input', () => {
+            olugraValueSpan.innerText = olugraInput.value;
+        });
+
+        // Función para mostrar la animación de carga al enviar el formulario
+        function showLoadingAnimation() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>

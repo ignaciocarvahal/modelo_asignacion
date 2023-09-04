@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario con animación de carga</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Formulario</h1>
+    <form id="parametros-form">
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select class="form-control" id="status" name="status">
+          <option value="1">1</option>
+          <option value="0">0</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="olgura">Olgura:</label>
+        <input type="number" class="form-control" id="olgura" name="olgura" step="0.01">
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="text" class="form-control" id="fecha" name="fecha">
+      </div>
+      <div class="form-group">
+        <label for="inicio">Inicio:</label>
+        <input type="text" class="form-control" id="inicio" name="inicio">
+      </div>
+      <div class="form-group">
+        <label for="final">Final:</label>
+        <input type="text" class="form-control" id="final" name="final">
+      </div>
+<button type="submit" id="submit-btn" class="btn btn-primary">Enviar</button>
+<div class="loading-container">
+  <div class="loading-icon"></div>
+  <p>Guardando datos...</p>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#parametros-form').submit(function(event) {
+      event.preventDefault();
+      $('#submit-btn').prop('disabled', true); // Deshabilitar el botón de envío
+      $('.loading-container').show();
+      $.ajax({
+        url: '/submit_form',
+        type: 'POST',
+        data: $('#parametros-form').serialize(),
+        success: function(data) {
+          $('#submit-btn').prop('disabled', false); // Habilitar el botón de envío nuevamente
+          $('.loading-container').hide();
+          alert('Datos guardados exitosamente. ID: ' + data.id + ', Status: ' + data.status);
+        },
+        error: function() {
+          $('#submit-btn').prop('disabled', false); // Habilitar el botón de envío nuevamente
+          $('.loading-container').hide();
+          alert('Error al guardar los datos.');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loading Animation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Agregar animación de fade-in */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInAnimation 1s ease-in forwards;
+        }
+
+        @keyframes fadeInAnimation {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Agregar estilo para la animación de carga */
+        .loader {
+            border: 8px solid #f3f3f3; /* Luz gris */
+            border-top: 8px solid #3498db; /* Azul */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 fade-in">
+        <h1>Processing...</h1>
+        <div class="loader"></div>
+    </div>
+    <!-- Agregar el siguiente script para realizar la solicitud AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Realizar una solicitud AJAX para obtener los resultados una vez que estén listos
+        function getResults() {
+            $.ajax({
+                url: '/get_results',
+                type: 'GET',
+                success: function(data) {
+                    // Redireccionar a la página de resultados
+                    window.location.href = '/show_results';
+                }
+            });
+        }
+
+        // Llamar a la función para obtener los resultados después de 5 segundos (ajusta este valor según sea necesario)
+        setTimeout(getResults, 5000); // 5000 ms = 5 segundos
+    </script>
+</head>
+<body>
+    <div class="container mt-5 fade-in">
+        
+    </div>
+</body>
+</html>

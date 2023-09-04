@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Resultados</h1>
+
+        <!-- Agregar el número de total de camioneros en grande --> 
+        <h2>Total de Camioneros</h2> 
+        <h1>{{ total_camioneros  }}</h1>
+
+        <!-- Mostrar la imagen planificacion.png -->
+        <h2>Imagen desde planificacion.png:</h2>
+        <img src="{{ url_for('static', filename='tmp/planificacion_trackers.png') }}" alt="Planificación" width="100%" height="100%">
+
+        <!-- Agregar más contenido o espacio al final de la página -->
+        <div style="margin-bottom: 100px;"></div>
+        
+    </div>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            {% if processed %}
+                hideLoading(); // Llamar a la función hideLoading() si el procesamiento se ha completado
+            {% endif %}
+        });
+    </script>
+</body>
+</html>
+

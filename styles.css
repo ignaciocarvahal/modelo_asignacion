@@ -1,0 +1,45 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #555555;
+    text-align: center;
+}
+
+h2 {
+    color: #555555;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #555555;
+}
+
+.form-range {
+    width: 100%;
+}
+
+.btn-primary {
+    display: block;
+    margin: 0 auto;
+}
+
+#pdf_section,
+#excel_section {
+    margin-top: 20px;
+}
+
