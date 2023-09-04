@@ -55,7 +55,7 @@ def job_today():
     
 # Programar la ejecución del script todos los días a las 13:00 y 16:30
 schedule.every().day.at("10:00").do(job_today)
-schedule.every().day.at("13:15").do(job)
+schedule.every().day.at("13:30").do(job)
 schedule.every().day.at("16:30").do(job)
 schedule.every().day.at("18:00").do(job)
 schedule.every().day.at("20:00").do(job)

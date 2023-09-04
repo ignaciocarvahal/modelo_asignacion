@@ -148,8 +148,8 @@ class Assignament:
 
 
 # Input date string
-start_string = '2023-09-04 00:00:00'
-end_string = '2023-09-04 23:59:00'
+start_string = '2023-09-05 00:00:00'
+end_string = '2023-09-05 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
