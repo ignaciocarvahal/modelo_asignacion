@@ -43,8 +43,8 @@ class Assignament:
 
     def Querys(self):
 
-        directory = os.path.dirname(os.getcwd())
-        with open(directory + "\\query_travels.txt", "r") as archivo:
+        directory = os.getcwd()
+        with open(directory + "\\queries\\query_travels.txt", "r") as archivo:
             contenido = archivo.read()
         query = contenido
 
@@ -56,7 +56,7 @@ class Assignament:
 
         df = pd.DataFrame(self.df)
         df.to_excel(
-            directory + "\\modelo de asignacion\\static\\tmp\\query_travels.xlsx", index=False)
+            directory + "\\static\\tmp\\query_travels.xlsx", index=False)
 
         query_trackers = "SELECT DISTINCT ON (usu_rut) nombre, ult_empt_tipo FROM public.timeline_programacion_conductores WHERE tipo_fecha != 'SINDISPONIBILIDAD'  and fecha_desde > '04-08-2023' and fecha_hasta < '06-08-2023' ORDER BY usu_rut, fecha_desde;"
         rows = connectionDB(query_trackers)
@@ -146,7 +146,7 @@ class Assignament:
         self.model_dict()
 
 
-"""
+
 # Input date string
 start_string = '2023-09-05 00:00:00'
 end_string = '2023-09-05 23:59:00'
@@ -162,7 +162,7 @@ assignament.reset()
 df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
 
-
+"""
 WHERE
   /* 1 en transito 2 cerrado */
   ser.estado = 1
