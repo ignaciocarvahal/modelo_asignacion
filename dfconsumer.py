@@ -381,7 +381,7 @@ def df_portuarios(start_date, end_date, download=True):
     return filter_containersretiros
 
 
-
+"""
 # Input date string
 start_string = '2023-09-05 00:00:00'
 end_string = '2023-09-05 23:59:00'
@@ -393,7 +393,7 @@ df = df_portuarios(start_date, end_date, True)
 #dfs = excel_to_df()
 
 #print(df)
-"""
+
 
 #print(len(df))
 """

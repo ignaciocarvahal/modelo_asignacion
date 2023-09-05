@@ -25,16 +25,16 @@ from datetime import datetime, timedelta
 
 
 directorio_actual = os.getcwd()
-dpw_dir = directorio_actual + "\secuencias\dpw"
-tps_dir = directorio_actual + "\secuencias\tps"
-sti_dir = directorio_actual + "\secuencias\sti"
+dpw_dir = directorio_actual + "\secuencias\\dpw"
+tps_dir = directorio_actual + "\secuencias\\tps"
+sti_dir = directorio_actual + "\secuencias\\sti"
 print(dpw_dir)
 
 def delete_dir_content():
     directorio_actual = os.getcwd()
-    dpw_dir = directorio_actual + "\secuencias\dpw"
-    tps_dir = directorio_actual + "\secuencias\tps"
-    sti_dir = directorio_actual + "\secuencias\sti"
+    dpw_dir = directorio_actual + "\secuencias\\dpw"
+    tps_dir = directorio_actual + "\secuencias\\tps"
+    sti_dir = directorio_actual + "\secuencias\\sti"
     
     rutas = [tps_dir, sti_dir, dpw_dir]
     for ruta_directorio in rutas:
@@ -57,7 +57,7 @@ def download_dpw():
     options = Options()
     options.add_argument("start-maximized")
     options.add_experimental_option("prefs", {
-        "download.default_directory": directorio_actual + "\secuencias\dpw",
+        "download.default_directory": directorio_actual + "\secuencias\\dpw",
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
         "safebrowsing.enabled": True
