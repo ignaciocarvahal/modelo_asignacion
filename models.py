@@ -348,7 +348,7 @@ def secuencial_problem(df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, e
         print("todos los posibles")
         trios = combinations(i, trackers)
         print("definicion del problema")
-        #print(datetime.fromtimestamp(i[80183]).strftime('%Y-%m-%d %H:%M:%S'))
+        
         m, x, y = problem3(trios, no_comp, i, Iv, trackers)
         
         print("ejecucion")
@@ -358,17 +358,13 @@ def secuencial_problem(df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, e
         if m.getStatus() == "optimal":
             df = plotSolution(m, x, y, trios, Fv, True)
             
-            #print(df[df['id']==80183]['start_time'])
-            #print(df2)
-            #print("_________________________")
-            #print(df)
             print("Con " + str(len(trackers)) + " camioneros")
             directory = os.getcwd()
             delete(directory)
             datos = merge(df2, df)
-            #print(datos)
+            
             datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
-            #carta_gantt_trackers(datos, start, end)
+            
             m1, x1, y1 = m, x, y
             m.freeProb()
             pass

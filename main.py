@@ -44,15 +44,18 @@ class Assignament:
     def Querys(self):
 
         directory = os.getcwd()
-        with open(directory + "\\queries\\query_travels.txt", "r") as archivo:
+        with open(directory + "\\queries\\new_travels.txt", "r") as archivo:
             contenido = archivo.read()
         query = contenido
-
-        rows = connectionDB(query)
-        # create a dataframe
-
-        self.df = pd.DataFrame(rows, columns=["id", "estado", "eta_fecha", "etapa_tipo", "etapa_titulo",
-                                              "etapa_1_fecha", "hora_presentacion", "id_salida", "id_llegada", "tiempo_minutos", "dist", "posicion", "comuna_nombre"])
+        
+        df = connectionDB_todf(query)
+        df = transform_dataframe(df)
+        pd.set_option('display.float_format', '{:.0f}'.format)
+        
+        df = merged()
+        df = rename_df(df)
+        self.df = df
+        
 
         df = pd.DataFrame(self.df)
         df.to_excel(
@@ -76,7 +79,7 @@ class Assignament:
         print(len(self.trackers))
 
         self.trackers = []
-        for i in range(80):
+        for i in range(86):
             self.trackers.append(str((i, i)))
 
     def preprocessing(self):
@@ -89,6 +92,7 @@ class Assignament:
         self.df, self.df_visualization = time_filler(self.df, df_port)
         self.df = self.df[["id", "hora_salida", "hora_llegada"]]
         # print("hola3", self.df_visualization)
+        
         self.df, self.min_hora_inicio, self.max_hora_salida = group_by_id(
             self.df_visualization)
         
@@ -112,6 +116,7 @@ class Assignament:
             self.Fv = max_hora_salida.to_dict()
             for id, fecha in self.Fv.items():
                 self.Fv[id] = fecha.timestamp()
+                
             self.duration[id] = max_hora_salida.iloc[i].timestamp() - \
                 min_hora_inicio.iloc[i].timestamp()
 
@@ -146,21 +151,22 @@ class Assignament:
         self.model_dict()
 
 
-
 # Input date string
-start_string = '2023-09-05 00:00:00'
-end_string = '2023-09-05 23:59:00'
+start_string = '2023-09-11 00:00:00'
+end_string = '2023-09-11 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(60*0, start_date, end_date, "+56998900893", False, True)
+assignament = Assignament(-60*20, start_date, end_date, "+56988876774", False, True)
 
 assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
+
+
 
 """
 WHERE

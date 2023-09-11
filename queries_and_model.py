@@ -21,7 +21,6 @@ from main import Assignament
 import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_session import Session
-
 import schedule
 import time
 import psycopg2

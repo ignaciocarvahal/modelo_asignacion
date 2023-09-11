@@ -58,21 +58,15 @@ comunas_santiago_chile = [
 def preprocess(df1):
     # crear copia
     df = df1.copy()
-
     pd.set_option('display.max_columns', None)
 
     # preprocesar dataframe
     df = df[df["hora_presentacion"].astype(bool)]
     df = df.dropna(subset=['etapa_1_fecha'])
-    
     df = df.drop(df[df['etapa_1_fecha'] == '0'].index)
     df = df.fillna(120)
 
     return df
-
-
-
-
 
 def date_filter(df1, fecha_referencia, fecha_referencia_fin):
     
@@ -122,6 +116,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=60,  T_estimado_presentac
     tiempo_minutos = list(df['tiempo_minutos'])
     etapa_tipo = list(df['etapa_tipo'])
     comuna = list(df['comuna_nombre'])
+    tiempo_en_cliente = list(df['percentil_70_tiempo_cliente'])
     #por cada elemento del df
     df_visualization = {}
     df_visualization["id"] = []
@@ -150,21 +145,21 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=60,  T_estimado_presentac
             df_visualization["id"].append(idservice[idx])
             df_visualization["etapa"].append("presentacion")
             df_visualization["DT inicio"].append(hora_salida[idx])
-            df_visualization["DT final"].append(hora_salida[idx]+ timedelta(minutes=T_estimado_presentacion))
+            df_visualization["DT final"].append(hora_salida[idx] + timedelta(minutes=tiempo_en_cliente[idx]))
             
             #creando instancia devolucion de vacio
             
             #hora de llegada es igual a la hora en que se llega al lugar de presentacion
             #mas el tiempo de presentacion, i.e. el tiempo de desconsolidacion
             #mas el tiempo estimado por google para el regreso
-            hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=T_estimado_presentacion) 
+            hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=tiempo_en_cliente[idx]) 
             
             #el tiempo de salida es igual al tiempo en que debemos llegar a cumplir 
             #menos el tiempo de viaje estimado por google 
             hora_salida[idx] = hora_salida[idx] - timedelta(minutes=tiempo_minutos[idx])
         #devolucion de vacios 
         elif etapa_tipo[idx] == 3 and comuna[idx] == 'San Antonio':#devolucion vacio 
-            hora_salida[idx] = hora_salida[idx] + timedelta(minutes=T_estimado_presentacion) 
+            hora_salida[idx] = hora_salida[idx] + timedelta(minutes=tiempo_en_cliente[idx]) 
             hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=tiempo_minutos[idx]) + timedelta(minutes=T_estimado_devoluciones) + timedelta(minutes=T_viajes_devolucion_SAI)
             
             #creando instancia de devolucion de vacio
@@ -174,7 +169,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=60,  T_estimado_presentac
             df_visualization["DT final"].append(hora_llegada[idx])
 
         elif etapa_tipo[idx] == 3 and comuna[idx] == 'Valparaíso' or comuna[idx] == 'Cartagena':#devolucion vacio 
-            hora_salida[idx] = hora_salida[idx] + timedelta(minutes=T_estimado_presentacion) 
+            hora_salida[idx] = hora_salida[idx] + timedelta(minutes=tiempo_en_cliente[idx]) 
             hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=tiempo_minutos[idx]) + timedelta(minutes=T_estimado_devoluciones) + timedelta(minutes=T_viajes_devolucion_VAL)
             
             #creando instancia de devolucion de vacio
@@ -184,7 +179,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=60,  T_estimado_presentac
             df_visualization["DT final"].append(hora_llegada[idx])
         
         elif etapa_tipo[idx] == 3 and comuna[idx] in comunas_santiago_chile:#devolucion vacio 
-            hora_salida[idx] = hora_salida[idx] + timedelta(minutes=T_estimado_presentacion) 
+            hora_salida[idx] = hora_salida[idx] + timedelta(minutes=tiempo_en_cliente[idx]) 
             hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=tiempo_minutos[idx]) + timedelta(minutes=T_estimado_devoluciones) + timedelta(minutes=T_viajes_devolucion_STGO)
             
             #creando instancia de devolucion de vacio
