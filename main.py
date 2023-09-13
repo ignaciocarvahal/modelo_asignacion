@@ -55,7 +55,7 @@ class Assignament:
         df = merged()
         df = rename_df(df)
         self.df = df
-        
+        #print(self.df[""])
 
         df = pd.DataFrame(self.df)
         df.to_excel(
@@ -78,9 +78,7 @@ class Assignament:
             self.trackers.append(str((trucker[0], trucker[1])))
         print(len(self.trackers))
 
-        self.trackers = []
-        for i in range(86):
-            self.trackers.append(str((i, i)))
+
 
     def preprocessing(self):
         
@@ -91,10 +89,16 @@ class Assignament:
         # print("hola2", self.df)
         self.df, self.df_visualization = time_filler(self.df, df_port)
         self.df = self.df[["id", "hora_salida", "hora_llegada"]]
-        # print("hola3", self.df_visualization)
+        print(self.df_visualization.columns)
         
         self.df, self.min_hora_inicio, self.max_hora_salida = group_by_id(
             self.df_visualization)
+        
+        n_truckers_ini = int(len(set(self.df_visualization["id"])) * 1) + 1
+        n_truckers_ini = 90
+        self.trackers = []
+        for i in range(n_truckers_ini):
+            self.trackers.append(str((i, i)))
         
 
     def model_dict(self):
@@ -152,14 +156,14 @@ class Assignament:
 
 
 # Input date string
-start_string = '2023-09-11 00:00:00'
-end_string = '2023-09-11 23:59:00'
+start_string = '2023-09-14 00:00:00'
+end_string = '2023-09-14 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(-60*20, start_date, end_date, "+56988876774", False, True)
+assignament = Assignament(-60*0, start_date, end_date, "+56988876774", False, True)
 
 assignament.reset()
 

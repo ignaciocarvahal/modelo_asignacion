@@ -1,1 +1,6 @@
-SELECT DISTINCT ON (usu_rut) nombre, ult_empt_tipo FROM public.timeline_programacion_conductores WHERE tipo_fecha != 'SINDISPONIBILIDAD'  and fecha_desde > '05-09-2023' and fecha_hasta < '06-09-2023' ORDER BY usu_rut, fecha_desde;
+SELECT DISTINCT ON (usu_rut) nombre, ult_empt_tipo 
+FROM public.timeline_programacion_conductores 
+WHERE tipo_fecha != 'SINDISPONIBILIDAD'  
+  AND TO_DATE(fecha_desde, 'DD-MM-YYYY') >= CURRENT_DATE
+  AND TO_DATE(fecha_hasta, 'DD-MM-YYYY') <= CURRENT_DATE + INTERVAL '1 day'
+ORDER BY usu_rut, TO_DATE(fecha_desde, 'DD-MM-YYYY');

@@ -318,9 +318,11 @@ from connection import connectionDB
 def query_contenedores():
     
     query_contenedores =  """
-    SELECT id, numero_contenedor
-        FROM public.servicios
-    	WHERE "createdAt" >= NOW() - INTERVAL '75 days';
+SELECT s.id, s.numero_contenedor, ct.conttam_tamano AS cont_tamano, s.contenedor_peso_carga
+FROM public.servicios AS s
+INNER JOIN public.contenedores_tamanos AS ct ON s.fk_contenedor_tamano = ct.conttam_id
+WHERE s."createdAt" >= NOW() - INTERVAL '75 days';
+
     """
                                 
     #AND ser.estado != 2 AND ser.estado != 999
@@ -328,13 +330,19 @@ def query_contenedores():
     
     contenedor = []
     servicios = []
+    cont_tamano = []
+    contenedor_peso_carga = []
     for row in rows:
         servicios.append(row[0])
         contenedor.append(row[1])
+        cont_tamano.append(row[2])
+        contenedor_peso_carga.append(row[3])
     contenedor = remove_dashes_and_convert(contenedor)
     
     dict_ = {"servicios":servicios,
-             "contenedor":contenedor}
+             "contenedor":contenedor,
+             "cont_tamano":cont_tamano,
+             "contenedor_peso":contenedor_peso_carga}
     
     contenedores = pd.DataFrame(dict_)
     

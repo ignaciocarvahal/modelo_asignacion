@@ -12,7 +12,7 @@ import pandas as pd
 import os
 from datetime import datetime
 import matplotlib.pyplot as plt
-from utils2 import merge, delete
+from utils2 import merge, delete, process_result
 from gantt import *
 
 
@@ -362,7 +362,7 @@ def secuencial_problem(df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, e
             directory = os.getcwd()
             delete(directory)
             datos = merge(df2, df)
-            
+            datos = process_result(datos)
             datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
             
             m1, x1, y1 = m, x, y
@@ -381,6 +381,7 @@ def secuencial_problem(df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, e
             break
     delete(directory)
     datos = merge(df2, df)
+    datos = process_result(datos)
     datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
     carta_gantt_trackers(datos, start, end, mostrar_info)
     print("final")

@@ -119,7 +119,7 @@ def rename_df(df):
     columnas_seleccionadas = ['fk_servicio', 'estado', 'eta_fecha', 'etapa_tipo', 'etapa_titulo',
            'etapa_1_fecha', 'etapa_1_hora', 'direccion_id_salida',
            'direccion_id_llegada', 'tiempo_minutos', 'distancia_mts',
-           'posicion_tipo', 'cont_tamano', 'contenedor_peso', 'comuna_nombre']
+           'posicion_tipo', 'cont_tamano', 'contenedor_peso_carga', 'comuna_nombre']
     
     new_columns = {
         'fk_servicio':'id', 
@@ -135,7 +135,7 @@ def rename_df(df):
         'distancia_mts':'dist',
         'posicion_tipo':'posicion', 
         'cont_tamano':'cont_tamano', 
-        'contenedor_peso':'contenedor_peso', 
+        'contenedor_peso_carga':'contenedor_peso', 
         'comuna_nombre':'comuna_nombre',
         'cli_desp_nombre':'cli_desp_nombre',
         'percentil_70_tiempo_cliente':'percentil_70_tiempo_cliente'
@@ -162,7 +162,7 @@ def merged():
     columnas_seleccionadas = ['fk_servicio', 'estado', 'eta_fecha', 'etapa_tipo', 
                               'etapa_titulo', 'etapa_1_fecha', 'etapa_1_hora', 
                               'direccion_id_salida', 'direccion_id_llegada', 'tiempo_minutos', 
-                              'distancia_mts', 'posicion_tipo', 'cont_tamano', 'contenedor_peso', 
+                              'distancia_mts', 'posicion_tipo', 'cont_tamano', 'contenedor_peso_carga', 
                               'comuna_nombre', 'cli_desp_nombre']
     
     df = df[columnas_seleccionadas]
@@ -182,18 +182,18 @@ def merged():
     
     # Definir los percentiles para identificar outliers (por ejemplo, 5% y 95%)
     percentile_low = 10
-    percentile_high = 90
+    percentile_high = 80
     
     # Calcular los percentiles para identificar los valores límite
     low_limit = df2['tiempo_estadia'].quantile(percentile_low / 100)
     
     high_limit = df2['tiempo_estadia'].quantile(percentile_high / 100)
-    
+    high_limit = 300
     # Filtrar el DataFrame para eliminar outliers
     filtered_df = df2[(df2['tiempo_estadia'] >= low_limit) & (df2['tiempo_estadia'] <= high_limit)]
     
     # Realizar el groupby por 'cli_desp_nombre' en el DataFrame filtrado y calcular el percentil 90
-    grouped = filtered_df.groupby('fk_cliente_despacho')['tiempo_estadia'].quantile(0.65)
+    grouped = filtered_df.groupby('fk_cliente_despacho')['tiempo_estadia'].quantile(0.5)
     
     # Resetear el índice para obtener un DataFrame plano
     grouped = grouped.reset_index()
