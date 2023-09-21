@@ -45,8 +45,15 @@ def concat_dataframes(dataframes_list):
         pandas.DataFrame: Concatenated DataFrame if there are multiple DataFrames,
                           or the single DataFrame if there's only one.
     """
-    if len(dataframes_list) == 1:
+    if len(dataframes_list) < 1:
+        # Crear un DataFrame vacío con las columnas requeridas
+        column_names = ['contenedor', 'fecha', 'comuna', 'empresa']
+        df = pd.DataFrame(columns=column_names)
+        return df
+    
+    elif len(dataframes_list) == 1:
         return dataframes_list[0]
+    
     elif len(dataframes_list) >1:
         #print(dataframes_list)
         concatenated_df = pd.concat(dataframes_list, ignore_index=True)
@@ -187,7 +194,7 @@ def calcular_similitud(texto1, texto2):
     # Elimina espacios y convierte a minúsculas
     texto1 = texto1.replace(" ", "").lower()
     texto2 = texto2.replace(" ", "").lower()
-
+    
     # Calcula la similitud entre las cadenas
     similaridad = difflib.SequenceMatcher(None, texto1, texto2).ratio()
 
@@ -203,7 +210,7 @@ def encontrar_fila_con_similitud(df, patron):
         
         if similitud > mejor_similitud:
             mejor_similitud = similitud
-            numero_de_fila = index   # Suma 1 porque el índice comienza en 0
+            numero_de_fila = index + 1   # Suma 1 porque el índice comienza en 0
 
     return numero_de_fila
 
@@ -223,32 +230,40 @@ def excel_to_df():
     for archivo in os.listdir(dpw_dir):
         if archivo.endswith(".xlsx"):
             archivo_ruta = os.path.join(dpw_dir, archivo)
-            df = pd.read_excel(archivo_ruta, header=4)  # Leer el archivo Excel y convertirlo en DataFrame
+            df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
+            # Patrón a buscar en el encabezado
+            patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
+            # Encuentra el número de fila con la mejor similitud
+            numero_de_fila = encontrar_fila_con_similitud(df1, patron)
+            print("hoalsd", numero_de_fila)
+            df = pd.read_excel(archivo_ruta, header=numero_de_fila)
+           
             dfs["dpw"].append(df)
 
     #tps
     for archivo in os.listdir(tps_dir):
         if archivo.endswith(".xlsx"):
-            print(archivo)
+           
             archivo_ruta = os.path.join(tps_dir, archivo)
             
             df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
             # Patrón a buscar en el encabezado
             patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
             # Encuentra el número de fila con la mejor similitud
-            numero_de_fila = encontrar_fila_con_similitud(df, patron)
-            df = pd.read_excel(archivo_ruta, header=3)
+            numero_de_fila = encontrar_fila_con_similitud(df1, patron)
+            #print("hoalsd", numero_de_fila)
+            df = pd.read_excel(archivo_ruta, header=numero_de_fila)
             dfs["tps"].append(df)
             
         elif archivo.endswith(".xls"):
-            print(archivo)
+          
             archivo_ruta = os.path.join(tps_dir, archivo)
             df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
             
             patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
             # Encuentra el número de fila con la mejor similitud
-            numero_de_fila = encontrar_fila_con_similitud(df, patron)
-            df = pd.read_excel(archivo_ruta, header=3)
+            numero_de_fila = encontrar_fila_con_similitud(df1, patron)
+            df = pd.read_excel(archivo_ruta, header=numero_de_fila)
             
             dfs["tps"].append(df)
 
@@ -256,7 +271,14 @@ def excel_to_df():
     for archivo in os.listdir(sti_dir):
         if archivo.endswith(".xls"):
             archivo_ruta = os.path.join(sti_dir, archivo)
-            df = pd.read_excel(archivo_ruta, header=2)  # Leer el archivo Excel y convertirlo en DataFrame
+            df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
+            # Patrón a buscar en el encabezado
+            patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
+            # Encuentra el número de fila con la mejor similitud
+            numero_de_fila = encontrar_fila_con_similitud(df1, patron)
+            #print("hoalsd", numero_de_fila)
+            df = pd.read_excel(archivo_ruta, header=numero_de_fila)
+           
             dfs["sti"].append(df)
 
     dfs["sti"] = concat_dataframes(dfs["sti"])
@@ -270,9 +292,22 @@ def excel_to_df():
 
 def df_standardizer(dfs):
     df_list = []
-    df_list.append(transform_sti(dfs["sti"]))
-    df_list.append(transform_tps(dfs["tps"]))
-    df_list.append(transform_dpw(dfs["dpw"]))
+    try:
+        df_list.append(transform_sti(dfs["sti"]))
+    except:
+        print("Error de formato en sti")
+        pass
+    try:
+        df_list.append(transform_tps(dfs["tps"]))
+    except:
+        print("Error de formato en tps")
+        pass
+    
+    try:
+        df_list.append(transform_dpw(dfs["dpw"]))
+    except:
+        print("Error de formato en dpw")
+        pass
  
     return concat_dataframes(df_list)
 
@@ -374,6 +409,7 @@ pd.set_option('display.max_rows', None)     # Mostrar todas las filas
 
 def df_portuarios(start_date, end_date, download=True):
     if download == True:
+        
         download_secuences()
         contenedores = query_contenedores()
         dfs = excel_to_df()
@@ -389,15 +425,16 @@ def df_portuarios(start_date, end_date, download=True):
     return filter_containersretiros
 
 
-"""
+
 # Input date string
-start_string = '2023-09-05 00:00:00'
-end_string = '2023-09-05 23:59:00'
+start_string = '2023-09-21 00:00:00'
+end_string = '2023-09-21 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
 end_date = pd.to_datetime(end_string)
 df = df_portuarios(start_date, end_date, True)
+"""
 #dfs = excel_to_df()
 
 #print(df)

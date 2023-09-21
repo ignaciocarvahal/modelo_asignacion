@@ -319,10 +319,26 @@ def download_tps():
 
 
 def download_secuences():
-    delete_dir_content()
-    download_tps()
-    download_dpw()
-    download_sti()
+    try:
+        delete_dir_content()
+    except:
+        print("Error al eliminar archivos de secuencia")
+    
+    try:
+        download_tps()
+    except:
+        print("Error al descargar tps")
+    
+    try:
+        download_dpw()
+    except:
+        print("Error al descargar dpw")
+    
+    try:
+        download_sti()
+    except:
+        print("Error al descargar sti")
+
     
     
     

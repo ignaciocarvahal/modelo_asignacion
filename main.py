@@ -81,8 +81,12 @@ class Assignament:
 
 
     def preprocessing(self):
-        
-        df_port = df_portuarios(self.start_date, self.end_date, self.download)
+        try: 
+            df_port = df_portuarios(self.start_date, self.end_date, self.download)
+        except:
+            print('Error al descargar directos diferidos')
+            df_port = pd.DataFrame(columns=['contenedor', 'fecha', 'comuna', 'empresa', 'servicios', 'cont_tamano', 'contenedor_peso'])
+
         self.df = preprocess(self.df)
         # print("hola", self.df)
         self.df = date_filter(self.df, self.start_date, self.end_date)
@@ -155,21 +159,21 @@ class Assignament:
         self.model_dict()
 
 
+
 # Input date string
-start_string = '2023-09-14 00:00:00'
-end_string = '2023-09-14 23:59:00'
+start_string = '2023-09-21 00:00:00'
+end_string = '2023-09-21 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(-60*0, start_date, end_date, "+56988876774", False, True)
+assignament = Assignament(-60*0, start_date, end_date, '+56998900893', False, True)
 
 assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
-
 
 
 """
