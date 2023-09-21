@@ -450,6 +450,10 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     plt.close()  # Cerrar la figura para liberar memoria
 
 
+
+
+
+"""
 # Input date string
 start_string = '2023-09-13 00:00:00'
 end_string = '2023-09-13 23:59:00'
@@ -472,7 +476,7 @@ mostrar_info = False
 carta_gantt_trackers(datos, start_date, end_date, mostrar_info)
 
 
-"""
+
 directory = os.getcwd()
 datos = pd.read_excel(directory + '\\static\\tmp\\planificacion2.xlsx')  # Asegúrate de que el nombre del archivo sea correcto
 
