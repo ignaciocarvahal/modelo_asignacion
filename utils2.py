@@ -368,7 +368,6 @@ def group_by_id(df):
         'DT final': max_hora_salida.values
     })
     
-    print(df2[df2['id']==80183]['DT inicio'])
     directory = os.getcwd()
     df2.to_excel(directory + '\\static\\tmp\\planificacion3.xlsx')
     return df2, min_hora_inicio, max_hora_salida

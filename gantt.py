@@ -441,9 +441,19 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     ax.yaxis.set_ticklabels([])
     plt.legend()  # Mostrar la leyenda con los nombres de las etapas
 
+    # Obtener la fecha y hora actual
+    fecha = start # datetime.datetime.now()
+
+    
+
+    
+    # Formatear la fecha como una cadena (por ejemplo, "2023-09-22")
+    fecha_formateada = fecha.strftime("%Y-%m-%d")
+
+
     # Generar la ruta y el nombre de archivo para guardar la imagen
     filename = f"{start.day}_{start.month}_corrio_{day}_hora_{hora}{minutos}.png"
-    filepath = os.path.join(directory, 'static', 'tmp', filename)
+    filepath = os.path.join(directory, 'static', 'tmp',fecha_formateada, filename)
 
     # Guardar el gráfico como una imagen en el archivo especificado
     plt.savefig(filepath, bbox_inches='tight')
@@ -451,12 +461,10 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
 
 
 
-
-
 """
 # Input date string
-start_string = '2023-09-13 00:00:00'
-end_string = '2023-09-13 23:59:00'
+start_string = '2023-09-25 00:00:00'
+end_string = '2023-09-25 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
