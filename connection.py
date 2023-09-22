@@ -163,7 +163,7 @@ def merged():
                               'etapa_titulo', 'etapa_1_fecha', 'etapa_1_hora', 
                               'direccion_id_salida', 'direccion_id_llegada', 'tiempo_minutos', 
                               'distancia_mts', 'posicion_tipo', 'cont_tamano', 'contenedor_peso_carga', 
-                              'comuna_nombre', 'cli_desp_nombre']
+                              'comuna_nombre', 'cli_desp_nombre', 'comercial_nombre']
     
     df = df[columnas_seleccionadas]
 

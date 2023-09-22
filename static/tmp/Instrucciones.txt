@@ -1,0 +1,7 @@
+cada carpeta tiene la fecha que queremos correr. 
+
+Ejemplo: Es viernes 22 y corres el lunes 25, entonces, 
+en la carpeta aparecera la fecha del dia lunes 25. 
+
+Dentro de la carpeta, habran archivos con la fecha y hora en 
+que corriste el modelo. 

@@ -34,7 +34,7 @@ ser.id as fk_servicio
 , concat(cond_1.usu_rut) as etapa_1_conductor_rut
 , concat ( TRIM(coalesce(cond_1.usu_nombre,'')),' ',TRIM(coalesce(cond_1.usu_apellido,'')) ) as etapa_1_conductor_nombre
 , coalesce(tract_1.patente,'') as etapa_1_tracto
-
+, comer.usu_nombre as nombre_comercial
 
 , coalesce(ser.almacenaje_principal,'') as almacenaje_principal /* donde se guardo el contenedor cuando se fue a retirar, y antes de la presentacion en cliente */
 , concat( coalesce(ser.cont_fila,''),'-',coalesce(ser.cont_columna,''),'-',coalesce(ser.cont_posicion) ) as posicion_ubicacion /* ultima ubicacion en el patio de TNM */
