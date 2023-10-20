@@ -78,7 +78,6 @@ def connectionDB_todf(query):
     column_names = [desc[0] for desc in cursor.description]
     rows = cursor.fetchall()
     df = pd.DataFrame(rows, columns=column_names)
-
     # Cerrar el cursor y la conexión
     cursor.close()
     connection.close()
@@ -193,7 +192,7 @@ def merged():
     filtered_df = df2[(df2['tiempo_estadia'] >= low_limit) & (df2['tiempo_estadia'] <= high_limit)]
     
     # Realizar el groupby por 'cli_desp_nombre' en el DataFrame filtrado y calcular el percentil 90
-    grouped = filtered_df.groupby('fk_cliente_despacho')['tiempo_estadia'].quantile(0.6)
+    grouped = filtered_df.groupby('fk_cliente_despacho')['tiempo_estadia'].quantile(0.5)
     
     # Resetear el índice para obtener un DataFrame plano
     grouped = grouped.reset_index()

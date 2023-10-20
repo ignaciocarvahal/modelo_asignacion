@@ -13,7 +13,9 @@ import numpy as np
 import random
 import os
 import psycopg2
+import datetime
 from datetime import datetime
+from funciones import *
 from connection import *
 from models import *
 from utils2 import preprocess, time_filler, date_filter, group_by_id, merge
@@ -21,6 +23,7 @@ from gantt import *
 from dfconsumer import df_portuarios
 from whatpy import message
 import datetime
+
 
 class Assignament:
     def __init__(self, olgura, start_date, end_date, cellphone, mostrar_info, download=True, T_estimado_retiros=40,  T_estimado_presentacion=180, T_estimado_descargas=10, T_viaje_retiros_SAI=30, T_viaje_retiros_STGO=160, T_viaje_retiros_VAL=120):
@@ -40,14 +43,19 @@ class Assignament:
         self.duration = {}
         self.mostrar_info = mostrar_info
         self.download = download
-
+        self.start_date = start_date 
+        self.fecha_formateada = ''
+        
     def Querys(self):
 
         # Obtener la fecha que vamos a correr
-        fecha = start_date 
+        fecha = self.start_date 
 
         # Formatear la fecha como una cadena (por ejemplo, "2023-09-22")
         fecha_formateada = fecha.strftime("%Y-%m-%d")
+        
+        
+        self.fecha_formateada = fecha.strftime("%d-%m-%Y")
         directory = os.getcwd()
         
         # Directorio donde crear la carpeta
@@ -122,8 +130,8 @@ class Assignament:
         self.df, self.min_hora_inicio, self.max_hora_salida = group_by_id(
             self.df_visualization)
         
-        n_truckers_ini = int(len(set(self.df_visualization["id"])) * 1) + 1
-        n_truckers_ini = 90
+        n_truckers_ini = initializator(self.df, self.fecha_formateada) 
+        print("kasdasdl", n_truckers_ini)
         self.trackers = []
         for i in range(n_truckers_ini):
             self.trackers.append(str((i, i)))
@@ -157,7 +165,7 @@ class Assignament:
         # Resolver el modelo y medir el tiempo de resolución
         start_time = time.time()
         df, n_camiones, total_camiones = secuencial_problem(
-            self.df_visualization, self.inicios, self.Fv, self.Iv, 50, self.trackers, self.olgura, self.start_date, self.end_date, self.mostrar_info)
+            self.df_visualization, self.inicios, self.Fv, self.Iv, 90, self.trackers, self.olgura, self.start_date, self.end_date, self.mostrar_info)
         end_time = time.time()
 
         # Obtener el tiempo de resolución en segundos
@@ -185,24 +193,25 @@ class Assignament:
 
 
 
-"""
 # Input date string
-start_string = '2023-09-25 00:00:00'
-end_string = '2023-09-25 23:59:00'
+start_string = '2023-10-20 00:00:00'
+end_string = '2023-10-20 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
+
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(-60*0, start_date, end_date, '+56998900893', False, False)
+assignament = Assignament(-60*0, start_date, end_date, '+56998', False, False)
 
 assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
 
-
+"""
 WHERE
+
   /* 1 en transito 2 cerrado */
   ser.estado = 1
 """

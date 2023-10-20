@@ -99,6 +99,7 @@ def run_model_from_db():
     start_date = None 
     end_date = None
     download = False
+
     try:
         # Establecer la conexión a la base de datos
         connection = psycopg2.connect(
@@ -138,6 +139,7 @@ def run_model_from_db():
             
             print(download)
             if status==1:
+                start_date = ""
                 # Convert to a pandas datetime object
                 start_date = pd.to_datetime(start_string)
                 end_date = pd.to_datetime(end_string)

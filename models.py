@@ -122,7 +122,7 @@ def problem3(trios, no_comp, i, Iv, camioneros, timestop=False):
     # Create an empty model
     m1 = scip.Model("assignment2")
     if timestop == False:
-        setMaxTime(m1, 600)  # Establece el tiempo máximo a 60 segundos
+        setMaxTime(m1, 1000)  # Establece el tiempo máximo a 60 segundos
     else: 
         pass
     # Add a variable for each possible assignment
@@ -153,7 +153,7 @@ def problem3(trios, no_comp, i, Iv, camioneros, timestop=False):
 
     # Set the objective function
     #m1.setObjective(scip.quicksum(x[v, c, t] for c in camioneros for v, t in i.items()), sense="minimize")
-
+    m1.setRealParam('limits/gap', 1000)
     m1.setObjective(1 , sense="maximize")
 
 
@@ -236,9 +236,6 @@ def printSolution(model, x, trios):
     else:
         print("No solution")
         
-
-
-
 
 def timestamp_to_date(timestamp):
     try:
@@ -349,7 +346,7 @@ def secuencial_problem(df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, e
         trios = combinations(i, trackers)
         print("definicion del problema")
         
-        m, x, y = problem3(trios, no_comp, i, Iv, trackers)
+        m, x, y = problem3(trios, no_comp, i, Iv, trackers, False)
         
         print("ejecucion")
         execute(m)
@@ -367,17 +364,17 @@ def secuencial_problem(df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, e
             
             m1, x1, y1 = m, x, y
             m.freeProb()
-            pass
+            break
 
         else:
-    
+            
             trackers.append(element)
      
             trios = combinations(i, trackers)
             print("problema final")
   
             print("problema final ejecucion")
-       
+            
             break
     delete(directory)
     datos = merge(df2, df)

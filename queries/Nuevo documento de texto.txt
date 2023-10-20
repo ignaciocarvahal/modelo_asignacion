@@ -1,0 +1,1 @@
+and cli_desp.cli_codigo!=1766
