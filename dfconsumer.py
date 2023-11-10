@@ -82,6 +82,12 @@ def calcular_verificador_contenedor(numero_contenedor):
     verificador = suma % 11
     return str(verificador) if verificador < 10 else "0"
 
+
+
+
+
+
+
 def transform_sti(input_df):
     """
     Transforms the input DataFrame by combining "Sigla" and "Numero" columns,
@@ -93,14 +99,15 @@ def transform_sti(input_df):
     Returns:
         pandas.DataFrame: Transformed DataFrame with columns "contenedor", "fecha", and "comuna".
     """
+    #print(input_df.columns)
     
-    input_df = input_df.dropna(subset=['Programacion Despacho'])
+    input_df = input_df.dropna(subset=['Rango fecha'])
     transformed_df = pd.DataFrame()
-    #input_df['Dv'] = input_df['Sigla'] + input_df['Numero'].astype(str)
-    
+    input_df['Dv'] = input_df['Sigla'] + input_df['Numero'].astype(str)
+    #print(input_df['Dv'])
     # Aplicar la función a la columna 'Dv'
-    #input_df['Dv'] = input_df['Dv'].apply(calcular_verificador_contenedor)
-
+    input_df['Dv'] = input_df['Dv'].apply(calcular_verificador_contenedor)
+    #print(input_df['Dv'])
     # Combine "Sigla" and "Numero" columns into "contenedor"
     
     transformed_df['contenedor'] = input_df['Sigla'] + input_df['Numero'].astype(str) + input_df['Dv'].astype(str) 
@@ -111,12 +118,9 @@ def transform_sti(input_df):
     # Format "Programacion Despacho" column and add "fecha" column
     # Elimina espacios en blanco adicionales en los valores de la columna 'Programacion Despacho'
     # Utiliza .loc para eliminar espacios en blanco adicionales en los valores de la columna 'Programacion Despacho'
-    input_df.loc[:, 'Programacion Despacho'] = input_df['Programacion Despacho'].str.strip()
+    input_df.loc[:, 'Rango fecha'] = input_df['Rango fecha'].str.strip()
 
-    
-
-    transformed_df['fecha'] = pd.to_datetime(input_df['Programacion Despacho'], format="%d/%m/%Y %H:%M", errors='coerce')
- 
+    transformed_df['fecha'] = pd.to_datetime(input_df['Rango fecha'], format="%d/%m/%Y %H:%M", errors='coerce')
     
     # Add "comuna" column with constant value 'San Antonio'
     transformed_df['comuna'] = 'San Antonio'
@@ -176,10 +180,8 @@ def transform_dpw(input_df):
     
     # Use "Unit Nbr" column for "contenedor"
     transformed_df['contenedor'] = input_df['Unit Nbr']
-    
     # Format "Appt Time" column and add "fecha" column
     transformed_df['fecha'] = pd.to_datetime(input_df['Appt Time'], format='%d-%b-%y %H%M')
-    
     # Add "comuna" column with constant value 'San Antonio'
     transformed_df['comuna'] = 'San Antonio'
     # Add "comuna" column with constant value 'San Antonio'
@@ -235,7 +237,7 @@ def excel_to_df():
             patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
             # Encuentra el número de fila con la mejor similitud
             numero_de_fila = encontrar_fila_con_similitud(df1, patron)
-            print("hoalsd", numero_de_fila)
+            #print("hoalsd", numero_de_fila)
             df = pd.read_excel(archivo_ruta, header=numero_de_fila)
            
             dfs["dpw"].append(df)
@@ -260,8 +262,7 @@ def excel_to_df():
             archivo_ruta = os.path.join(tps_dir, archivo)
             df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
             
-            patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
-            # Encuentra el número de fila con la mejor similitud
+            patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"            # Encuentra el número de fila con la mejor similitud
             numero_de_fila = encontrar_fila_con_similitud(df1, patron)
             df = pd.read_excel(archivo_ruta, header=numero_de_fila)
             
@@ -269,22 +270,24 @@ def excel_to_df():
 
     #sti
     for archivo in os.listdir(sti_dir):
-        if archivo.endswith(".xls"):
+        if archivo.endswith(".xls") or archivo.endswith(".xlsx"):
             archivo_ruta = os.path.join(sti_dir, archivo)
             df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
+            #print(df1)
             # Patrón a buscar en el encabezado
-            patron = "N° FECHA HORA OBSERVACIONES CONTENEDOR TIPO ALM IMO"
+            patron = "Sigla	Numero	Dv	C.Alm	Desc. Alm	Descargado	Carga limpia	Desp.Programado	Rango fecha	Fecha descarga	NAVE	ETA"
+
             # Encuentra el número de fila con la mejor similitud
             numero_de_fila = encontrar_fila_con_similitud(df1, patron)
             #print("hoalsd", numero_de_fila)
-            df = pd.read_excel(archivo_ruta, header=numero_de_fila)
-           
+            df = pd.read_excel(archivo_ruta, header=0)
+            #print(df)
             dfs["sti"].append(df)
 
     dfs["sti"] = concat_dataframes(dfs["sti"])
     dfs["tps"] = concat_dataframes(dfs["tps"])
     dfs["dpw"] = concat_dataframes(dfs["dpw"])
-    
+    #print(dfs)
     return dfs
 
 
@@ -292,6 +295,8 @@ def excel_to_df():
 
 def df_standardizer(dfs):
     df_list = []
+    #print(dfs["sti"])
+    df_list.append(transform_sti(dfs["sti"]))
     try:
         df_list.append(transform_sti(dfs["sti"]))
     except:
@@ -413,6 +418,7 @@ def df_portuarios(start_date, end_date, download=True):
         download_secuences()
         contenedores = query_contenedores()
         dfs = excel_to_df()
+        #print(dfs)
         retiros = df_standardizer(dfs)
         retiros = filter_by_date(retiros, start_date, end_date)
     else:
@@ -427,8 +433,8 @@ def df_portuarios(start_date, end_date, download=True):
 
 """
 # Input date string
-start_string = '2023-09-21 00:00:00'
-end_string = '2023-09-21 23:59:00'
+start_string = '2023-11-10 00:00:00'
+end_string = '2023-11-10 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)

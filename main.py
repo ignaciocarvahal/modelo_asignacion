@@ -130,7 +130,7 @@ class Assignament:
         self.df, self.min_hora_inicio, self.max_hora_salida = group_by_id(
             self.df_visualization)
         
-        n_truckers_ini = initializator(self.df, self.fecha_formateada) 
+        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 1
         print("kasdasdl", n_truckers_ini)
         self.trackers = []
         for i in range(n_truckers_ini):
@@ -191,27 +191,26 @@ class Assignament:
         self.model_dict()
 
 
-
-
+"""
 # Input date string
-start_string = '2023-10-20 00:00:00'
-end_string = '2023-10-20 23:59:00'
+start_string = '2023-11-11 00:00:00'
+end_string = '2023-11-11 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
 
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(-60*0, start_date, end_date, '+56998', False, False)
+assignament = Assignament(-60*0, start_date, end_date, '+56998', True, True)
 
 assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
 
-"""
-WHERE
 
+
+WHERE
   /* 1 en transito 2 cerrado */
   ser.estado = 1
 """

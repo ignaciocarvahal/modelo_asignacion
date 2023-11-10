@@ -10,6 +10,7 @@ import schedule
 import time
 import datetime
 from main import Assignament
+from programacion_ws import excel_to_df, insertar_dataframe_en_data_demurrage
 
 def model_execution():
     # Obtener la fecha actual
@@ -26,6 +27,9 @@ def model_execution():
     assignament.reset()
 
     df, n_camiones, total_camioneros = assignament.execute()
+    df = excel_to_df()
+    #print(df.columns)
+    insertar_dataframe_en_data_demurrage(df)
     # print("numero de camioneros", n_camiones)
 
 def model_execution_today():
@@ -41,6 +45,9 @@ def model_execution_today():
 
     df, n_camiones, total_camioneros = assignament.execute()
     # print("numero de camioneros", n_camiones)
+    df = excel_to_df()
+    #print(df.columns)
+    insertar_dataframe_en_data_demurrage(df)
 
 def job():
     
@@ -55,9 +62,9 @@ def job_today():
     
 # Programar la ejecución del script todos los días a las 13:00 y 16:30
 schedule.every().day.at("10:00").do(job_today)
-schedule.every().day.at("13:30").do(job)
-schedule.every().day.at("16:30").do(job)
-schedule.every().day.at("18:00").do(job)
+schedule.every().day.at("13:35").do(job)
+schedule.every().day.at("15:35").do(job)
+schedule.every().day.at("17:48").do(job)
 schedule.every().day.at("20:30").do(job)
 
 while True:

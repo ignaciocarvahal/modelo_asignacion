@@ -22,13 +22,28 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import shutil
 from datetime import datetime, timedelta
+import pandas as pd
+from connection import connectionDB
 
 
 directorio_actual = os.getcwd()
 dpw_dir = directorio_actual + "\secuencias\\dpw"
 tps_dir = directorio_actual + "\secuencias\\tps"
 sti_dir = directorio_actual + "\secuencias\\sti"
-print(dpw_dir)
+
+def encontrar_fila_con_similitud(df, patron):
+    mejor_similitud = 0
+    numero_de_fila = None
+
+    for index, row in df.iterrows():
+        header = " ".join(map(str, row))
+        similitud = calcular_similitud(patron, header)
+        
+        if similitud > mejor_similitud:
+            mejor_similitud = similitud
+            numero_de_fila = index + 1   # Suma 1 porque el índice comienza en 0
+
+    return numero_de_fila
 
 def delete_dir_content():
     directorio_actual = os.getcwd()
@@ -137,7 +152,7 @@ def query_NAVES():
     
     return NAVES
 
-from datetime import datetime, timedelta
+
 
 def esta_dentro_del_rango(fecha_hora_str):
     try:
@@ -171,21 +186,15 @@ def tiene_similitud_con_lista(texto, lista):
     return False
 
 
-
-from connection import connectionDB
-
-
-
-
-
-
-
 def download_sti():
     directorio_actual = os.getcwd()
+    sti_dir = directorio_actual + "\secuencias\sti"
+    sti_dir_tmp = directorio_actual + "\secuencias\sti_tmp"
+    
     options = Options()
     options.add_argument("start-maximized")
     options.add_experimental_option("prefs", {
-        "download.default_directory": directorio_actual + "\secuencias\sti" ,
+        "download.default_directory": directorio_actual + "\secuencias\sti_tmp" ,
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
         "safebrowsing.enabled": True
@@ -196,7 +205,7 @@ def download_sti():
     except: 
         driver = webdriver.Chrome(options=options)
         
-    driver.get("https://www.stiport.com/sti_en_linea/transportistas/informedespachonav.php")
+    driver.get("https://www.stiport.com/sti_en_linea/directos_rango_horario/index.php?origen=TRANS")
     
     
     # Esperar hasta 1 segundos para que aparezca el elemento
@@ -229,7 +238,7 @@ def download_sti():
     
     NAVES = query_NAVES()
     print(len(NAVES))
-          
+    lista_df = []
     count = 0
     # Imprimir los enlaces
     for link, arrival in zip(links, arrivals):
@@ -243,18 +252,51 @@ def download_sti():
                     enlace = driver.get(download_page)
                     time.sleep(1)
                     descargar =  wait.until(EC.presence_of_element_located((By.XPATH, '//html/body/div/div/div/div/a[@class="tipo_excel"]')))
-                    
-                    
                     descargar.click()
                     time.sleep(1)
+                    
+                    for archivo in os.listdir(sti_dir_tmp):        
+                        if archivo.endswith(".xls"):
+                            archivo_ruta = os.path.join(directorio_actual + "\secuencias\sti_tmp", archivo)
+
+                            df1 = pd.read_excel(archivo_ruta, header=0)  # Leer el archivo Excel y convertirlo en DataFrame
+                            
+                            # Patrón a buscar en el encabezado
+                            patron = 'Sigla Numero Dv C.Alm Desc. Alm Descargado Carga limpia Desp.Programado Rango fecha Fecha descarga NAVE ETA'
+                            
+                            # Encuentra el número de fila con la mejor similitud
+                            numero_de_fila = encontrar_fila_con_similitud(df1, patron)
+                            print("asdfasdf", numero_de_fila)
+                            df = pd.read_excel(archivo_ruta, header=numero_de_fila)
+                            df["NAVE"] = str(text.strip())
+                            df["ETA"] = str(arrival.text_content()) #lista_df.append(df)
+                            
+                            print("jpña")
+                            # Reemplaza las barras diagonales con guiones bajos en arrival.text_content()
+                            #arrival_text = re.sub(r'[/\\]', '_', arrival.text_content())
+                            
+                            # Luego, crea la ruta de archivo
+                            file_path = directorio_actual + '\\secuencias\\sti\\' + str(text.strip()) + '.xlsx'
+
+
+                            print(file_path)
+
+                            
+                            #print(directorio_actual + '\\secuencias\\sti\\' +  descapitalize_and_remove_spaces(str(text)) + '.xlsx')
+                            df.to_excel(file_path , index=False) 
+                            
+                            
+                    time.sleep(1)
+                    os.remove(archivo_ruta) 
                     driver.back()
                     count += 1
+
         else:
             print(count)
             break
     
     driver.quit()
-
+    return lista_df
 
 
 
@@ -325,6 +367,11 @@ def download_secuences():
         print("Error al eliminar archivos de secuencia")
     
     try:
+        download_sti()
+    except:
+        print("Error al descargar sti")
+
+    try:
         download_tps()
     except:
         print("Error al descargar tps")
@@ -334,14 +381,11 @@ def download_secuences():
     except:
         print("Error al descargar dpw")
     
-    try:
-        download_sti()
-    except:
-        print("Error al descargar sti")
+
 
     
     
-    
+
 #download_secuences()
 
                             
