@@ -66,6 +66,7 @@ class Assignament:
             os.mkdir(os.path.join(directorio_base, fecha_formateada))
         
         
+        
         with open(directory + "\\queries\\new_travels.txt", "r") as archivo:
             contenido = archivo.read()
         query = contenido
@@ -191,17 +192,17 @@ class Assignament:
         self.model_dict()
 
 
-"""
+
 # Input date string
-start_string = '2023-11-11 00:00:00'
-end_string = '2023-11-11 23:59:00'
+start_string = '2023-11-14 00:00:00'
+end_string = '2023-11-14 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
 
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(-60*0, start_date, end_date, '+56998', True, True)
+assignament = Assignament(-60*0, start_date, end_date, '+56998', True, False)
 
 assignament.reset()
 
@@ -209,7 +210,7 @@ df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
 
 
-
+"""
 WHERE
   /* 1 en transito 2 cerrado */
   ser.estado = 1
