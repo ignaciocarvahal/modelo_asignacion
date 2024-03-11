@@ -130,7 +130,7 @@ def insertar_dataframe_en_data_demurrage(df):
     try:
         # Conectarse a la base de datos PostgreSQL
         conn = psycopg2.connect(
-            host="localhost",
+            host="3.91.152.225",
             database="data_demurrage",
             user="postgres",
             password="ignacio"

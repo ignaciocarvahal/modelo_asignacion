@@ -23,7 +23,7 @@ def model_execution():
     start_date = datetime.datetime.combine(next_day, datetime.time(0, 0))
     end_date = datetime.datetime.combine(next_day, datetime.time(23, 59))
 
-    assignament = Assignament(60*0, start_date, end_date, "+56998900893", False, True)
+    assignament = Assignament(60*10, start_date, end_date, "+56998900893", True, True)
     assignament.reset()
 
     df, n_camiones, total_camioneros = assignament.execute()
@@ -40,7 +40,7 @@ def model_execution_today():
     start_date = datetime.datetime.combine(current_date, datetime.time(0, 0))
     end_date = datetime.datetime.combine(current_date, datetime.time(23, 59))
 
-    assignament = Assignament(60*0, start_date, end_date, "+56998900893", True, False)
+    assignament = Assignament(60*10, start_date, end_date, "+56998900893", True, False)
     assignament.reset()
 
     df, n_camiones, total_camioneros = assignament.execute()
@@ -55,17 +55,29 @@ def job():
     model_execution()
     print("Script ejecutado.")
 
+
 def job_today():
     print("Ejecutando el script...")
     model_execution_today()
     print("Script ejecutado.")
     
 # Programar la ejecución del script todos los días a las 13:00 y 16:30
+
+schedule.every().day.at("08:20").do(job_today)
 schedule.every().day.at("10:00").do(job_today)
-schedule.every().day.at("13:35").do(job)
-schedule.every().day.at("15:35").do(job)
-schedule.every().day.at("17:48").do(job)
-schedule.every().day.at("20:30").do(job)
+schedule.every().day.at("11:00").do(job)
+schedule.every().day.at("12:41").do(job)
+schedule.every().day.at("13:20").do(job)
+schedule.every().day.at("14:10").do(job)
+schedule.every().day.at("15:08").do(job)
+schedule.every().day.at("16:30").do(job)
+schedule.every().day.at("17:14").do(job)
+schedule.every().day.at("18:06").do(job)
+schedule.every().day.at("19:30").do(job)
+schedule.every().day.at("20:50").do(job)
+schedule.every().day.at("21:30").do(job)
+schedule.every().day.at("22:34").do(job)
+#schedule.every().day.at("01:30").do(job)
 
 while True:
     schedule.run_pending()

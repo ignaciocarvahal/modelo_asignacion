@@ -99,16 +99,21 @@ def date_filter(df1, fecha_referencia, fecha_referencia_fin):
     # Crear la columna 'hora_llegada_timestamp' como timestamps
     df['hora_llegada_timestamp'] = df['hora_presentacion'].apply(lambda x: x.timestamp())
     
+    print(fecha_referencia)
     # Convertir la fecha de referencia a timestamp
     timestamp_referencia = fecha_referencia.timestamp()
     timestamp_referencia_fin = fecha_referencia_fin.timestamp()
     #print("hola2", df)
+    print(timestamp_referencia)
+    print()
+    print(df)
     df = df[df['hora_llegada_timestamp']>timestamp_referencia]
     df = df[df['hora_llegada_timestamp']<timestamp_referencia_fin] 
     #print("hola3", df)
     return df
 
-def time_filler(df1, df_portuarios, T_estimado_retiros=60,  T_estimado_presentacion=175, T_estimado_descargas=10, T_viaje_retiros_SAI=40, T_viaje_retiros_STGO=160, T_viaje_retiros_VAL=120, T_estimado_devoluciones=60, T_viajes_devolucion_SAI=40, T_viajes_devolucion_VAL=120, T_viajes_devolucion_STGO=160):#T_estimado_retiros=40,  T_estimado_presentacion=150, T_estimado_descargas=10, T_viaje_retiros_SAI=40, T_viaje_retiros_STGO=160, T_viaje_retiros_VAL=120, T_estimado_devoluciones=40, T_viajes_devolucion_SAI=40, T_viajes_devolucion_VAL=120, T_viajes_devolucion_STGO=160):
+def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentacion=175, T_estimado_descargas=10, T_viaje_retiros_SAI=40, T_viaje_retiros_STGO=160, T_viaje_retiros_VAL=120, T_estimado_devoluciones=60, T_viajes_devolucion_SAI=40, T_viajes_devolucion_VAL=120, T_viajes_devolucion_STGO=160):#T_estimado_retiros=40,  T_estimado_presentacion=150, T_estimado_descargas=10, T_viaje_retiros_SAI=40, T_viaje_retiros_STGO=160, T_viaje_retiros_VAL=120, T_estimado_devoluciones=40, T_viajes_devolucion_SAI=40, T_viajes_devolucion_VAL=120, T_viajes_devolucion_STGO=160):
+    
     
     
     df = df1.copy()
@@ -419,4 +424,4 @@ def delete(directory):
 
     
     
-    
+

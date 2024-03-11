@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jul 12 15:04:15 2023
@@ -21,7 +22,7 @@ from models import *
 from utils2 import preprocess, time_filler, date_filter, group_by_id, merge
 from gantt import *
 from dfconsumer import df_portuarios
-from whatpy import message
+from whatpy import message, resumen
 import datetime
 
 
@@ -67,6 +68,7 @@ class Assignament:
         
         
         
+        
         with open(directory + "\\queries\\new_travels.txt", "r") as archivo:
             contenido = archivo.read()
         query = contenido
@@ -109,7 +111,7 @@ class Assignament:
         self.trackers = []
         for trucker in trackers:
             self.trackers.append(str((trucker[0], trucker[1])))
-        print(len(self.trackers))
+        #print(len(self.trackers))
 
 
 
@@ -131,7 +133,7 @@ class Assignament:
         self.df, self.min_hora_inicio, self.max_hora_salida = group_by_id(
             self.df_visualization)
         
-        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 1
+        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 6
         print("kasdasdl", n_truckers_ini)
         self.trackers = []
         for i in range(n_truckers_ini):
@@ -191,18 +193,18 @@ class Assignament:
         print("dict")
         self.model_dict()
 
-
-
+"""
 # Input date string
-start_string = '2023-11-14 00:00:00'
-end_string = '2023-11-14 23:59:00'
+start_string = '2024-02-20 00:00:00'
+end_string = '2024-02-20 23:59:00'
+
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
 
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(-60*0, start_date, end_date, '+56998', True, False)
+assignament = Assignament(60*15, start_date, end_date, '+56998900893', True, False)
 
 assignament.reset()
 
@@ -210,7 +212,7 @@ df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
 
 
-"""
+
 WHERE
   /* 1 en transito 2 cerrado */
   ser.estado = 1

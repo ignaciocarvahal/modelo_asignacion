@@ -140,7 +140,7 @@ def problem3(trios, no_comp, i, Iv, camioneros, timestop=False):
     # Add the constraint
     for v, t in i.items():
         m1.addCons(scip.quicksum(x[(v, c, t)] for c in camioneros) == 1)
-
+    
     # Add the constraints
     for v, t in no_comp:
         for c in camioneros:

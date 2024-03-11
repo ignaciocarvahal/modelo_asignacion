@@ -69,16 +69,9 @@ left join public.servicios_etapas as eta_0 on eta_1.fk_etapa_anterior=eta_0.id
 
 WHERE
 ser.estado = 1
-AND (
-    eta_1.fecha > TO_CHAR(CURRENT_DATE - INTERVAL '4 days', 'DD-MM-YYYY')
-    OR ser.id IN (SELECT DISTINCT s.id
-                  FROM public.servicios as s
-                  INNER JOIN public.servicios_etapas as eta_1_sub
-                  ON s.id = eta_1_sub.fk_servicio
-                  WHERE eta_1_sub.fecha > TO_CHAR(CURRENT_DATE - INTERVAL '1 days', 'DD-MM-YYYY'))
-)
+
 
 order by 
 ser.id
-, eta_1.posicion 
+ 
 asc

@@ -6,11 +6,72 @@ import pandas as pd
 import os
 import base64
 import psycopg2
-
+from whatpy import message, resumen
 import os
 import paramiko
+from connection import *
+
+import psycopg2
+from datetime import datetime
+
+def subir_datos_modelo(n_chasis_20, n_multis, n_camiones, peak, peak_20):
+    # Datos de conexión
+    host = "54.160.143.94"
+    port = "5432"  # Puerto predeterminado de PostgreSQL
+    database = "formularios"  # Reemplazar por el nombre real de la base de datos
+    user = "postgres"
+    password = "ignacio"
+
+    from datetime import datetime
+    
+    # Obtener la fecha y hora actual
+    fecha_hora_actual = datetime.now()
+    
+    # Formatear la fecha y hora como una cadena
+    formato = "%Y-%m-%d %H:%M:%S"
+    fecha_hora_formateada = fecha_hora_actual.strftime(formato)
 
 
+    # Imprimir la información
+    print(f"Datos a insertar: {n_chasis_20}, {n_multis}, {n_camiones}, {peak}, {peak_20}, {fecha_hora_formateada}")
+
+    #connection 
+    try:
+        # Establecer la conexión
+        connection = psycopg2.connect(
+            host=host,
+            port=port,
+            user=user,
+            password=password,
+            database=database
+        )
+        print("Conexión exitosa a la base de datos PostgreSQL")
+    except (Exception, psycopg2.Error) as error:
+        print("Error al conectarse a la base de datos PostgreSQL:", error)
+        return  # Salir de la función si hay un error de conexión
+
+    cursor = connection.cursor()
+    
+    # Utilizar parámetros para evitar SQL Injection
+    consulta_sql = """
+        INSERT INTO reu_planificacion.data(
+            requerimiento_camiones, requerimiento_chasis_20, requerimiento_chasis_multi,
+            hora_peak, hora_peak_chasis_20, created_at
+        )
+        VALUES (%s, %s, %s, %s, %s, %s);
+    """
+    
+    # Ejecutar la consulta con parámetros
+    cursor.execute(consulta_sql, (n_camiones, n_chasis_20, n_multis, peak, peak_20, fecha_hora_formateada))
+    
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+# Ejemplo de uso
+#subir_datos_modelo(53, 7, 11, "2024-02-15 15:00:01", "2024-02-15 16:00:01")
+
+    
 def upload_file_to_server(local_file_path, remote_directory, server_ip, server_username, server_password):
     try:
         # Establish SSH connection on port 34
@@ -174,7 +235,7 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     max_concurrent_time_20_pesados = service_times.iloc[max_concurrent_index_20_pesados]
 
     # Convertir la columna 'datetime_column' al formato '%H:%M'
-    max_concurrent_time_str = max_concurrent_time_20_pesados.strftime('%H:%M')
+    max_concurrent_time_str_20 = max_concurrent_time_20_pesados.strftime('%H:%M')
 
     # Plot the vertical red line
     #fig, ax2 = plt.subplots(1, 1, figsize=(20, len(trackers) * 0.3), constrained_layout=True, sharex=False)
@@ -458,13 +519,95 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     # Guardar el gráfico como una imagen en el archivo especificado
     plt.savefig(filepath, bbox_inches='tight')
     plt.close()  # Cerrar la figura para liberar memoria
+    print(str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+    
+    
+    
+    
 
+    #try:
+    n_camiones = int(len(trackers))
+    n_multis =int( np.max(concurrent_services_20_pesados_livianos))
+    n_chasis_20 = int(np.max(concurrent_services_20_pesados))
+    
+    # Obtener la fecha y hora actual
+    
+    fecha_actual = datetime.now()
+    
+    # Obtener la hora y minutos de la cadena max_concurrent_time_str
+    hora, minuto = map(int, max_concurrent_time_str.split(':'))
+    
+    # Crear un objeto datetime para mañana con la hora y minutos especificados
+    fecha_manana = fecha_actual + timedelta(days=1)
+    fecha_manana_con_hora = fecha_manana.replace(hour=hora, minute=minuto, second=0)
+    
+    # Obtener el timestamp para max_concurrent_time_str
+    peak = int(round(fecha_manana_con_hora.timestamp()))
+    
+    # Obtener la hora y minutos de la cadena max_concurrent_time_str_20
+    hora, minuto = map(int, max_concurrent_time_str_20.split(':'))
+    
+    # Crear un objeto datetime para mañana con la hora y minutos especificados
+    fecha_manana_con_hora_20 = fecha_manana.replace(hour=hora, minute=minuto, second=0)
+    
+    # Obtener el timestamp para max_concurrent_time_str_20
+    peak_20 = int(round(fecha_manana_con_hora_20.timestamp()))
+    
+    # Convertir los timestamps a objetos datetime
+    peak = datetime.utcfromtimestamp(peak)
+    peak_20 = datetime.utcfromtimestamp(peak_20)
+    #print(n_chasis_20, n_multis, n_camiones, peak, peak_20)
+    subir_datos_modelo(n_chasis_20, n_multis, n_camiones, peak, peak_20)
+    
+    #except:
+       # print("No se pudo subir info a datawarehouse")
+    
+    
+    
+    
+    
+    
+    try:
+        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+        time.sleep(60)
+        
+    except:
+        print("fallo mensaje gantt")
+    
+    try:
+        resumen('+56944930665',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+        time.sleep(60)
+    except:
+        print("fallo gantt mensahe")
 
+    try:
+        resumen('+56944073046',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+        time.sleep(60)
+    except:
+        print("fallo gantt mensahe")
+        
+    try:
+        resumen('+56990399048',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+        time.sleep(60)
+    except:
+        print("fallo gantt mensahe")
+
+    try:
+        resumen('+56944057461',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+        time.sleep(60)
+    except:
+        print("fallo gantt mensahe")
+
+    try:
+        resumen('+56944057281',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+        time.sleep(60)
+    except:
+        print("fallo gantt mensahe")
 
 """
 # Input date string
-start_string = '2023-09-25 00:00:00'
-end_string = '2023-09-25 23:59:00'
+start_string = '2024-02-16 00:00:00'
+end_string = '2024-02-16 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
@@ -487,7 +630,7 @@ carta_gantt_trackers(datos, start_date, end_date, mostrar_info)
 
 directory = os.getcwd()
 datos = pd.read_excel(directory + '\\static\\tmp\\planificacion2.xlsx')  # Asegúrate de que el nombre del archivo sea correcto
-
 #carta_gantt_trackers(datos)
 
+kjh
 """
