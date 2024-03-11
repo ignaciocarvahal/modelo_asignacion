@@ -31913,3 +31913,13 @@ Time: 10:8
 Phone Number: +56990399048
 Message: Resumen para el día 11-03-2024 Minimo 56 transportistas. Minimo 7 chasis de veinte + multi. Minimo 7 chasis de veinte Presentaciones: 53 Retiros: 42comercial cantidad_de_servicios LILIAN 19 DIEGO 14 DWI 22
 --------------------
+Date: 11/3/2024
+Time: 10:10
+Phone Number: +56944057461
+Message: Resumen para el día 11-03-2024 Minimo 56 transportistas. Minimo 7 chasis de veinte + multi. Minimo 7 chasis de veinte Presentaciones: 53 Retiros: 42comercial cantidad_de_servicios LILIAN 19 DIEGO 14 DWI 22
+--------------------
+Date: 11/3/2024
+Time: 10:12
+Phone Number: +56944057281
+Message: Resumen para el día 11-03-2024 Minimo 56 transportistas. Minimo 7 chasis de veinte + multi. Minimo 7 chasis de veinte Presentaciones: 53 Retiros: 42comercial cantidad_de_servicios LILIAN 19 DIEGO 14 DWI 22
+--------------------
