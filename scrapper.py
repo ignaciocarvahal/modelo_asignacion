@@ -139,7 +139,7 @@ def query_NAVES():
     WHERE
         ser.estado = 1
         AND eta_1.tipo = 1
-        AND TO_DATE(eta_1.fecha, 'DD-MM-YYYY') > (CURRENT_DATE - INTERVAL '1 month')
+        AND TO_DATE(eta_1.fecha, 'DD-MM-YYYY') > (CURRENT_DATE - INTERVAL '3 month')
     ORDER BY
         servicio_nave_nombre; """
                                     
