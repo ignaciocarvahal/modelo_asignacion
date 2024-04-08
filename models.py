@@ -14,6 +14,8 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 from utils2 import merge, delete, process_result
 from gantt import *
+import ast
+from cargar_modelo import cargar_modelo
 
 
 
@@ -30,19 +32,59 @@ def obtener_elementos_mayores(diccionario, valor_limite):
     elementos_mayores = {clave: valor for clave, valor in diccionario.items() if valor > valor_limite}
     return elementos_mayores
 
-def combinations(i, camioneros):
-    #here we define all the convinations of the schudeled travels and the trackers that can do it
+    
+def validator(v, j, tipo_viaje, tipo_tracker):
+    #si es propio puede hacer cualquier viaje 
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO':
+        return True
+    
+    #si es asociado no puede ir a retirar a valparaiso ni tampoco hacer viajes de 20
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO':
+        return True
+    
+    #si es porteador o porteador externo solo puede ir a retiros de sai 
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR'  and tipo_viaje[v]=='retiro_sai':
+        return True
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext' and tipo_viaje[v]=='retiro_sai':
+        return True
+    
+    #si es tercero no hace de viajes de 20 ni portea en valpo, ni hace puerto cruzado 
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO' and  tipo_viaje[v] != 'retiro_val' and tipo_viaje[v] != 'Puerto cruzado':
+        return True
+    
+    else:
+        return False
+
+def combinations(i, camioneros, tipo_viaje, tipo_tracker):
+    # Aquí definimos todas las combinaciones de los viajes programados y los trackers que pueden hacerlo
     trios = []
-    #for v in Iv:
-    #    for t in i.values():
+    print("Se inician combinaciones")
+
     for v, t in i.items():
         for j in camioneros:
-            trios.append((v, j, t))
+            if validator(v, j, tipo_viaje, tipo_tracker):
+                #if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR':
+                    #print(tipo_tracker[ast.literal_eval(j)[0]] , tipo_viaje[v])
+
+                trios.append((v, j, t))
+            '''
+            else:
+                if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR':
+                    print(tipo_tracker[ast.literal_eval(j)[0]] , tipo_viaje[v])
+            '''
+    #trios.append((v, j, t))
     trios = set(trios)
-    #print("the number of variables is: " + str(len(trios)))
-    #print(trios)
     return trios
 
+def camioneros_comp(v,camiones, tipo_viaje, tipo_tracker):
+    comp = []
+    viajes = []
+    for c in camiones:
+        if validator(v, c, tipo_viaje, tipo_tracker):
+            comp.append(c)
+            viajes.append(v)
+    return comp, viajes
 
 #we check the feasability of making two travels with the same tracker. If the end time of one travel is later
 #than the start time of another travel that begins after the first one, these two travels are not compatible.
@@ -62,7 +104,7 @@ def no_compatible(Iv, i, Fv, olgura):
 
             else:
                 eta[(inicio, final)] = 1
-                
+
     return no_comp
 
 
@@ -77,138 +119,95 @@ def slicer(valor_limite, i):
 def setMaxTime(model, max_time):
     model.setRealParam('limits/time', max_time)
 
-def problem(trios, no_comp, i, Iv, camioneros, timestop=False):
-    # Create an empty model
-    m1 = scip.Model("assignment2")
-    if timestop == False:
-        setMaxTime(m1,240)  # Establece el tiempo máximo a 60 segundos
-    else: 
-        pass
-    # Add a variable for each possible assignment
-    x = {}
-    for trio in trios:
-        x[trio] = m1.addVar(vtype="B", name="locate[" + str(trio) + "]")
-
-
-    # Crear variables auxiliares y_c
-    y = {}
-    for c in camioneros:
-        y[c] = m1.addVar(vtype="B", name=f"y_{c}")
-        
+def objective_function(v, j, tipo_viaje, tipo_tracker):
     
-    # Add the constraint
-    for v, t in i.items():
-        m1.addCons(scip.quicksum(x[(v, c, t)] for c in camioneros) >= 1)
+    
+    resultado = 0 
+    
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR' and tipo_viaje[v]=='retiro_sai':
+        return 1000
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext' and tipo_viaje[v]=='retiro_sai':
+        return -100
 
-    # Add the constraints
-    for v, t in no_comp:
-        for c in camioneros:
-            m1.addCons(x[v[0], c, t[0]] + x[v[1], c, t[1]] <= 1)
-            
-    # Restricción: Definición de las variables auxiliares y_c si el camionero c tiene un servicio entonces tiene que estar disponible 
-    #for c in camioneros:
-    #   m1.addCons(y[c] >= sum(x[v, c, t] for v, t in i.items())/len(Iv))
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] == 'retiro_sai':
+        return 20
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] != 'retiro_sai':
+        return 1000
+    # 
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] == 'viaje_20':
+        return 2500
+    
+    #elif tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO':
+    #    return 130
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] == 'viaje_20':
+        return -100
+    
+    #elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO'and tipo_viaje[v] != 'viaje_20':
+    #    return 0
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] != 'retiro_sai':
+        return 20
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] == 'retiro_sai':
+        return 20
+    
+    elif (tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO'):
+        return -2000
+    
+    else:
+        return 0
     
 
-    # Set the objective function
-    m1.setObjective(scip.quicksum(x[v, c, t] for c in camioneros for v, t in i.items()), sense="minimize")
-
-    #m1.setObjective(1 , sense="maximize")
-
-
-    return m1, x, y
-
-def problem3(trios, no_comp, i, Iv, camioneros, timestop=False):
+def problem3( tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timestop=False):
+    
     # Create an empty model
     m1 = scip.Model("assignment2")
     if timestop == False:
         setMaxTime(m1, 1000)  # Establece el tiempo máximo a 60 segundos
     else: 
         pass
-    # Add a variable for each possible assignment
-    x = {}
-    for trio in trios:
-        x[trio] = m1.addVar(vtype="B", name="locate[" + str(trio) + "]")
-
-
-    # Crear variables auxiliares y_c
-    y = {}
-    for c in camioneros:
-        y[c] = m1.addVar(vtype="B", name=f"y_{c}")
-        
-    
-    # Add the constraint
-    for v, t in i.items():
-        m1.addCons(scip.quicksum(x[(v, c, t)] for c in camioneros) == 1)
-    
-    # Add the constraints
-    for v, t in no_comp:
-        for c in camioneros:
-            m1.addCons(x[v[0], c, t[0]] + x[v[1], c, t[1]] <= 1)
-            
-    # Restricción: Definición de las variables auxiliares y_c si el camionero c tiene un servicio entonces tiene que estar disponible 
-    #for c in camioneros:
-    #   m1.addCons(y[c] >= sum(x[v, c, t] for v, t in i.items())/len(Iv))
-    
-
-    # Set the objective function
-    #m1.setObjective(scip.quicksum(x[v, c, t] for c in camioneros for v, t in i.items()), sense="minimize")
-    m1.setRealParam('limits/gap', 1000)
-    m1.setObjective(1 , sense="maximize")
-
-
-    return m1, x, y
-
-    # Call the printSolution() function with the model as an argument
-    #printSolution(m)
-    # Call the plotSolution() function with the model as an argument
-    
-    
-def problem2(trios, no_comp, i, Iv, camioneros):
-    # Create an empty model
-    m1 = scip.Model("assignment1")
     
     # Add a variable for each possible assignment
     x = {}
     for trio in trios:
         x[trio] = m1.addVar(vtype="B", name="locate[" + str(trio) + "]")
-    print("hola4")
 
-    # Crear variables auxiliares y_c
-    y = {}
-    for c in camioneros:
-        y[c] = m1.addVar(vtype="B", name=f"y_{c}")
-    print("hola5")
     # Add the constraint
     for v, t in i.items():
-        m1.addCons(scip.quicksum(x[(v, c, t)] for c in camioneros) == 1)
-    print("hola6")
+        m1.addCons(scip.quicksum(x[(v, c, t)] for c in camioneros_comp(v, camioneros, tipo_viaje, tipo_tracker)[0]) == 1)
+    
     # Add the constraints
     for v, t in no_comp:
         for c in camioneros:
-            m1.addCons(x[v[0], c, t[0]] + x[v[1], c, t[1]] <= 1)
-    print("hola7")
-    # Restricción: Definición de las variables auxiliares y_c si el camionero c tiene un servicio entonces tiene que estar disponible 
-    #for c in camioneros:
-    #    for v, t in i.items():
-    #        m1.addCons(y[c] >= x[v, c, t] )
-    
-    # Restricción: Definición de las variables auxiliares y_c si el camionero c tiene un servicio entonces tiene que estar disponible 
-    for c in camioneros:
-        m1.addCons(y[c] * len(Iv) >= sum(x[v, c, t] for v, t in i.items()))
-    print("hola8")
+            if validator(v[0], c, tipo_viaje, tipo_tracker) and validator(v[1], c, tipo_viaje, tipo_tracker):
+                m1.addCons(x[v[0], c, t[0]] + x[v[1], c, t[1]] <= 1)
+ 
     # Set the objective function
-    #m1.setObjective(scip.quicksum(x[v, c, t] for c in camioneros for v, t in i.items()), sense="maximize")
+    m1.setRealParam('limits/gap', 10)
     
-    # Set the objective function
-    m1.setObjective(scip.quicksum(y[c] for c in camioneros), sense="minimize")
-    print("hola9")
-    #m1.setObjective(1, sense="minimize")
-    return m1, x, y
+    #m1.setObjective(1 , sense="maximize")
+    
+    
+    m1.setObjective(
+        scip.quicksum(
+            objective_function(v, c, tipo_viaje, tipo_tracker) * x[v, c, t]
+            for v, t in i.items()
+            for c in camioneros
+            if (v, c, t) in x  # Verifica que la clave exista en el diccionario x
+        ),
+        sense="maximize"
+    )
+    
+    
+    return m1, x
 
     # Call the printSolution() function with the model as an argument
     #printSolution(m)
     # Call the plotSolution() function with the model as an argument
+    
 
 
 
@@ -248,8 +247,9 @@ def timestamp_to_date(timestamp):
 
 def plotSolution(model, x, y, trios,Fv, export=False):
     
-    if model.getStatus() == "optimal":
-        print("\nCost: %g" % model.getObjVal())
+    if True:#model.getStatus() == "optimal":
+        
+        #print("\nCost: %g" % model.getObjVal())
         #print("\nBuy:")
         travels = []
         trackers = []
@@ -297,13 +297,12 @@ def plotSolution(model, x, y, trios,Fv, export=False):
     df = pd.DataFrame(dictionary)
     #print(df)
     fig, ax = plt.subplots(1, figsize=(16, 6))
-    
+    #print(df["Trackers"])
     ax.barh(df["Trackers"], df["start_to_end_time"], left=df['start_time'])
     plt.savefig(ruta_imagen + "\\static\\tmp\\planificacion.png")
     plt.show()
     
     df = pd.DataFrame(df)
-    
     df.to_excel(ruta_imagen + "\\static\\tmp\\planificacion.xlsx", index=False)
     
     return df
@@ -311,22 +310,6 @@ def plotSolution(model, x, y, trios,Fv, export=False):
 
 
 
-def hotstart(m1, m2):
-    print("fase 1")
-    solution = m1.getBestSol()
-    variable = m1.getVars()
-    n_vars = m1.getNVars()
-    newsol = m2.createSol()
-    print("fase 2")
-    if m1.getStatus() == "OPTIMAL" or m1.getStatus() =="FEASIBLE" :
-        print("warmstart")
-        for n in range(n_vars):
-            print(n)
-            newsol[variable[n]] = m1.getSolVal(solution, variable[n])
-
-        m2.trySol(newsol)
-    #else: 
-    #    m1.optimize()
 
 
 def remove_last_element(lst):
@@ -336,31 +319,36 @@ def remove_last_element(lst):
         print("The list is already empty.")
         return None
 
-def secuencial_problem(df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, end, mostrar_info):
+def secuencial_problem(tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, end, mostrar_info):
     trackers = trackers1
     total_camioneros = trackers
     print("no compatibles")
     no_comp = no_compatible(Iv, i, Fv, olgura)
     for n_trackers in range(max_trackers, 0, -1):
         print("todos los posibles")
-        trios = combinations(i, trackers)
+        trios = combinations(i, trackers, tipo_viaje, tipo_tracker)
         print("definicion del problema")
-        
-        m, x, y = problem3(trios, no_comp, i, Iv, trackers, False)
-        
+  
+        m, x = problem3( tipo_viaje, tipo_tracker, trios, no_comp, i, Iv, trackers, False)
+        y ={}
         print("ejecucion")
         execute(m)
         element = remove_last_element(trackers)
         
         if m.getStatus() == "optimal":
-            df = plotSolution(m, x, y, trios, Fv, True)
-            
+            try:
+                df = plotSolution(m, x, y, trios, Fv, True)
+            except:
+                print("error al plotear la solución")
             print("Con " + str(len(trackers)) + " camioneros")
             directory = os.getcwd()
             delete(directory)
+            print(df.columns, df2.columns)
             datos = merge(df2, df)
+           
             datos = process_result(datos)
             datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
+            cargar_modelo(datos)
             
             m1, x1, y1 = m, x, y
             m.freeProb()
@@ -370,21 +358,29 @@ def secuencial_problem(df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, e
             
             trackers.append(element)
      
-            trios = combinations(i, trackers)
+            #trios = combinations(i, trackers)
             print("problema final")
   
             print("problema final ejecucion")
             
             break
+    df = plotSolution(m, x, y, trios, Fv, True)
+    directory = os.getcwd()
     delete(directory)
     datos = merge(df2, df)
     datos = process_result(datos)
     datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
+    print(datos.columns)
+    cargar_modelo(datos)
     carta_gantt_trackers(datos, start, end, mostrar_info)
     print("final")
-    df = plotSolution(m1, x1, y1, trios, Fv, True)
-   
-    m1.freeProb()
+    
+    try:  
+        df = plotSolution(m1, x1, y1, trios, Fv, True)
+    except:
+        print("error al plotear la solución")
+        
+    m.freeProb()
     return df, len(trackers) , len(total_camioneros)
             
 

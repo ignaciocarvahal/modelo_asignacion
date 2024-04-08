@@ -179,6 +179,7 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
 
     # Merge the last service end time back to the original data
     datos = pd.merge(datos, last_service_end_time, on='Trackers')
+   
 
     # Ordenar los servicios según la columna "last_end_time"
     datos.sort_values(by='last_end_time', ascending=True, inplace=True)
@@ -187,10 +188,21 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
 
     # Crear una lista de conductores
     trackers = datos['Trackers'].unique()
+    # Convertir cadenas de texto a tuplas
+    trackers_tuplas = [eval(t) for t in trackers]
+    
+    # Contar el número de tuplas con el formato deseado
+    conteo_porteadores = sum(1 for t in trackers_tuplas if 'Porteador' in t[0])
+    conteo_terceros = sum(1 for t in trackers_tuplas if 'Tercero' in t[0])
+    
+    print(f"Número de porteadores: {conteo_porteadores}")
+    print(f"Número de terceros: {conteo_terceros}")
+    
     tracker_positions = {tracker: pos for pos, tracker in enumerate(trackers)}
 
     datos.reset_index(inplace=True)
     hitos = datos[datos['DT duracion'] == pd.Timedelta(seconds=0)]
+    
     nrows = datos.shape[0]
 
     # Crear una lista de todos los momentos en que inician y terminan los servicios
@@ -520,10 +532,6 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     plt.savefig(filepath, bbox_inches='tight')
     plt.close()  # Cerrar la figura para liberar memoria
     print(str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
-    
-    
-    
-    
 
     #try:
     n_camiones = int(len(trackers))
@@ -565,15 +573,17 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     
     
     
-    
+
+    #resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+
     
     try:
-        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+        #resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
         time.sleep(60)
-        
+         
     except:
         print("fallo mensaje gantt")
-    
+    """   
     try:
         resumen('+56944930665',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
         time.sleep(60)
@@ -604,7 +614,7 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     except:
         print("fallo gantt mensahe")
 
-"""
+
 # Input date string
 start_string = '2024-02-16 00:00:00'
 end_string = '2024-02-16 23:59:00'
