@@ -25,6 +25,8 @@ from dfconsumer import df_portuarios
 from whatpy import message, resumen
 import datetime
 
+def tuplas_a_strings(tupla):
+    return str(tupla)
 
 class Assignament:
     def __init__(self, olgura, start_date, end_date, cellphone, mostrar_info, download=True, T_estimado_retiros=40,  T_estimado_presentacion=180, T_estimado_descargas=10, T_viaje_retiros_SAI=30, T_viaje_retiros_STGO=160, T_viaje_retiros_VAL=120):
@@ -96,8 +98,9 @@ class Assignament:
         df = pd.DataFrame(self.df)
 
 
-        query_trackers = "SELECT DISTINCT ON (usu_rut) nombre, ult_empt_tipo FROM public.timeline_programacion_conductores WHERE tipo_fecha != 'SINDISPONIBILIDAD'  and fecha_desde > '04-08-2023' and fecha_hasta < '06-08-2023' ORDER BY usu_rut, fecha_desde;"
+        query_trackers = "SELECT DISTINCT ON (usu_rut) nombre, ult_empt_tipo FROM public.timeline_programacion_conductores WHERE tipo_fecha != 'SINDISPONIBILIDAD'  and fecha_desde > '11-03-2024' and fecha_hasta < '12-03-2024' ORDER BY usu_rut, fecha_desde;"
         rows = connectionDB(query_trackers)
+        #print(rows)
         trackers = []
         for row in rows:
             if str(row[1]) == 'PROPIO':
@@ -106,13 +109,15 @@ class Assignament:
                 trackers.append((str(row[0]), str(row[1]), 1))
             elif str(row[1]) == 'TERCERO':
                 trackers.append((str(row[0]), str(row[1]), 2))
-
-        trackers = sorted(trackers, key=lambda x: x[2])
+      
+        self.trackers = [str(x) for x in sorted(trackers, key=lambda x: x[2])]
+        #print(self.trackers)
+        """
         self.trackers = []
         for trucker in trackers:
             self.trackers.append(str((trucker[0], trucker[1])))
         #print(len(self.trackers))
-
+        """
 
 
     def preprocessing(self):
@@ -128,25 +133,29 @@ class Assignament:
         # print("hola2", self.df)
         self.df, self.df_visualization = time_filler(self.df, df_port)
         self.df = self.df[["id", "hora_salida", "hora_llegada"]]
-        print(self.df_visualization.columns)
+        #print(self.df_visualization.columns)
         
         self.df, self.min_hora_inicio, self.max_hora_salida = group_by_id(
             self.df_visualization)
         
         n_truckers_ini = initializator(self.df, self.fecha_formateada) + 6
-        print("kasdasdl", n_truckers_ini)
+        #print("kasdasdl", n_truckers_ini)
+        """
         self.trackers = []
         for i in range(n_truckers_ini):
             self.trackers.append(str((i, i)))
-        
+        """
+     
 
     def model_dict(self):
         min_hora_inicio, max_hora_salida = self.min_hora_inicio, self.max_hora_salida
         # print(min_hora_inicio)
+        print(self.df.columns)#[self.df["fk_servicio"]==95751])
         for i, id in enumerate(set(self.df['id'])):
             if type(min_hora_inicio.iloc[i]) == float:
                 min_hora_inicio.iloc[i] = datetime.fromtimestamp(
                     min_hora_inicio.iloc[i])
+                
             if type(max_hora_salida.iloc[i]) == float:
                 max_hora_salida.iloc[i] = datetime.fromtimestamp(
                     max_hora_salida.iloc[i])
@@ -164,9 +173,10 @@ class Assignament:
                 min_hora_inicio.iloc[i].timestamp()
 
     def execute(self):
-
+        #print(self.trackers)
         # Resolver el modelo y medir el tiempo de resolución
         start_time = time.time()
+        #print(self.inicios)
         df, n_camiones, total_camiones = secuencial_problem(
             self.df_visualization, self.inicios, self.Fv, self.Iv, 90, self.trackers, self.olgura, self.start_date, self.end_date, self.mostrar_info)
         end_time = time.time()
@@ -179,7 +189,8 @@ class Assignament:
         datos = pd.read_excel(directory + '\\static\\tmp\\planificacion.xlsx')
         
         try:
-            message(self.cellphone)
+            print("mensaje")
+            #message(self.cellphone)
         except:
             print("mensaje fallido")
 
@@ -193,10 +204,10 @@ class Assignament:
         print("dict")
         self.model_dict()
 
-"""
+
 # Input date string
-start_string = '2024-02-20 00:00:00'
-end_string = '2024-02-20 23:59:00'
+start_string = '2024-03-11 00:00:00'
+end_string = '2024-03-11 12:59:00'
 
 
 # Convert to a pandas datetime object
@@ -204,7 +215,7 @@ start_date = pd.to_datetime(start_string)
 
 end_date = pd.to_datetime(end_string)
 
-assignament = Assignament(60*15, start_date, end_date, '+56998900893', True, False)
+assignament = Assignament(60*0, start_date, end_date, '', True, False)
 
 assignament.reset()
 
@@ -212,7 +223,7 @@ df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
 
 
-
+"""
 WHERE
   /* 1 en transito 2 cerrado */
   ser.estado = 1

@@ -1,6 +1,6 @@
 select
 ser.id as fk_servicio
-
+, eta_1.id as fk_etapa /*id de la etapa*/
 , ser.estado /* 0 pre servicio 1 transito 2 terminado 999 eliminado */
 , ser.referencia /* la referencia con que el cliente identifica el servicio */
 , concat ( case when TRIM(comer.usu_nombre) LIKE '% %' then left(TRIM(comer.usu_nombre), strpos(TRIM(comer.usu_nombre), ' ') - 1) else TRIM(comer.usu_nombre) end ,' '
@@ -69,6 +69,8 @@ left join public.servicios_etapas as eta_0 on eta_1.fk_etapa_anterior=eta_0.id
 
 WHERE
 ser.estado = 1
+
+
 
 
 order by 

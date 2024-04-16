@@ -84,6 +84,44 @@ def connectionDB_todf(query):
 
     return df
 
+def connectionDW_todf(query):
+
+    # Datos de conexión
+    host = "3.91.152.225"
+    port = "5432"  # Puerto predeterminado de PostgreSQL
+    database = "dw"  # Reemplazar por el nombre real de la base de datos
+    user = "postgres"
+    password = "ignacio"
+    #connection 
+    try:
+        # Establecer la conexión
+        connection = psycopg2.connect(
+            host=host,
+            port=port,
+            user=user,
+            password=password,
+            database=database
+        )
+        print("Conexión exitosa a la base de datos PostgreSQL")
+    except (Exception, psycopg2.Error) as error:
+        print("Error al conectarse a la base de datos PostgreSQL:", error)
+    # execute the query 
+    cursor = connection.cursor()
+    cursor.execute(query)
+
+    cursor = connection.cursor()
+    cursor.execute(query)
+
+    # Obtener los resultados en un DataFrame
+    column_names = [desc[0] for desc in cursor.description]
+    rows = cursor.fetchall()
+    df = pd.DataFrame(rows, columns=column_names)
+    # Cerrar el cursor y la conexión
+    cursor.close()
+    connection.close()
+
+    return df
+
 
 
 def transform_dataframe(df):
@@ -115,13 +153,14 @@ def transform_dataframe(df):
 
 
 def rename_df(df):
-    columnas_seleccionadas = ['fk_servicio', 'estado', 'eta_fecha', 'etapa_tipo', 'etapa_titulo',
+    columnas_seleccionadas = ['fk_servicio', 'fk_etapa', 'estado', 'eta_fecha', 'etapa_tipo', 'etapa_titulo',
            'etapa_1_fecha', 'etapa_1_hora', 'direccion_id_salida',
            'direccion_id_llegada', 'tiempo_minutos', 'distancia_mts',
-           'posicion_tipo', 'cont_tamano', 'contenedor_peso_carga', 'comuna_nombre']
+           'posicion_tipo', 'cont_tamano', 'contenedor_peso_carga', 'comuna_nombre', 'etapa_1_lugar_nombre', 'etapa_1_conductor_rut', 'etapa_1_conductor_nombre']
     
     new_columns = {
         'fk_servicio':'id', 
+        'fk_etapa': 'fk_etapa',
         'estado':'estado', 
         'eta_fecha':'eta_fecha', 
         'etapa_tipo':'etapa_tipo', 
@@ -136,6 +175,7 @@ def rename_df(df):
         'cont_tamano':'cont_tamano', 
         'contenedor_peso_carga':'contenedor_peso', 
         'comuna_nombre':'comuna_nombre',
+        'direccion_nombre': 'etapa_1_lugar_nombre',
         'cli_desp_nombre':'cli_desp_nombre',
         'percentil_70_tiempo_cliente':'percentil_70_tiempo_cliente'
         }
@@ -162,18 +202,18 @@ def merged():
                               'etapa_titulo', 'etapa_1_fecha', 'etapa_1_hora', 
                               'direccion_id_salida', 'direccion_id_llegada', 'tiempo_minutos', 
                               'distancia_mts', 'posicion_tipo', 'cont_tamano', 'contenedor_peso_carga', 
-                              'comuna_nombre', 'cli_desp_nombre', 'comercial_nombre']
+                              'comuna_nombre', 'etapa_1_lugar_nombre', 'cli_desp_nombre', 'comercial_nombre', 'fk_etapa', 'etapa_1_conductor_rut', 'etapa_1_conductor_nombre']
     
     df = df[columnas_seleccionadas]
 
     
-    
+    print('recibiendo datos para estimaciones de estadias en cliente')
     with open(directory + "\\queries\\tiempos_presentaciones.txt", "r") as archivo:
         contenido = archivo.read()
     query = contenido
     
     df2 = connectionDB_todf(query)
-
+    print('datos recibidos')
     
     # Suponiendo que 'tiempo_estadia' es una columna con valores de tiempo en formato de cadena
     # Convierte la columna 'tiempo_estadia' a un formato numérico (en minutos)
@@ -200,6 +240,7 @@ def merged():
     # Renombrar la columna resultante
     grouped.columns = ['fk_cliente_despacho', 'percentil_70_tiempo']
     
+    print("Agregando estimación de tiempo de estadia al df")
     # Realizar left join de grouped sobre df utilizando 'cli_desp_nombre' como clave de unión
     merged_df = df.merge(grouped, left_on='cli_desp_nombre', right_on='fk_cliente_despacho', how='left')
     

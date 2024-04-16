@@ -10,7 +10,6 @@ from whatpy import message, resumen
 import os
 import paramiko
 from connection import *
-
 import psycopg2
 from datetime import datetime
 
@@ -145,9 +144,7 @@ def insert_image(filename, encoded_image):
             connection.close()
 
 # trackers
-
-
-def carta_gantt_trackers(datos, start, end, mostrar_info):
+def datos_asignacion(datos, start, end, mostrar_info):
     directory = os.getcwd()
     # Asegúrate de que el nombre del archivo sea correcto
     datos = pd.read_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
@@ -179,18 +176,31 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
 
     # Merge the last service end time back to the original data
     datos = pd.merge(datos, last_service_end_time, on='Trackers')
+   
 
     # Ordenar los servicios según la columna "last_end_time"
     datos.sort_values(by='last_end_time', ascending=True, inplace=True)
 
     datos['DT duracion'] = datos['DT final'] - datos['DT inicio']
 
+
     # Crear una lista de conductores
     trackers = datos['Trackers'].unique()
+    # Convertir cadenas de texto a tuplas
+    trackers_tuplas = [eval(t) for t in trackers]
+    
+    # Contar el número de tuplas con el formato deseado
+    conteo_porteadores = sum(1 for t in trackers_tuplas if 'Porteador' in t[0])
+    conteo_terceros = sum(1 for t in trackers_tuplas if 'Tercero' in t[0])
+    
+    print(f"Número de porteadores: {conteo_porteadores}")
+    print(f"Número de terceros: {conteo_terceros}")
+    
     tracker_positions = {tracker: pos for pos, tracker in enumerate(trackers)}
 
     datos.reset_index(inplace=True)
     hitos = datos[datos['DT duracion'] == pd.Timedelta(seconds=0)]
+    
     nrows = datos.shape[0]
 
     # Crear una lista de todos los momentos en que inician y terminan los servicios
@@ -215,10 +225,6 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     # Convertir la columna 'datetime_column' al formato '%H:%M'
     max_concurrent_time_str = max_concurrent_time.strftime('%H:%M')
 
-    # Plot the vertical red line
-    fig, ax = plt.subplots(1, 1, figsize=(
-        20, len(trackers) * 0.3), constrained_layout=True, sharex=False)
-    ax.invert_yaxis()
 
     # Crear una lista para contar cuántos servicios están ocurriendo en cada momento
     concurrent_services_20_pesados = []
@@ -262,6 +268,20 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     # Convertir la columna 'datetime_column' al formato '%H:%M'
     max_concurrent_time_str = max_concurrent_time_20_pesados_livianos.strftime(
         '%H:%M')
+    
+    
+    return datos, last_service_end_time, tracker_positions, trackers, max_concurrent_time, max_concurrent_time_str, max_concurrent_time_20_pesados, max_concurrent_time_20_pesados_livianos, concurrent_services_20_pesados_livianos, concurrent_services_20_pesados, max_concurrent_time_str_20
+    
+    
+    
+def carta_gantt_trackers(datos, start, end, mostrar_info):
+    datos, last_service_end_time, tracker_positions, trackers, max_concurrent_time, max_concurrent_time_str,max_concurrent_time_20_pesados, max_concurrent_time_20_pesados_livianos, concurrent_services_20_pesados_livianos, concurrent_services_20_pesados, max_concurrent_time_str_20 = datos_asignacion(datos, start, end, mostrar_info)
+    
+    # Plot the vertical red line
+    fig, ax = plt.subplots(1, 1, figsize=(
+        20, len(trackers) * 0.3), constrained_layout=True, sharex=False)
+    ax.invert_yaxis()
+
 
     # Colores para cada etapa
     colores_etapas = {
@@ -323,15 +343,7 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
                         f"serv:{servicio}", color='black', ha='right', va='bottom', fontsize=8)
                 servicios_etiquetados.add(servicio)
                 
-        """
-        # Agregar etiqueta con el número de servicio al inicio de cada barra
-        for index, row in datos_etapa.iterrows():
-            servicio = row['id']
-            if servicio not in servicios_etiquetados:
-                ax.text(row['DT inicio'], tracker_positions[row['Trackers']],
-                        f"serv:{servicio}", color='black', ha='right', va='bottom', fontsize=8)
-                servicios_etiquetados.add(servicio)
-        """
+
         # Después de crear el gráfico, define las etiquetas y colores para la leyenda
     legend_labels = ['20 liviano', '20 pesado']
     legend_colors = ['black', 'black']
@@ -505,25 +517,18 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     # Obtener la fecha y hora actual
     fecha = start # datetime.datetime.now()
 
-    
-
-    
     # Formatear la fecha como una cadena (por ejemplo, "2023-09-22")
     fecha_formateada = fecha.strftime("%Y-%m-%d")
 
-
     # Generar la ruta y el nombre de archivo para guardar la imagen
+    directory = os.getcwd()
     filename = f"{start.day}_{start.month}_corrio_{day}_hora_{hora}{minutos}.png"
     filepath = os.path.join(directory, 'static', 'tmp',fecha_formateada, filename)
 
     # Guardar el gráfico como una imagen en el archivo especificado
     plt.savefig(filepath, bbox_inches='tight')
     plt.close()  # Cerrar la figura para liberar memoria
-    print(str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
-    
-    
-    
-    
+    #print(str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
 
     #try:
     n_camiones = int(len(trackers))
@@ -565,15 +570,17 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     
     
     
-    
+
+    #resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+
     
     try:
-        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
+        #resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
         time.sleep(60)
-        
+         
     except:
         print("fallo mensaje gantt")
-    
+  
     try:
         resumen('+56944930665',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start))
         time.sleep(60)
@@ -604,10 +611,13 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     except:
         print("fallo gantt mensahe")
 
+ 
+
+   
 """
 # Input date string
-start_string = '2024-02-16 00:00:00'
-end_string = '2024-02-16 23:59:00'
+start_string = '2024-04-12 00:00:00'
+end_string = '2024-04-12 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
@@ -626,11 +636,25 @@ mostrar_info = False
 
 carta_gantt_trackers(datos, start_date, end_date, mostrar_info)
 
-
-
+"""
+'''
 directory = os.getcwd()
 datos = pd.read_excel(directory + '\\static\\tmp\\planificacion2.xlsx')  # Asegúrate de que el nombre del archivo sea correcto
-#carta_gantt_trackers(datos)
+carta_gantt_trackers(datos)
+'''
 
-kjh
-"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
