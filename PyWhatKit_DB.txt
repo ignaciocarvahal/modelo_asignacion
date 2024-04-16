@@ -32253,3 +32253,18 @@ Time: 17:22
 Phone Number: +56988876774
 Message: *PLANIFICACIÓN* 2024-03-09 00:00:00 *CAMIONES FALTANTES: 8* (2 terceros y 3 asociados) *Requerimiento estimado* *Minimo 70 transportistas.* Minimo 13 chasis de veinte + multi. Minimo 40 chasis de veinte *Camiones Disponibles* Propios: 25 Asociado: 37 TOTAL: 62 *Servicios Solicitados:* Presentaciones: 50 Retiros: 120 *Servicios Solicitados por ejecutivo:* Empty DataFrameColumns: [comercial, cantidad_de_servicios]Index: []
 --------------------
+Date: 12/4/2024
+Time: 15:21
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-03-09 00:00:00 *CAMIONES FALTANTES: 16* (2 terceros y 3 asociados) *Requerimiento estimado* *Minimo 70 transportistas.* Minimo 13 chasis de veinte + multi. Minimo 40 chasis de veinte *Camiones Disponibles* Propios: 15 Asociado: 39 TOTAL: 54 *Servicios Solicitados:* Presentaciones: 50 Retiros: 120 *Servicios Solicitados por ejecutivo:* Empty DataFrameColumns: [comercial, cantidad_de_servicios]Index: []
+--------------------
+Date: 12/4/2024
+Time: 15:28
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-03-09 00:00:00 *CAMIONES FALTANTES: 15* (2 terceros y 3 asociados) *Requerimiento estimado* *Minimo 70 transportistas.* Minimo 13 chasis de veinte + multi. Minimo 40 chasis de veinte *Camiones Disponibles* Propios: 14 Asociado: 41 TOTAL: 55 *Servicios Solicitados:* Presentaciones: 50 Retiros: 120 *Servicios Solicitados por ejecutivo:* Empty DataFrameColumns: [comercial, cantidad_de_servicios]Index: []
+--------------------
+Date: 12/4/2024
+Time: 15:37
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-03-09 00:00:00 *CAMIONES FALTANTES: 13* (2 terceros y 3 asociados) *Requerimiento estimado* *Minimo 70 transportistas.* Minimo 13 chasis de veinte + multi. Minimo 40 chasis de veinte *Camiones Disponibles* Propios: 16 Asociado: 41 TOTAL: 57 *Servicios Solicitados:* Presentaciones: 50 Retiros: 120 *Servicios Solicitados por ejecutivo:* Empty DataFrameColumns: [comercial, cantidad_de_servicios]Index: []
+--------------------

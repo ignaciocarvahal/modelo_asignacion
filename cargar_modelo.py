@@ -36,7 +36,7 @@ def cargar_modelo(df):
     # Separar las tuplas de la columna 'Trackers' en columnas separadas
     df[['Nombre', 'Tipo', 'Valor1', 'Valor2', 'Documento']] = pd.DataFrame(df['Trackers'].tolist(), index=df.index)
 
-    print(df.columns)
+    #print(df.columns)
     # Eliminar la columna 'Trackers' original
     df.drop(columns=['Trackers', 'Valor1', 'Valor2'], inplace=True)
     '''
@@ -105,4 +105,4 @@ def connectionDB(query):
     return rows
 
 query = 'select * from timeline_programacion_conductores_python'
-print(connectionDB(query))
+#print(connectionDB(query))

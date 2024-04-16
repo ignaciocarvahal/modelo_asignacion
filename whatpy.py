@@ -33,7 +33,7 @@ def obtener_datos_mensaje(fecha):
     
     # Convertir la cadena a un objeto datetime
     fecha_objeto = datetime.strptime(fecha, "%Y-%m-%d %H:%M:%S")
-    print(fecha_objeto)
+    #print(fecha_objeto)
     # Formatear la fecha en el nuevo formato
     fecha = str(fecha_objeto.strftime("%d-%m-%Y"))
     #from datetime import datetime, timedelta
@@ -48,8 +48,23 @@ def obtener_datos_mensaje(fecha):
     
     
     
+    query_enrolados = '''
+        SELECT
+        SUM( CASE WHEN usu.ult_empt_tipo='PROPIO' then 1 else 0 end) as tot_tnm
+        , SUM( CASE WHEN usu.ult_empt_tipo='ASOCIADO' then 1 else 0 end) as tot_tercero
+        from public.usuarios as usu
+        where
+        usu_tipo=2
+        and usu_estado=0
+        ;
+
+    '''
     
+    df_enrolados = connectionDB_todf(query_enrolados)#.to_string(query_enrolados)
     
+  
+    n_total_propios = str(df_enrolados['tot_tnm'][0])
+    n_total_asociados = str(df_enrolados['tot_tercero'][0])
     
     query = f'''SELECT
                   comer.usu_nombre as Comercial,
@@ -70,68 +85,68 @@ def obtener_datos_mensaje(fecha):
                   comer.usu_rut
                 ;'''
     
-    query_cond_propios = '''
-    SELECT
-  CAST("personas"."tabla_hechos"."dia" AS date) AS "dia",
-  "Dimension Usuario"."empleado_tipo" AS "Dimension Usuario__empleado_tipo",
-  36 - count(distinct "personas"."tabla_hechos"."dia_libre_id") AS "count"
-FROM
-  "personas"."tabla_hechos"
- 
-LEFT JOIN "personas"."dimension_usuario" AS "Dimension Usuario" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Usuario"."dia_libre_id"
-  LEFT JOIN "personas"."dimension_tipo_permiso" AS "Dimension Tipo Permiso" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Tipo Permiso"."dia_libre_id"
-WHERE
-  (
-    "personas"."tabla_hechos"."dia" >= CAST((NOW() + INTERVAL '1 day') AS date)
-  )
- 
-   AND (
-    "personas"."tabla_hechos"."dia" < CAST((NOW() + INTERVAL '2 day') AS date)
-  )
-  AND ("Dimension Usuario"."estado_empleado2" = 0)
-  AND ("Dimension Usuario"."tipo_empleado" = 2)
-  AND ("Dimension Usuario"."empleado_tipo" = 'PROPIO')
-GROUP BY
-  CAST("personas"."tabla_hechos"."dia" AS date),
-  "Dimension Usuario"."empleado_tipo"
-ORDER BY
-  CAST("personas"."tabla_hechos"."dia" AS date) ASC,
-  "Dimension Usuario"."empleado_tipo" ASC
+    query_cond_propios = f'''
+                SELECT
+                          CAST("personas"."tabla_hechos"."dia" AS date) AS "dia",
+                          "Dimension Usuario"."empleado_tipo" AS "Dimension Usuario__empleado_tipo",
+                          {n_total_propios} - count(distinct "Dimension Usuario"."rut_conductor") AS "count"
+                        FROM
+                          "personas"."tabla_hechos"
+                         
+                        LEFT JOIN "personas"."dimension_usuario" AS "Dimension Usuario" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Usuario"."dia_libre_id"
+                          LEFT JOIN "personas"."dimension_tipo_permiso" AS "Dimension Tipo Permiso" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Tipo Permiso"."dia_libre_id"
+                        WHERE
+                          (
+                            "personas"."tabla_hechos"."dia" >= CAST((NOW() + INTERVAL '1 day') AS date)
+                          )
+                         
+                           AND (
+                            "personas"."tabla_hechos"."dia" < CAST((NOW() + INTERVAL '2 day') AS date)
+                          )
+                          AND ("Dimension Usuario"."estado_empleado2" = 0)
+                          AND ("Dimension Usuario"."tipo_empleado" = 2)
+                          AND ("Dimension Usuario"."empleado_tipo" = 'PROPIO')
+                        GROUP BY
+                          CAST("personas"."tabla_hechos"."dia" AS date),
+                          "Dimension Usuario"."empleado_tipo"
+                        ORDER BY
+                          CAST("personas"."tabla_hechos"."dia" AS date) ASC,
+                          "Dimension Usuario"."empleado_tipo" ASC
     '''
-
-    query_cond_asociados = '''
+    #print(query_cond_propios)
+    query_cond_asociados = f'''
         SELECT
-      CAST("personas"."tabla_hechos"."dia" AS date) AS "dia",
-      "Dimension Usuario"."empleado_tipo" AS "Dimension Usuario__empleado_tipo",
-      41 - count(distinct "personas"."tabla_hechos"."dia_libre_id") AS "count"
-    FROM
-      "personas"."tabla_hechos"
-     
-    LEFT JOIN "personas"."dimension_usuario" AS "Dimension Usuario" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Usuario"."dia_libre_id"
-      LEFT JOIN "personas"."dimension_tipo_permiso" AS "Dimension Tipo Permiso" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Tipo Permiso"."dia_libre_id"
-    WHERE
-      (
-        "personas"."tabla_hechos"."dia" >= CAST((NOW() + INTERVAL '1 day') AS date)
-      )
-     
-       AND (
-        "personas"."tabla_hechos"."dia" < CAST((NOW() + INTERVAL '2 day') AS date)
-      )
-      AND ("Dimension Usuario"."estado_empleado2" = 0)
-      AND ("Dimension Usuario"."tipo_empleado" = 2)
-      AND ("Dimension Usuario"."empleado_tipo" = 'ASOCIADO')
-      AND (
-      ("Dimension Usuario"."estado_empleado" <> 1)
-     
-      OR ("Dimension Usuario"."estado_empleado" IS NULL)
-    )
-      
-    GROUP BY
-      CAST("personas"."tabla_hechos"."dia" AS date),
-      "Dimension Usuario"."empleado_tipo"
-    ORDER BY
-      CAST("personas"."tabla_hechos"."dia" AS date) ASC,
-      "Dimension Usuario"."empleado_tipo" ASC
+          CAST("personas"."tabla_hechos"."dia" AS date) AS "dia",
+          "Dimension Usuario"."empleado_tipo" AS "Dimension Usuario__empleado_tipo",
+          {n_total_asociados} - count(distinct "Dimension Usuario"."rut_conductor") AS "count"
+        FROM
+          "personas"."tabla_hechos"
+         
+        LEFT JOIN "personas"."dimension_usuario" AS "Dimension Usuario" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Usuario"."dia_libre_id"
+          LEFT JOIN "personas"."dimension_tipo_permiso" AS "Dimension Tipo Permiso" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Tipo Permiso"."dia_libre_id"
+        WHERE
+          (
+            "personas"."tabla_hechos"."dia" >= CAST((NOW() + INTERVAL '1 day') AS date)
+          )
+         
+           AND (
+            "personas"."tabla_hechos"."dia" < CAST((NOW() + INTERVAL '2 day') AS date)
+          )
+          AND ("Dimension Usuario"."estado_empleado2" = 0)
+          AND ("Dimension Usuario"."tipo_empleado" = 2)
+          AND ("Dimension Usuario"."empleado_tipo" = 'ASOCIADO')
+          AND (
+          ("Dimension Usuario"."estado_empleado" <> 1)
+         
+          OR ("Dimension Usuario"."estado_empleado" IS NULL)
+        )
+          
+        GROUP BY
+          CAST("personas"."tabla_hechos"."dia" AS date),
+          "Dimension Usuario"."empleado_tipo"
+        ORDER BY
+          CAST("personas"."tabla_hechos"."dia" AS date) ASC,
+          "Dimension Usuario"."empleado_tipo" ASC
     '''
     
     fecha = f'''{fecha}'''

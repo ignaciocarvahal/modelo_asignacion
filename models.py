@@ -77,6 +77,20 @@ def combinations(i, camioneros, tipo_viaje, tipo_tracker):
     trios = set(trios)
     return trios
 
+def mandatory_combinations(i, camioneros):
+    # Aquí definimos todas las combinaciones de los viajes programados y los trackers que pueden hacerlo
+    trios = []
+    print("Se inician combinaciones")
+
+    for v, t in i.items():
+        for j in camioneros:
+
+            trios.append((v, j, t))
+
+    #trios.append((v, j, t))
+    trios = set(trios)
+    return trios
+
 def camioneros_comp(v,camiones, tipo_viaje, tipo_tracker):
     comp = []
     viajes = []
@@ -173,8 +187,18 @@ def problem3( tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timest
     # Add a variable for each possible assignment
     x = {}
     for trio in trios:
+        #print(trio)
         x[trio] = m1.addVar(vtype="B", name="locate[" + str(trio) + "]")
-
+    
+    yr=0
+    print(len(trios))
+    for trio in trios:
+        if yr==100:
+            print(trio)
+            m1.addCons(x[trio]  == 1)
+        yr+=1
+        
+        
     # Add the constraint
     for v, t in i.items():
         m1.addCons(scip.quicksum(x[(v, c, t)] for c in camioneros_comp(v, camioneros, tipo_viaje, tipo_tracker)[0]) == 1)
@@ -182,9 +206,23 @@ def problem3( tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timest
     # Add the constraints
     for v, t in no_comp:
         for c in camioneros:
+            #print(c,v, t)
             if validator(v[0], c, tipo_viaje, tipo_tracker) and validator(v[1], c, tipo_viaje, tipo_tracker):
                 m1.addCons(x[v[0], c, t[0]] + x[v[1], c, t[1]] <= 1)
- 
+                
+    #print(trios(0))
+    #print(trios(30))
+    #print(trios(50))
+    #print(trios(12))
+    #m1.addCons(x[trio]  == 1)
+    #m1.addCons(x[trios(30)]  == 1)
+    #m1.addCons(x[trios(50)]  == 1)
+    #m1.addCons(x[trios(12)]  == 1)
+    #for w, c in servicios_asignados.items():
+    #    m1.addCons(scip.quicksum(x[(w, c, t)] for v, t in i.items() ) == 1)
+        
+        
+        
     # Set the objective function
     m1.setRealParam('limits/gap', 10)
     
@@ -343,7 +381,7 @@ def secuencial_problem(tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_trackers, t
             print("Con " + str(len(trackers)) + " camioneros")
             directory = os.getcwd()
             delete(directory)
-            print(df.columns, df2.columns)
+            #print(df.columns, df2.columns)
             datos = merge(df2, df)
            
             datos = process_result(datos)

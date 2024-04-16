@@ -50,41 +50,52 @@ def cargar_excel_como_df(nombre_archivo):
         return None
 
 def determinar_tipo_viaje(grupo):
-    print(grupo[['comuna_nombre', 'etapa_tipo', 'etapa_1_fecha']])
+
     if any(grupo['etapa_tipo'] == 2) and (any((grupo['etapa_tipo'] == 3) & (grupo['comuna_nombre']=='Valparaíso')) or any((grupo['etapa_tipo'] == 1) & (grupo['comuna_nombre']=='Valparaíso'))):
-        print('Puerto cruzado')
+        #print('Puerto cruzado')
         return 'Puerto cruzado'
     
     elif any(grupo['etapa_tipo'] == 2) and any(grupo['cont_tamano']==20):
-        print('viaje_20')
+        #print('viaje_20')
         return 'viaje_20'
     
     elif any(grupo['etapa_tipo'] == 2):
-        print('presentacion')
+        #print('presentacion')
         return 'presentacion'
     
     elif any((grupo['etapa_tipo'] == 1) & (grupo['comuna_nombre']!='San Antonio')) :
-        print('retiro_val')
+        #print('retiro_val')
         return 'retiro_val'
 
     elif any((grupo['etapa_tipo'] == 1) & (grupo['comuna_nombre']=='San Antonio')) :
-        print('porteo')
+        #print('porteo')
         return 'retiro_sai'
     
     else:
         return 'otro_tipo'
     
-def procesar_datos(df, fecha_filtro):
+def procesar_datos(df, fecha_filtro, fecha_inicio, fecha_final):
     from datetime import datetime, timedelta
     
     # Obtener la fecha de mañana
     fecha_de_mañana = datetime.now() #+ timedelta(days=1)
-    fecha_de_mañana_str = fecha_de_mañana.strftime("%d-%m-%Y")
-    print(fecha_de_mañana_str, fecha_filtro)
+    fecha_de_hoy_str = fecha_de_mañana.strftime("%d-%m-%Y")
+    
+    
+    fecha_inicio = fecha_inicio.strftime("%d-%m-%Y")
+    fecha_final = fecha_final.strftime("%d-%m-%Y")
+    
+    #df[df[["etapa_1_fecha"]]]
+    
+    
+    
+    #print(fecha_de_mañana_str, fecha_filtro)
     fecha_de_mañana_str = fecha_filtro
+    print(fecha_de_mañana_str)
     
     # Filtrar el DataFrame por el día de mañana
-    df_mañana = df[df["etapa_1_fecha"] == fecha_de_mañana_str]
+    df_mañana = df[(df["etapa_1_fecha"] == fecha_de_mañana_str) | (df["etapa_1_fecha"] == fecha_de_hoy_str)]
+
 
     
     return df_mañana.groupby('id').apply(determinar_tipo_viaje).to_dict()
@@ -112,28 +123,21 @@ class Assignament:
         self.fecha_formateada = ''
         
     def Querys(self):
-
+        
+        espacio = """
+        """
+        
+        print("inicializando fecha")
         # Obtener la fecha que vamos a correr
         fecha = self.start_date 
-
         # Formatear la fecha como una cadena (por ejemplo, "2023-09-22")
         fecha_formateada = fecha.strftime("%Y-%m-%d")
-        
-        
         self.fecha_formateada = fecha.strftime("%d-%m-%Y")
-        directory = os.getcwd()
+        print("La fecha ha sido formateada a %d-%m-%Y")
         
-        # Directorio donde crear la carpeta
-        directorio_base = directory + "\\static\\tmp\\"  # Ruta base donde deseas crear la carpeta
         
-        # Comprobar si la carpeta ya existe antes de crearla
-        if not os.path.exists(os.path.join(directorio_base, fecha_formateada)):
-            os.mkdir(os.path.join(directorio_base, fecha_formateada))
-
-        with open(directory + "\\queries\\new_travels.txt", "r") as archivo:
-            contenido = archivo.read()
-        query = contenido
         
+        print("definiendo fechas de hoy y mañana")
         fecha_ahora = datetime.datetime.now()
         
         fecha_de_hoy = fecha_ahora + timedelta(days=0)
@@ -147,26 +151,70 @@ class Assignament:
         # Reemplazar ":" por "_" en la hora
         fecha_hora_formateada = fecha_hora_formateada.replace(":", "-")        
         
+        print("han sido creadas fechas de hoy y mañana")    
+        print(espacio)
+        
+        
+        print("Creando directorio para guardar resultados")
+        directory = os.getcwd()
+        # Directorio donde crear la carpeta
+        directorio_base = directory + "\\static\\tmp\\"  # Ruta base donde deseas crear la carpeta
+        # Comprobar si la carpeta ya existe antes de crearla
+        if not os.path.exists(os.path.join(directorio_base, fecha_formateada)):
+            os.mkdir(os.path.join(directorio_base, fecha_formateada))
+        print("directorio creado")
+        print(espacio)
+        
+        
+        print("leer query printcipal desde directorio y traerlas desde la base")
+
+        with open(directory + "\\queries\\new_travels.txt", "r") as archivo:
+            contenido = archivo.read()
+        query = contenido
+        
+
         nombre_archivo = "df.xlsx"
         #df = cargar_excel_como_df(nombre_archivo)
         
         print('query_de_viajes')
         df = connectionDB_todf(query)
-        print('query_de_viajes_terminada')
-
-        df.to_excel(directory + "\\static\\tmp\\" + str(fecha_formateada) + "\\query_travels" + str(fecha_hora_formateada) + ".xlsx", index=False)
-        df = transform_dataframe(df)
-
-        pd.set_option('display.float_format', '{:.0f}'.format)
+        print('df de query de viajes (principal) definida')
+        print(espacio)
         
+
+        print("guadando df con las fechas en que se corrio")
+        #print(df[['fk_servicio','etapa_1_conductor_nombre']])
+        df.to_excel(directory + "\\static\\tmp\\" + str(fecha_formateada) + "\\query_travels" + str(fecha_hora_formateada) + ".xlsx", index=False)
+        print('excel guardado')
+        print(espacio)
+        
+        
+        print("desde connection, se iguala la hora y fecha de la presentacion con la de devolución")
+        df = transform_dataframe(df)
+        print("horas listas para ser estimadas")
+        print(espacio)
+        
+        
+        pd.set_option('display.float_format', '{:.0f}'.format)
+        print('desde connection, estimamos las estadias en cliente ')
         df = merged()
+        print("Estimación de estadias lista")
+        print(espacio)
+        
+        
+        print("ELegimos y renombramos las columnas (connection)")
         df = rename_df(df)
+        print("columnas elegidas y formateadas")
+        print("inicializamos self.df con este ultimo dataframe")
         self.df = df
         df = pd.DataFrame(self.df)
-        self.tipo_viaje = procesar_datos(df, self.fecha_formateada)
+        print("inicializando tipos de viaje: ptocruzado, porteo...")
+        self.tipo_viaje = procesar_datos(df, self.fecha_formateada, self.start_date, self.end_date)
+        print("tipos de viajes creados")
+        print(espacio)
         
-        print(fecha_de_hoy_str, fecha_de_mañana_str)
-
+        
+        print("trayendo datos de conductores")
         query_trackers = f'''SELECT DISTINCT ON (usu_rut) nombre, ult_empt_tipo, usu_rut
                                 FROM public.timeline_programacion_conductores 
                                 WHERE tipo_fecha != 'SINDISPONIBILIDAD'  AND 
@@ -174,21 +222,23 @@ class Assignament:
                                       AND TO_DATE(fecha_hasta, 'DD-MM-YYYY') <= '{fecha_de_mañana_str}'
                                       AND tipo_fecha = 'ETAPA'
                                       ORDER BY usu_rut, TO_DATE(fecha_desde, 'DD-MM-YYYY');'''
-        
         rows = connectionDB(query_trackers)
-        #print(rows)
+        print("datos recibidos")
+        print(espacio)
+        
+        
+        print("Creando conductores dicponibles")
         trackers = []
         porteadores = ['BETHI PROAÑO R', 'MIGUEL PEÑAHERRERA P', 'OSWALDO ESCALONA A', 'LUIS PAILLALEF P', 'PATRICIO PARDO V', 'CRISTIAN REAL M']
        
-        #self.n_truckers_ini = initializator(self.df, self.fecha_formateada) + 7
-        maximo = 900
+        maximo = 80
         i=0
         
         for row in rows:
             if i < maximo:
                 if str(row[0]) in porteadores:
                     trackers.append((str(row[0]), 'PORTEADOR', 0, 1, str(row[2])))
-                    print(str(row[0]))
+                    #print(str(row[0]))
                 elif str(row[1]) == 'PROPIO' and not(str(row[0]) in porteadores):
                     trackers.append((str(row[0]), str(row[1]), 0, 1, str(row[2])))
                 elif str(row[1]) == 'ASOCIADO':
@@ -196,8 +246,11 @@ class Assignament:
                 elif str(row[1]) == 'TERCERO':
                     trackers.append((str(row[0]), str(row[1]), 2, 0, str(row[2])))
             i += 1
+            
+        print("conductores disponibles creados")
         
-        for j in range(30):
+        print("agregamos conductores ficticios")
+        for j in range(300):
             if j % 2 == 0:
                 trackers.append((str(f'''Porteador {j}'''), str('PORTEADOR_ext'), 0, 0, str('99.999.999-9')))
             else:
@@ -209,37 +262,59 @@ class Assignament:
         self.tipo_tracker = pd.DataFrame(self.trackers, columns=['id', 'tipo_conductor', 'resp1', 'resp2', 'rut'])
         self.tipo_tracker = self.tipo_tracker.set_index('id')['tipo_conductor'].to_dict()
         self.trackers = [str(x) for x in trackers]
-        
-
+        print("Conductores creados")
+        print(espacio)
 
 
     def preprocessing(self):
+        
+        espacio = """
+        """
+        
+        print('traemos datos del puerto con scraper')
         try: 
             df_port = df_portuarios(self.start_date, self.end_date, self.download)
         except:
             print('Error al descargar directos diferidos')
             df_port = pd.DataFrame(columns=['contenedor', 'fecha', 'comuna', 'empresa', 'servicios', 'cont_tamano', 'contenedor_peso'])
 
+        print("sacamos vacios")
         self.df = preprocess(self.df)
-       
+        print("rellenamos fechas invalidas ")
         self.df = date_filter(self.df, self.start_date, self.end_date)
-
-        self.df, self.df_visualization = time_filler(self.df, df_port)
-  
-        self.df = self.df[["id", "hora_salida", "hora_llegada"]]
-    
+        print("calculamos las horas de salida y llegada ademas agregar los retiros de puerto del scraper")
+        print(espacio)
         
+        
+        print("Colocar fechas y horas de las etapas con estimaciones estadisticas")
+        self.df, self.df_visualization = time_filler(self.df, df_port)
+        print("Horas por etapa fijadas")
+        print(espacio)
+        
+        
+        self.df = self.df[["id", "hora_salida", "hora_llegada"]]
+        
+        print("Sacar inicio y final de todas las etapas de cada servicio")
         self.df, self.min_hora_inicio, self.max_hora_salida = group_by_id(
             self.df_visualization)
+        print("Inicios y finales calculados")
+        print(espacio)
         
+        
+        print("Seleccionar cantidad de camioneros que entran al modelo")
         n_truckers_ini = initializator(self.df, self.fecha_formateada) + 6
         self.trackers = self.trackers[:n_truckers_ini]
+        print("Camioneros seleccionados para el modelo")
+        print(espacio)
+        
+        
         #print(self.trackers)
 
     def model_dict(self):
         min_hora_inicio, max_hora_salida = self.min_hora_inicio, self.max_hora_salida
         # print(min_hora_inicio)
-
+        self.servicios_asignados = {}
+        
         for i, id in enumerate(set(self.df['id'])):
             if type(min_hora_inicio.iloc[i]) == float:
                 min_hora_inicio.iloc[i] = datetime.fromtimestamp(
@@ -261,6 +336,7 @@ class Assignament:
             self.duration[id] = max_hora_salida.iloc[i].timestamp() - \
                 min_hora_inicio.iloc[i].timestamp()
 
+            
 
     def execute(self):
         #print(self.trackers)
@@ -296,8 +372,8 @@ class Assignament:
 
 
 # Input date string
-start_string = '2024-04-08 00:00:00'
-end_string = '2024-04-08 23:59:00'
+start_string = '2024-04-16 00:00:00'
+end_string = '2024-04-16 23:59:00'
 
 
 # Convert to a pandas datetime object
@@ -311,3 +387,12 @@ assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
 # print("numero de camioneros", n_camiones)
+
+
+
+"""
+debo crear una query que rankee por llegada 
+
+el ultimo que llega es el ultimo que sale 
+
+"""

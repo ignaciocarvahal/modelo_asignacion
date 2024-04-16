@@ -9,6 +9,7 @@ import os
 from datetime import datetime
 from datetime import datetime, timedelta
 import datetime
+
 #from travel_dataframe import *
 
 comunas_santiago_chile = [
@@ -70,6 +71,9 @@ def preprocess(df1):
 
 def date_filter(df1, fecha_referencia, fecha_referencia_fin):
     
+    import time
+    print(df1.columns)
+    time.sleep(200)
     # crear copia
     df = df1.copy()
     
@@ -82,13 +86,15 @@ def date_filter(df1, fecha_referencia, fecha_referencia_fin):
     
     #por cada elemento del df
     for idx in range(len(df)):
-        
-        #si la hora de llegada dice cero lo pasamos a formato de hora
-        if hora_presentacion[idx] == '0':
-            hora_presentacion[idx] = '00:00'
-        #concatenamos 
-        hora_presentacion[idx] = str(fecha[idx]) + ' ' + str(hora_presentacion[idx])
-    
+        if fecha[idx]:
+            #si la hora de llegada dice cero lo pasamos a formato de hora
+            if hora_presentacion[idx] == '0':
+                hora_presentacion[idx] = '00:00'
+            #concatenamos 
+            hora_presentacion[idx] = str(fecha[idx]) + ' ' + str(hora_presentacion[idx])
+        else:
+            hora_presentacion[idx] =  str('01-01-1900') + ' ' + str(hora_presentacion[idx])
+            
     df["hora_presentacion"] = hora_presentacion
     
     # Convertir la columna 'hora_llegada' a tipo 'datetime'
@@ -96,7 +102,7 @@ def date_filter(df1, fecha_referencia, fecha_referencia_fin):
         df['hora_presentacion'] = pd.to_datetime(df['hora_presentacion'], format='%d-%m-%Y %H:%M')
     except:
         print("hora del planeta de los simios")
-        
+        print(df['hora_presentacion'])
     # Crear la columna 'hora_llegada_timestamp' como timestamps
     df['hora_llegada_timestamp'] = df['hora_presentacion'].apply(lambda x: x.timestamp())
     
@@ -128,7 +134,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
     cont_tamano = list(df['cont_tamano'])
     peso_cont = list(df['contenedor_peso'])
     tiempo_en_cliente = list(df['percentil_70_tiempo_cliente'])
-    
+    deposito = list(df['etapa_1_lugar_nombre'])
     
     
     #print(len(idservice), len(cont_tamano), len(peso_cont))
@@ -143,6 +149,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
     df_visualization["cont_tamano"] = []
     df_visualization["peso_cont"] = []
 
+    
     for idx in range(len(df)):
         
         if type(hora_salida[idx]) == float:
@@ -224,7 +231,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             
             df_visualization["cont_tamano"].append(cont_tamano[idx])
             df_visualization["peso_cont"].append(peso_cont[idx])
-
+            
         #retiros de full
         elif etapa_tipo[idx] == 1 and comuna[idx] == 'San Antonio': #retiro de contenedores full
             hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=T_estimado_retiros) 
@@ -374,7 +381,7 @@ import pandas as pd
 
 def group_by_id(df):
     # Imprimir el DataFrame filtrado print(df_filtrado)
-    print("group_by", df.columns)
+    #print("group_by", df.columns)
     grouped_df = df.groupby('id')
 
     min_hora_inicio = grouped_df['DT inicio'].min()
@@ -395,11 +402,11 @@ def group_by_id(df):
     return df2, min_hora_inicio, max_hora_salida
 
 def merge(df1, df2):
-    print(df1.columns)
-    print(df2.columns)
+    #print(df1.columns)
+    #print(df2.columns)
     # Realizar el merge basado en las columnas 'ID_Servicio' y 'ID_Serv'
     df_resultado = pd.merge(df1, df2, left_on='id', right_on='id', how='left')
-    print(df_resultado.columns)
+    #print(df_resultado.columns)
     return df_resultado
 
 def process_result(df_resultado):
