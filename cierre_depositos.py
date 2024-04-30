@@ -8,93 +8,102 @@ Created on Thu Apr 11 17:20:24 2024
 import pandas as pd
 
 
-
-def alcanza_a_volver(fk_servicio):
+def cierre_depositos():
         
     CIERRE_DEPOSITOS = {
-        'agunsa': {
-            'santiago': {
+        'AGUNSA': {
+            'SAI': {
                 'semana': '19:00',
                 'sabado': '15:00'
             },
-            'san_antonio': {
+            'SAI': {
                 'semana': '22:00',
                 'sabado': '18:00'
             },
-            'valparaiso': {
+            'VAL': {
                 'semana': '20:00',
                 'sabado': '15:00'
             }
         },
-        'medlog': {
-            'santiago': {
+        'MEDLOG': {
+            'SCL': {
                 'semana': '19:30',
                 'sabado': '13:30'
             },
-            'san_antonio': {
+            'SAI': {
                 'semana': '22:00',
                 'sabado': '18:00'
             },
-            'valparaiso': {
+            'VAL': {
                 'semana': '22:00',
                 'sabado': '18:00'
             }
         },
-        'sitrans': {
-            'santiago': {
+        'SITRANS': {
+            'SCL': {
                 'semana': '20:00',
                 'sabado': '13:00'
             },
-            'san_antonio': {
+            'SAI': {
                 'semana': '22:00',
                 'sabado': '17:00'
             },
-            'valparaiso': {
+            'VAL': {
                 'semana': '19:00',
                 'sabado': '13:00'
             }
         },
-        'contopsa': {
-            'santiago': {
+        'CONTOPSA': {
+            'SCL': {
                 'semana': '18:00',
                 'sabado': '12:30'
             },
-            'san_antonio': {
+            'SAI': {
                 'semana': '22:00',
                 'sabado': '18:00'
             },
-            'valparaiso': {
+            'VAL': {
                 'semana': '00:00',
                 'sabado': '00:00'
             }
         },
-        'dyc': {
-            'santiago': {
+        'DYC': {
+            'SCL': {
                 'semana': '20:00',
                 'sabado': '15:00'
             },
-            'san_antonio': {
+            'SAI': {
                 'semana': '22:00',
                 'sabado': '18:00'
             },
-            'valparaiso': {
+            'VAL': {
                 'semana': '20:00',
                 'sabado': '15:00'
             }
         }
     }
+    return CIERRE_DEPOSITOS
 
 
-    horario_cierre = CIERRE_DEPOSITOS['dyc']['santiago']['semana']
-    print(horario_cierre)
-
-
+#str ---> arreglo
+def identificador_depositos(nombre_deposito):
+    lista_de_palabras = nombre_deposito.split()
+    
+    
+    json_cierre_depositos = cierre_depositos()
+    empresas = json_cierre_depositos.keys()
+    ciudades = json_cierre_depositos['CONTOPSA'].keys()
+    
+    for palabra in lista_de_palabras:
+        if palabra in empresas:
+            empresa_a_revisar = palabra
+        if palabra in ciudades:
+            ciudad_a_revisar = palabra
+        
+        if palabra not in empresas and palabra not in ciudades:
+            return {}
 
     
-    hora_pandas = pd.to_timedelta(hora_texto + ':00')
-    
-    if hora_pandas < hora_fin_servicio:
-        return '10:00'
-    else:
-        return hora
-    
+    return json_cierre_depositos[empresa_a_revisar][ciudad_a_revisar]
+
+print(identificador_depositos('MEDLOG VAL'))

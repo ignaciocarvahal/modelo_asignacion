@@ -177,7 +177,8 @@ def rename_df(df):
         'comuna_nombre':'comuna_nombre',
         'direccion_nombre': 'etapa_1_lugar_nombre',
         'cli_desp_nombre':'cli_desp_nombre',
-        'percentil_70_tiempo_cliente':'percentil_70_tiempo_cliente'
+        'percentil_70_tiempo_cliente':'percentil_70_tiempo_cliente',
+        'rut_conductor': 'etapa_1_conductor_rut'
         }
 
     df.rename(columns=new_columns, inplace=True)

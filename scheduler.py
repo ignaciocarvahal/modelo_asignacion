@@ -9,7 +9,7 @@ import pandas as pd
 import schedule
 import time
 import datetime
-from main import Assignament
+from tipos_conductores import Assignament
 from programacion_ws import excel_to_df, insertar_dataframe_en_data_demurrage
 
 def model_execution():
@@ -63,20 +63,76 @@ def job_today():
     
 # Programar la ejecución del script todos los días a las 13:00 y 16:30
 
-schedule.every().day.at("08:20").do(job_today)
-schedule.every().day.at("10:00").do(job_today)
-schedule.every().day.at("11:00").do(job)
-schedule.every().day.at("12:41").do(job)
-schedule.every().day.at("13:20").do(job)
-schedule.every().day.at("14:10").do(job)
-schedule.every().day.at("15:08").do(job)
-schedule.every().day.at("16:30").do(job)
-schedule.every().day.at("17:14").do(job)
-schedule.every().day.at("18:06").do(job)
-schedule.every().day.at("19:30").do(job)
-schedule.every().day.at("20:50").do(job)
-schedule.every().day.at("21:30").do(job)
-schedule.every().day.at("22:34").do(job)
+try: 
+    schedule.every().day.at("08:20").do(job_today)
+except:
+    print("fallo el modelo")
+
+try:
+    schedule.every().day.at("10:45").do(job_today)
+except:
+    print("fallo el modelo")
+    
+
+try: 
+    schedule.every().day.at("11:14").do(job)
+except:
+    print("fallo el modelo")
+
+try: 
+    schedule.every().day.at("12:41").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("13:20").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("15:01").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("17:29").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("16:19").do(job)
+except:
+    print("fallo el modelo")
+
+try: 
+    schedule.every().day.at("17:57").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("18:30").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("19:30").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("20:50").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("21:30").do(job)
+except:
+    print("fallo el modelo")
+    
+try: 
+    schedule.every().day.at("22:34").do(job)
+except:
+    print("fallo el modelo")
 #schedule.every().day.at("01:30").do(job)
 
 while True:

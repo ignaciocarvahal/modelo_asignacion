@@ -69,7 +69,7 @@ left join public.servicios_etapas as eta_0 on eta_1.fk_etapa_anterior=eta_0.id
 
 WHERE
 ser.estado = 1
-
+and ser.fk_tipo_carga != 'LCL'
 
 
 

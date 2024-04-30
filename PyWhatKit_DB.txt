@@ -32268,3 +32268,123 @@ Time: 15:37
 Phone Number: +56988876774
 Message: *PLANIFICACIÓN* 2024-03-09 00:00:00 *CAMIONES FALTANTES: 13* (2 terceros y 3 asociados) *Requerimiento estimado* *Minimo 70 transportistas.* Minimo 13 chasis de veinte + multi. Minimo 40 chasis de veinte *Camiones Disponibles* Propios: 16 Asociado: 41 TOTAL: 57 *Servicios Solicitados:* Presentaciones: 50 Retiros: 120 *Servicios Solicitados por ejecutivo:* Empty DataFrameColumns: [comercial, cantidad_de_servicios]Index: []
 --------------------
+Date: 29/4/2024
+Time: 16:56
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-03-09 00:00:00 *CAMIONES FALTANTES: 3* (2 terceros y 3 asociados) *Requerimiento estimado* *Minimo 70 transportistas.* Minimo 13 chasis de veinte + multi. Minimo 40 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 50 Retiros: 120 *Servicios Solicitados por ejecutivo:* Empty DataFrameColumns: [comercial, cantidad_de_servicios]Index: []
+--------------------
+Date: 29/4/2024
+Time: 17:21
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 asociados) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 1 chasis de veinte + multi. Minimo 0 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 56 Retiros: 18 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 14
+--------------------
+Date: 29/4/2024
+Time: 17:23
+Phone Number: +56998900893
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 asociados) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 1 chasis de veinte + multi. Minimo 0 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 56 Retiros: 18 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 14
+--------------------
+Date: 29/4/2024
+Time: 17:37
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 asociados) *Requerimiento estimado* *Minimo 55 transportistas.* Minimo 1 chasis de veinte + multi. Minimo 0 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 57 Retiros: 18 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 14
+--------------------
+Date: 29/4/2024
+Time: 17:39
+Phone Number: +56998900893
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 asociados) *Requerimiento estimado* *Minimo 55 transportistas.* Minimo 1 chasis de veinte + multi. Minimo 0 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 57 Retiros: 18 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 15
+--------------------
+Date: 29/4/2024
+Time: 18:38
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 28 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 18:40
+Phone Number: +56998900893
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 28 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 18:42
+Phone Number: +56944930665
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 28 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 18:44
+Phone Number: +56944073046
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 28 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 18:46
+Phone Number: +56990399048
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 28 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 18:48
+Phone Number: +56944057461
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 28 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 18:50
+Phone Number: +56944057281
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 28 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 19:38
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 73 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 19:40
+Phone Number: +56998900893
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 73 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 19:42
+Phone Number: +56944930665
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 73 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 19:44
+Phone Number: +56944073046
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 73 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 19:46
+Phone Number: +56990399048
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 73 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 19:48
+Phone Number: +56944057461
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 73 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 29/4/2024
+Time: 19:50
+Phone Number: +56944057281
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 41 TOTAL: 67 *Servicios Solicitados:* Presentaciones: 61 Retiros: 73 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 31 DIEGO 13 DWI 18
+--------------------
+Date: 30/4/2024
+Time: 10:41
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 42 TOTAL: 68 *Servicios Solicitados:* Presentaciones: 64 Retiros: 103 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 32 DIEGO 14 DWI 19
+--------------------
+Date: 30/4/2024
+Time: 11:57
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-04-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 64 transportistas.* Minimo 2 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 42 TOTAL: 68 *Servicios Solicitados:* Presentaciones: 66 Retiros: 110 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 32 DIEGO 14 DWI 21
+--------------------
+Date: 30/4/2024
+Time: 14:39
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-02 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 36 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 2 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 42 TOTAL: 68 *Servicios Solicitados:* Presentaciones: 40 Retiros: 7 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 27 DIEGO 6 DWI 7
+--------------------
+Date: 30/4/2024
+Time: 14:41
+Phone Number: +56998900893
+Message: *PLANIFICACIÓN* 2024-05-02 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 36 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 2 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 42 TOTAL: 68 *Servicios Solicitados:* Presentaciones: 40 Retiros: 7 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 27 DIEGO 6 DWI 7
+--------------------
+Date: 30/4/2024
+Time: 14:43
+Phone Number: +56944930665
+Message: *PLANIFICACIÓN* 2024-05-02 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 36 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 2 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 42 TOTAL: 68 *Servicios Solicitados:* Presentaciones: 40 Retiros: 7 *Servicios Solicitados por ejecutivo:* comercial cantidad_de_servicios LILIAN 27 DIEGO 6 DWI 7
+--------------------
