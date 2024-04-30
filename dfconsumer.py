@@ -334,6 +334,7 @@ def filter_containers(input_df, contenedores):
     # Combinar los DataFrames basado en la columna 'contenedores'
     merged_df = input_df.merge(contenedores, on='contenedor')
     merged_df = merged_df.drop_duplicates(subset='contenedor')
+    print(merged_df)
     return merged_df
     
 
@@ -358,9 +359,10 @@ from connection import connectionDB
 def query_contenedores():
     
     query_contenedores =  """
-SELECT s.id, s.numero_contenedor, ct.conttam_tamano AS cont_tamano, s.contenedor_peso_carga
+SELECT s.id, s.numero_contenedor, ct.conttam_tamano AS cont_tamano, s.contenedor_peso_carga, eta.id
 FROM public.servicios AS s
 INNER JOIN public.contenedores_tamanos AS ct ON s.fk_contenedor_tamano = ct.conttam_id
+INNER JOIN public.servicios_etapas AS eta ON s.id = eta.fk_servicio
 WHERE s."createdAt" >= NOW() - INTERVAL '75 days';
 
     """
@@ -372,17 +374,20 @@ WHERE s."createdAt" >= NOW() - INTERVAL '75 days';
     servicios = []
     cont_tamano = []
     contenedor_peso_carga = []
+    fk_etapa = []
     for row in rows:
         servicios.append(row[0])
         contenedor.append(row[1])
         cont_tamano.append(row[2])
         contenedor_peso_carga.append(row[3])
+        fk_etapa.append(row[4])
     contenedor = remove_dashes_and_convert(contenedor)
     
     dict_ = {"servicios":servicios,
              "contenedor":contenedor,
              "cont_tamano":cont_tamano,
-             "contenedor_peso":contenedor_peso_carga}
+             "contenedor_peso":contenedor_peso_carga,
+             "fk_etapa": fk_etapa}
     
     contenedores = pd.DataFrame(dict_)
     
@@ -418,7 +423,6 @@ def df_portuarios(start_date, end_date, download=True):
         download_secuences()
         contenedores = query_contenedores()
         dfs = excel_to_df()
-        #print(dfs)
         retiros = df_standardizer(dfs)
         retiros = filter_by_date(retiros, start_date, end_date)
     else:
@@ -426,6 +430,7 @@ def df_portuarios(start_date, end_date, download=True):
         dfs = excel_to_df()
         retiros = df_standardizer(dfs)
         retiros = filter_by_date(retiros, start_date, end_date)
+        
     filter_containersretiros = filter_containers(retiros, contenedores)
     filter_containersretiros.to_excel("retiros//retiros_puerto.xlsx", index=False)
     return filter_containersretiros

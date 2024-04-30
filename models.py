@@ -32,16 +32,43 @@ def obtener_elementos_mayores(diccionario, valor_limite):
     elementos_mayores = {clave: valor for clave, valor in diccionario.items() if valor > valor_limite}
     return elementos_mayores
 
+def validador_asignados(asignados, servicio, rut):
+    if servicio in asignados.keys():
+        if str(asignados[servicio]) == str(rut):
+            return True
+        else:
+            return False
     
 def validator(v, j, tipo_viaje, tipo_tracker):
+    
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and (tipo_viaje[v]=='viaje_20' or tipo_viaje[v] == 'Puerto cruzado'):
+        return False
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR'  and tipo_viaje[v]!='retiro_sai':
+        return False
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext' and tipo_viaje[v]!='retiro_sai':
+        return False
+    
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO' and  (tipo_viaje[v] == 'retiro_val' or tipo_viaje[v] == 'Puerto cruzado'):
+        return False
+    
+    else: 
+        return True
+    
+    '''
     #si es propio puede hacer cualquier viaje 
     if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO':
         return True
-    
+ 
+    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v]=='viaje_20':
+        return False
+
     #si es asociado no puede ir a retirar a valparaiso ni tampoco hacer viajes de 20
     elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO':
         return True
     
+
     #si es porteador o porteador externo solo puede ir a retiros de sai 
     elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR'  and tipo_viaje[v]=='retiro_sai':
         return True
@@ -55,18 +82,18 @@ def validator(v, j, tipo_viaje, tipo_tracker):
     
     else:
         return False
-
+    '''
 def combinations(i, camioneros, tipo_viaje, tipo_tracker):
     # Aquí definimos todas las combinaciones de los viajes programados y los trackers que pueden hacerlo
     trios = []
     print("Se inician combinaciones")
-
+    
     for v, t in i.items():
         for j in camioneros:
             if validator(v, j, tipo_viaje, tipo_tracker):
                 #if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR':
                     #print(tipo_tracker[ast.literal_eval(j)[0]] , tipo_viaje[v])
-
+                
                 trios.append((v, j, t))
             '''
             else:
@@ -137,45 +164,72 @@ def objective_function(v, j, tipo_viaje, tipo_tracker):
     
     
     resultado = 0 
+    r_propio = 0
+    r_asociado = 0
+    r_porteador = 0
+    r_porteador_ext = 0
+    r_externo = 0
+    
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO':
+        r_propio = r_propio + 3000
+        
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO':
+        r_asociado = r_asociado 
+      
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO':
+        r_externo = r_externo - 3000
+    
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR':
+        r_porteador = r_porteador + 5000
+        
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext':
+        r_porteador_ext = r_porteador_ext - 3000
+        
+        
     
     if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR' and tipo_viaje[v]=='retiro_sai':
-        return 1000
+        r_porteador = r_porteador + 10000
     
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext' and tipo_viaje[v]=='retiro_sai':
-        return -100
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext' and tipo_viaje[v]=='retiro_sai':
+        r_porteador = r_porteador - 100
+        
 
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] == 'retiro_sai':
-        return 20
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] == 'retiro_sai':
+        r_propio = r_propio - 100
+        
     
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] != 'retiro_sai':
-        return 1000
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] != 'retiro_sai':
+        r_propio = r_propio + 1000
+        
     # 
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] == 'viaje_20':
-        return 2500
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] == 'viaje_20':
+        r_propio = r_propio + 2500
+        
     
-    #elif tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO':
-    #    return 130
-    
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] == 'viaje_20':
-        return -100
+
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] == 'viaje_20':
+        r_asociado = r_asociado - 2000
+        
     
     #elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO'and tipo_viaje[v] != 'viaje_20':
     #    return 0
     
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] != 'retiro_sai':
-        return 20
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] != 'retiro_sai':
+        r_asociado = r_asociado - 1000
     
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] == 'retiro_sai':
-        return 20
+    if tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] == 'retiro_sai':
+        r_asociado = r_asociado + 20
     
-    elif (tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO'):
-        return -2000
-    
-    else:
-        return 0
+    if (tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO'):
+        r_externo = r_externo - 4000
     
 
-def problem3( tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timestop=False):
+    
+    
+    return r_propio + r_asociado + r_porteador + r_externo + r_porteador_ext
+    
+
+def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timestop=False):
     
     # Create an empty model
     m1 = scip.Model("assignment2")
@@ -187,17 +241,22 @@ def problem3( tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timest
     # Add a variable for each possible assignment
     x = {}
     for trio in trios:
+        #if validador_asignados(asignados, trio[0], eval(trio[1])[-1]):
         #print(trio)
         x[trio] = m1.addVar(vtype="B", name="locate[" + str(trio) + "]")
     
-    yr=0
+
     print(len(trios))
+    
     for trio in trios:
-        if yr==100:
-            print(trio)
-            m1.addCons(x[trio]  == 1)
-        yr+=1
+        #print((trio[0], eval(trio[1])[-1]), asignados)
+        if validador_asignados(asignados, trio[0], eval(trio[1])[-1]):
+        #if (trio[0], eval(trio[1])[-1]) in asignados.items():
         
+            print(trio)
+            #m1.addCons(x[trio]  == 1)
+            
+    #print(asignados.items())
         
     # Add the constraint
     for v, t in i.items():
@@ -210,22 +269,12 @@ def problem3( tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timest
             if validator(v[0], c, tipo_viaje, tipo_tracker) and validator(v[1], c, tipo_viaje, tipo_tracker):
                 m1.addCons(x[v[0], c, t[0]] + x[v[1], c, t[1]] <= 1)
                 
-    #print(trios(0))
-    #print(trios(30))
-    #print(trios(50))
-    #print(trios(12))
-    #m1.addCons(x[trio]  == 1)
-    #m1.addCons(x[trios(30)]  == 1)
-    #m1.addCons(x[trios(50)]  == 1)
-    #m1.addCons(x[trios(12)]  == 1)
-    #for w, c in servicios_asignados.items():
-    #    m1.addCons(scip.quicksum(x[(w, c, t)] for v, t in i.items() ) == 1)
-        
+
         
         
     # Set the objective function
-    m1.setRealParam('limits/gap', 10)
-    
+    #m1.setRealParam('limits/gap', 10)
+    m1.setParam('limits/solutions', 1)
     #m1.setObjective(1 , sense="maximize")
     
     
@@ -286,7 +335,7 @@ def timestamp_to_date(timestamp):
 def plotSolution(model, x, y, trios,Fv, export=False):
     
     if True:#model.getStatus() == "optimal":
-        
+    
         #print("\nCost: %g" % model.getObjVal())
         #print("\nBuy:")
         travels = []
@@ -296,7 +345,7 @@ def plotSolution(model, x, y, trios,Fv, export=False):
         start_to_end_times = []
         
         for (v, c, t) in trios:
- 
+     
             if model.getVal(x[v, c, t]) > 0.0001:
                 #print((v, c, t),model.getVal(x[v, c, t]))
                 travels.append(v)
@@ -304,8 +353,8 @@ def plotSolution(model, x, y, trios,Fv, export=False):
                 start_times.append(datetime.fromtimestamp(t))
                 end_times.append(timestamp_to_date(Fv[v]))
                 start_to_end_times.append(datetime.fromtimestamp(Fv[v])-datetime.fromtimestamp(t))
-                #print("%s %g" % ((v, c, t), model.getVal(x[v, c, t])))
-     
+                    #print("%s %g" % ((v, c, t), model.getVal(x[v, c, t])))
+               
     else:
         travels = []
         trackers = []
@@ -313,6 +362,7 @@ def plotSolution(model, x, y, trios,Fv, export=False):
         end_times = []
         start_to_end_times = []
         print("No solution")
+  
     ruta_imagen = os.getcwd()
 
     fechas = []
@@ -357,7 +407,7 @@ def remove_last_element(lst):
         print("The list is already empty.")
         return None
 
-def secuencial_problem(tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, end, mostrar_info):
+def secuencial_problem(asignados, tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_trackers, trackers1, olgura, start, end, mostrar_info):
     trackers = trackers1
     total_camioneros = trackers
     print("no compatibles")
@@ -367,7 +417,7 @@ def secuencial_problem(tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_trackers, t
         trios = combinations(i, trackers, tipo_viaje, tipo_tracker)
         print("definicion del problema")
   
-        m, x = problem3( tipo_viaje, tipo_tracker, trios, no_comp, i, Iv, trackers, False)
+        m, x = problem3(asignados, tipo_viaje, tipo_tracker, trios, no_comp, i, Iv, trackers, False)
         y ={}
         print("ejecucion")
         execute(m)
@@ -409,6 +459,7 @@ def secuencial_problem(tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_trackers, t
     datos = process_result(datos)
     datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
     print(datos.columns)
+    print(datos)
     cargar_modelo(datos)
     carta_gantt_trackers(datos, start, end, mostrar_info)
     print("final")

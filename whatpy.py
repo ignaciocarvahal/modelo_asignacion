@@ -174,7 +174,7 @@ def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros
     *PLANIFICACIÓN*
     {fecha}
     
-    *CAMIONES FALTANTES: {camiones_faltantes}* ({n_terceros} terceros y {n_porteadores} asociados)
+    *CAMIONES FALTANTES: {camiones_faltantes}* ({n_terceros} terceros y {n_porteadores} porteadores)
     
     *Requerimiento estimado*
                     *Minimo {numero_camiones} transportistas.*
@@ -214,5 +214,5 @@ def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros
   
   
 #pruebas
-
+#
 #resumen('+56988876774', 70, 50, 120, '00:00', 13, 40,  '2024-03-09 00:00:00', 2, 3)
