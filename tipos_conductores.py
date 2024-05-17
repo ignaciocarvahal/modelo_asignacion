@@ -327,7 +327,7 @@ class Assignament:
     def model_dict(self):
         min_hora_inicio, max_hora_salida = self.min_hora_inicio, self.max_hora_salida
         # print(min_hora_inicio)
-  
+        #print(self.df['fk_etapa'])
         
         for i, id in enumerate(set(self.df['id'])):
             if type(min_hora_inicio.iloc[i]) == float:
@@ -383,10 +383,10 @@ class Assignament:
         print("dict")
         self.model_dict()
 
-"""
+
 # Input date string
-start_string = '2024-05-16 00:00:00'
-end_string = '2024-05-16 23:59:00'
+start_string = '2024-05-18 00:00:00'
+end_string = '2024-05-18 23:59:00'
 
 
 # Convert to a pandas datetime object
@@ -399,7 +399,7 @@ assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
 
-
+"""
 debo crear una query que rankee por llegada 
 
 el ultimo que llega es el ultimo que sale 

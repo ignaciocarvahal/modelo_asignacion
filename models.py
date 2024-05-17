@@ -177,7 +177,7 @@ def objective_function(v, j, tipo_viaje, tipo_tracker):
         r_asociado = r_asociado 
       
     if tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO':
-        r_externo = r_externo - 3000
+        r_externo = r_externo - 5000
     
     if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR':
         r_porteador = r_porteador + 5000
@@ -221,7 +221,7 @@ def objective_function(v, j, tipo_viaje, tipo_tracker):
         r_asociado = r_asociado + 2000
     
     if (tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO'):
-        r_externo = r_externo - 4000
+        r_externo = r_externo - 7000
     
 
     
@@ -332,7 +332,7 @@ def timestamp_to_date(timestamp):
         return None
 
 
-def plotSolution(model, x, y, trios,Fv, export=False):
+def plotSolution(model, x, y, trios, Fv, df2, start, end, mostrar_info, export=False):
     
     if True:#model.getStatus() == "optimal":
     
@@ -386,9 +386,19 @@ def plotSolution(model, x, y, trios,Fv, export=False):
     #print(df)
     fig, ax = plt.subplots(1, figsize=(16, 6))
     #print(df["Trackers"])
-    ax.barh(df["Trackers"], df["start_to_end_time"], left=df['start_time'])
-    plt.savefig(ruta_imagen + "\\static\\tmp\\planificacion.png")
-    plt.show()
+    #ax.barh(df["Trackers"], df["start_to_end_time"], left=df['start_time'])
+    #plt.savefig(ruta_imagen + "\\static\\tmp\\planificacion.png")
+    #plt.show()
+    
+    directory = os.getcwd()
+    delete(directory)
+    datos = merge(df2, df)
+    datos = process_result(datos)
+    datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
+    print(datos.columns)
+    print(datos)
+    cargar_modelo(datos)
+    carta_gantt_trackers(datos, start, end, mostrar_info)
     
     df = pd.DataFrame(df)
     df.to_excel(ruta_imagen + "\\static\\tmp\\planificacion.xlsx", index=False)
@@ -425,7 +435,7 @@ def secuencial_problem(asignados, tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_
         
         if m.getStatus() == "optimal":
             try:
-                df = plotSolution(m, x, y, trios, Fv, True)
+                df = plotSolution(m, x, y, trios, Fv, df2, start, end, mostrar_info,  True)
             except:
                 print("error al plotear la solución")
             print("Con " + str(len(trackers)) + " camioneros")
@@ -452,7 +462,7 @@ def secuencial_problem(asignados, tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_
             print("problema final ejecucion")
             
             break
-    df = plotSolution(m, x, y, trios, Fv, True)
+    df = plotSolution(m, x, y, trios, Fv, df2, start, end, mostrar_info,  True)
     directory = os.getcwd()
     delete(directory)
     datos = merge(df2, df)
@@ -465,7 +475,7 @@ def secuencial_problem(asignados, tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_
     print("final")
     
     try:  
-        df = plotSolution(m1, x1, y1, trios, Fv, True)
+        df = plotSolution(m1, x1, y1, trios, Fv, df2, start, end, mostrar_info,  True)
     except:
         print("error al plotear la solución")
         

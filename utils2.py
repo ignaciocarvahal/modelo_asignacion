@@ -124,6 +124,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
     
     
     df = df1.copy()
+    
     idservice = list(df["id"])
     fk_etapa = list(df["fk_etapa"])
     hora_salida = list(df['hora_presentacion'])
@@ -149,6 +150,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
     df_visualization["peso_cont"] = []
     df_visualization["comuna_nombre"] = []
     df_visualization["etapa_tipo"] = []
+    df_visualization["id_modelo"] = []
     #df_visualization["hora_presentacion"] = []
     
     for idx in range(len(df)):
@@ -162,6 +164,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
         if etapa_tipo[idx] == 2:#presentaciones
         
             #creando la instancia de trayecto
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-p")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("trayecto")
@@ -174,6 +177,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             df_visualization["etapa_tipo"].append(etapa_tipo[idx])
             
             #creando instancia de presentacion en cliente 
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-p")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("presentacion")
@@ -200,6 +204,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=tiempo_minutos[idx]) + timedelta(minutes=T_estimado_devoluciones) + timedelta(minutes=T_viajes_devolucion_SAI)
             
             #creando instancia de devolucion de vacio
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-p")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("devolucion_vacio_sai")
@@ -219,6 +224,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_llegada_deposito = hora_salida[idx] + timedelta(minutes=tiempo_minutos[idx]) + timedelta(minutes=T_viajes_devolucion_VAL)
             print("llegada_deposito: ", hora_llegada_deposito, deposito)
             #creando instancia de devolucion de vacio
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-p")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("devolucion_vacio_val")
@@ -239,6 +245,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             print("llegada_deposito: ", hora_llegada_deposito, deposito)
             
             #creando instancia de devolucion de vacio
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-p")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("devolucion_vacio_stgo")
@@ -255,6 +262,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=T_estimado_retiros) 
             hora_salida[idx] = hora_salida[idx] - timedelta(minutes=T_viaje_retiros_SAI)
             #creando instancia de retiros full
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-r")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("retiro_full_sai")
@@ -271,6 +279,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_salida[idx] = hora_salida[idx] - timedelta(minutes=T_viaje_retiros_VAL)
             
             #creando instancia de retiros full
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-r")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("retiro_full_val")
@@ -287,6 +296,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_salida[idx] = hora_salida[idx] - timedelta(minutes=T_viaje_retiros_STGO)
         
             #creando instancia de retiros full
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-r")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("retiro_full_stgo")
@@ -306,6 +316,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_salida[idx] = hora_salida[idx] - timedelta(minutes=tiempo_minutos[idx])
            
             #creando instancia de presentacion en cliente 
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-r")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("almacenamiento")
@@ -343,6 +354,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_llegada[idx] = hora_salida[idx] + timedelta(minutes=T_estimado_retiros) 
             hora_salida[idx] = hora_salida[idx] - timedelta(minutes=T_viaje_retiros_SAI)
             #creando instancia de retiros full
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-r")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("retiro_full_sai")
@@ -359,6 +371,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_salida[idx] = hora_salida[idx] - timedelta(minutes=T_viaje_retiros_VAL)
             
             #creando instancia de retiros full
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-r")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("retiro_full_val")
@@ -375,6 +388,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             hora_salida[idx] = hora_salida[idx] - timedelta(minutes=T_viaje_retiros_STGO)
         
             #creando instancia de retiros full
+            df_visualization["id_modelo"].append(str(idservice[idx]) + "-r")
             df_visualization["id"].append(idservice[idx])
             df_visualization["fk_etapa"].append(fk_etapa[idx])
             df_visualization["etapa"].append("retiro_full_stgo")
@@ -419,18 +433,19 @@ import pandas as pd
 
 def group_by_id(df):
     # Imprimir el DataFrame filtrado print(df_filtrado)
-    #print("group_by", df.columns)
+    print("group_by", df.columns)
+    #df['fk_servicio_etapa'] = = df['id'].astype(str) + df['etapa'].astype(str)
     grouped_df = df.groupby('id')
 
     min_hora_inicio = grouped_df['DT inicio'].min()
     max_hora_salida = grouped_df['DT final'].max()
-    #fk_etapa_lista = grouped_df['fk_etapa']
+    id_modelo = grouped_df['id_modelo']
     # Configurar pandas para mostrar todas las columnas
     pd.set_option('display.max_columns', None)
 
     df2 = pd.DataFrame({
         'id': df['id'].unique(),
-        #'fk_etapa': fk_etapa_lista,
+        'id_modelo': id_modelo,
         'DT inicio': min_hora_inicio.values,
         'DT final': max_hora_salida.values
     })
@@ -440,11 +455,10 @@ def group_by_id(df):
     return df2, min_hora_inicio, max_hora_salida
 
 def merge(df1, df2):
-    #print(df1.columns)
-    #print(df2.columns)
+
     # Realizar el merge basado en las columnas 'ID_Servicio' y 'ID_Serv'
     df_resultado = pd.merge(df1, df2, left_on='id', right_on='id', how='left')
-    #print(df_resultado.columns)
+
     return df_resultado
 
 def process_result(df_resultado):
