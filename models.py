@@ -218,7 +218,7 @@ def objective_function(v, j, tipo_viaje, tipo_tracker):
         r_asociado = r_asociado - 1000
     
     if tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] == 'retiro_sai':
-        r_asociado = r_asociado + 20
+        r_asociado = r_asociado + 2000
     
     if (tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO'):
         r_externo = r_externo - 4000
@@ -234,7 +234,7 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
     # Create an empty model
     m1 = scip.Model("assignment2")
     if timestop == False:
-        setMaxTime(m1, 1000)  # Establece el tiempo máximo a 60 segundos
+        setMaxTime(m1, 1200)  # Establece el tiempo máximo a 60 segundos
     else: 
         pass
     
@@ -273,8 +273,8 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
         
         
     # Set the objective function
-    #m1.setRealParam('limits/gap', 10)
-    m1.setParam('limits/solutions', 1)
+    m1.setRealParam('limits/gap', 0.01)
+    m1.setParam('limits/solutions', 10)
     #m1.setObjective(1 , sense="maximize")
     
     

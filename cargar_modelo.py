@@ -3,24 +3,21 @@ from sqlalchemy import create_engine
 import psycopg2
 import ast
 
+
+
 def match_tipo(titulo):
-    match titulo:
-        case 'retiro_full_val':
-            return 'RETIRO CONTENEDOR FULL'
-        case 'retiro_full_sai':
-            return 'RETIRO CONTENEDOR FULL'
-        case 'almacenamiento':
-            return 'ALMACENAMIENTO'
-        case 'trayecto':
-            return 'TRAYECTO'
-        case 'presentacion':
-            return 'PRESENTACION EN CLIENTE'
-        case 'devolucion_vacio_sai':
-            return 'DEVOLUCION VACIO'
-        case 'devolucion_vacio_val':
-            return 'DEVOLUCION VACIO'
-        case _:
-            return titulo
+    if titulo == 'retiro_full_val' or titulo == 'retiro_full_sai':
+        return 'RETIRO CONTENEDOR FULL'
+    elif titulo == 'almacenamiento':
+        return 'ALMACENAMIENTO'
+    elif titulo == 'trayecto':
+        return 'TRAYECTO'
+    elif titulo == 'presentacion':
+        return 'PRESENTACION EN CLIENTE'
+    elif titulo == 'devolucion_vacio_sai' or titulo == 'devolucion_vacio_val':
+        return 'DEVOLUCION VACIO'
+    else:
+        return titulo
         
 def cargar_modelo(df):
     user = 'postgres'

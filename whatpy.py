@@ -59,15 +59,16 @@ def obtener_datos_mensaje(fecha):
         ;
 
     '''
+
     
     df_enrolados = connectionDB_todf(query_enrolados)#.to_string(query_enrolados)
     
   
     n_total_propios = str(df_enrolados['tot_tnm'][0])
     n_total_asociados = str(df_enrolados['tot_tercero'][0])
-    
+
     query = f'''SELECT
-                  comer.usu_nombre as Comercial,
+                  comer.usu_nombre || ' ' || comer.usu_apellido AS nombre_completo,
                   COUNT(comer.usu_rut) as Cantidad_de_servicios
                 FROM
                   public.servicios as ser
@@ -97,11 +98,11 @@ def obtener_datos_mensaje(fecha):
                           LEFT JOIN "personas"."dimension_tipo_permiso" AS "Dimension Tipo Permiso" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Tipo Permiso"."dia_libre_id"
                         WHERE
                           (
-                            "personas"."tabla_hechos"."dia" >= CAST((NOW() + INTERVAL '1 day') AS date)
+                            "personas"."tabla_hechos"."dia" >= TO_DATE('{fecha}', 'DD-MM-YYYY') --- CAST((NOW() + INTERVAL '1 day') AS date)
                           )
                          
                            AND (
-                            "personas"."tabla_hechos"."dia" < CAST((NOW() + INTERVAL '2 day') AS date)
+                            "personas"."tabla_hechos"."dia" < (TO_DATE('{fecha}', 'DD-MM-YYYY') + INTERVAL '1 day')---CAST((NOW() + INTERVAL '2 day') AS date)
                           )
                           AND ("Dimension Usuario"."estado_empleado2" = 0)
                           AND ("Dimension Usuario"."tipo_empleado" = 2)
@@ -126,11 +127,11 @@ def obtener_datos_mensaje(fecha):
           LEFT JOIN "personas"."dimension_tipo_permiso" AS "Dimension Tipo Permiso" ON "personas"."tabla_hechos"."dia_libre_id" = "Dimension Tipo Permiso"."dia_libre_id"
         WHERE
           (
-            "personas"."tabla_hechos"."dia" >= CAST((NOW() + INTERVAL '1 day') AS date)
+            "personas"."tabla_hechos"."dia" >= TO_DATE('{fecha}', 'DD-MM-YYYY')
           )
          
            AND (
-            "personas"."tabla_hechos"."dia" < CAST((NOW() + INTERVAL '2 day') AS date)
+            "personas"."tabla_hechos"."dia" < (TO_DATE('{fecha}', 'DD-MM-YYYY') + INTERVAL '1 day')
           )
           AND ("Dimension Usuario"."estado_empleado2" = 0)
           AND ("Dimension Usuario"."tipo_empleado" = 2)
@@ -168,7 +169,8 @@ def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros
     total_cond_disp = int(propios_disponibles) + int(asociados_disponibles)
     
     resta_camiones =  int(numero_camiones) - int(total_cond_disp)
-    camiones_faltantes = max(0, resta_camiones)
+    #camiones_faltantes = max(0, resta_camiones)
+    camiones_faltantes = n_terceros + n_porteadores
     mensaje = f"""
     
     *PLANIFICACIÓN*
@@ -214,5 +216,9 @@ def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros
   
   
 #pruebas
-#
-#resumen('+56988876774', 70, 50, 120, '00:00', 13, 40,  '2024-03-09 00:00:00', 2, 3)
+#resumen('+56988876774', 77, 77, 77, '00:00', 77, 77,  '2024-05-16 00:00:00', 2, 3)
+
+
+
+
+

@@ -23,7 +23,7 @@ def model_execution():
     start_date = datetime.datetime.combine(next_day, datetime.time(0, 0))
     end_date = datetime.datetime.combine(next_day, datetime.time(23, 59))
 
-    assignament = Assignament(60*10, start_date, end_date, "+56998900893", True, True)
+    assignament = Assignament(60*10, start_date, end_date, "+56998900893", True, False)
     assignament.reset()
 
     df, n_camiones, total_camioneros = assignament.execute()
@@ -90,7 +90,7 @@ except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("15:01").do(job)
+    schedule.every().day.at("14:59").do(job)
 except:
     print("fallo el modelo")
     
@@ -105,12 +105,12 @@ except:
     print("fallo el modelo")
 
 try: 
-    schedule.every().day.at("17:57").do(job)
+    schedule.every().day.at("17:59").do(job)
 except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("18:30").do(job)
+    schedule.every().day.at("18:34").do(job)
 except:
     print("fallo el modelo")
     
@@ -120,7 +120,7 @@ except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("20:50").do(job)
+    schedule.every().day.at("20:00").do(job)
 except:
     print("fallo el modelo")
     

@@ -363,7 +363,8 @@ SELECT s.id, s.numero_contenedor, ct.conttam_tamano AS cont_tamano, s.contenedor
 FROM public.servicios AS s
 INNER JOIN public.contenedores_tamanos AS ct ON s.fk_contenedor_tamano = ct.conttam_id
 INNER JOIN public.servicios_etapas AS eta ON s.id = eta.fk_servicio
-WHERE s."createdAt" >= NOW() - INTERVAL '75 days';
+WHERE s."createdAt" >= NOW() - INTERVAL '75 days'
+and eta.tipo = 1;
 
     """
                                 

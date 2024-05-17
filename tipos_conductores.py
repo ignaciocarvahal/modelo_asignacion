@@ -316,7 +316,7 @@ class Assignament:
         
         
         print("Seleccionar cantidad de camioneros que entran al modelo")
-        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 12
+        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 2
         self.trackers = self.trackers[:n_truckers_ini]
         print("Camioneros seleccionados para el modelo")
         print(espacio)
@@ -383,11 +383,10 @@ class Assignament:
         print("dict")
         self.model_dict()
 
-
 """
 # Input date string
-start_string = '2024-05-02 00:00:00'
-end_string = '2024-05-02 23:59:00'
+start_string = '2024-05-16 00:00:00'
+end_string = '2024-05-16 23:59:00'
 
 
 # Convert to a pandas datetime object
@@ -399,7 +398,6 @@ assignament = Assignament(60*0, start_date, end_date, '', False, False)
 assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
-
 
 
 debo crear una query que rankee por llegada 
