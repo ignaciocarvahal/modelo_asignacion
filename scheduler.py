@@ -23,7 +23,7 @@ def model_execution():
     start_date = datetime.datetime.combine(next_day, datetime.time(0, 0))
     end_date = datetime.datetime.combine(next_day, datetime.time(23, 59))
 
-    assignament = Assignament(60*10, start_date, end_date, "+56998900893", True, False)
+    assignament = Assignament(60*10, start_date, end_date, "+56998900893", True, True)
     assignament.reset()
 
     df, n_camiones, total_camioneros = assignament.execute()
@@ -64,53 +64,49 @@ def job_today():
 # Programar la ejecución del script todos los días a las 13:00 y 16:30
 
 try: 
-    schedule.every().day.at("08:20").do(job_today)
+    schedule.every().day.at("08:00").do(job_today)
 except:
     print("fallo el modelo")
 
 try:
-    schedule.every().day.at("10:45").do(job_today)
+    schedule.every().day.at("10:30").do(job_today)
 except:
     print("fallo el modelo")
     
 
 try: 
-    schedule.every().day.at("11:14").do(job)
+    schedule.every().day.at("12:00").do(job)
 except:
     print("fallo el modelo")
 
 try: 
-    schedule.every().day.at("12:41").do(job)
+    schedule.every().day.at("13:00").do(job)
 except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("13:20").do(job)
+    schedule.every().day.at("14:00").do(job)
 except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("14:59").do(job)
+    schedule.every().day.at("16:00").do(job)
 except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("17:29").do(job)
+    schedule.every().day.at("17:30").do(job)
 except:
     print("fallo el modelo")
     
-try: 
-    schedule.every().day.at("16:19").do(job)
-except:
-    print("fallo el modelo")
 
 try: 
-    schedule.every().day.at("17:59").do(job)
+    schedule.every().day.at("17:30").do(job)
 except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("18:34").do(job)
+    schedule.every().day.at("18:30").do(job)
 except:
     print("fallo el modelo")
     
@@ -120,17 +116,17 @@ except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("20:00").do(job)
+    schedule.every().day.at("20:30").do(job)
 except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("21:30").do(job)
+    schedule.every().day.at("21:50").do(job)
 except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("22:34").do(job)
+    schedule.every().day.at("22:30").do(job)
 except:
     print("fallo el modelo")
 #schedule.every().day.at("01:30").do(job)

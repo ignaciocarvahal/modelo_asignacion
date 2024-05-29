@@ -86,7 +86,7 @@ def date_filter(df1, fecha_referencia, fecha_referencia_fin):
     
     #por cada elemento del df
     for idx in range(len(df)):
-        if fecha[idx]:
+        if fecha[idx] and hora_presentacion[idx]:
             #si la hora de llegada dice cero lo pasamos a formato de hora
             if hora_presentacion[idx] == '0':
                 hora_presentacion[idx] = '00:00'
@@ -102,7 +102,9 @@ def date_filter(df1, fecha_referencia, fecha_referencia_fin):
         df['hora_presentacion'] = pd.to_datetime(df['hora_presentacion'], format='%d-%m-%Y %H:%M')
     except:
         print("hora del planeta de los simios")
-        print(df['hora_presentacion'])
+        print(df['hora_presentacion'].iloc[:10])
+    
+
     # Crear la columna 'hora_llegada_timestamp' como timestamps
     df['hora_llegada_timestamp'] = df['hora_presentacion'].apply(lambda x: x.timestamp())
     

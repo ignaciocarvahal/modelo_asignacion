@@ -251,11 +251,11 @@ class Assignament:
                     trackers.append((str(row[0]), str(row[1]), 2, 0, str(row[2])))
             i += 1
             
-        print("Conductores disponibles creados")
+        print("Conductores disponibles creados: ", len(trackers))
         
         print("Agregamos conductores ficticios")
         for j in range(30):
-            if j % 2 == 0:
+            if j % 2 or j % 3 or j % 5 == 0:
                 trackers.append((str(f'''Porteador {j}'''), str('PORTEADOR_ext'), 0, 0, str('99.999.999-9')))
             else:
                 trackers.append((str(f'''Tercero {j}'''), str('TERCERO'), 0, 0, str('99.999.999-9')))               
@@ -316,7 +316,7 @@ class Assignament:
         
         
         print("Seleccionar cantidad de camioneros que entran al modelo")
-        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 2
+        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 12
         self.trackers = self.trackers[:n_truckers_ini]
         print("Camioneros seleccionados para el modelo")
         print(espacio)
@@ -384,9 +384,11 @@ class Assignament:
         self.model_dict()
 
 
-# Input date string
-start_string = '2024-05-18 00:00:00'
-end_string = '2024-05-18 23:59:00'
+
+"""
+#Input date string
+start_string = '2024-05-28 00:00:00'
+end_string = '2024-05-28 23:59:00'
 
 
 # Convert to a pandas datetime object
@@ -399,7 +401,7 @@ assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
 
-"""
+
 debo crear una query que rankee por llegada 
 
 el ultimo que llega es el ultimo que sale 

@@ -191,7 +191,7 @@ def objective_function(v, j, tipo_viaje, tipo_tracker):
         r_porteador = r_porteador + 10000
     
     if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext' and tipo_viaje[v]=='retiro_sai':
-        r_porteador = r_porteador - 100
+        r_porteador = r_porteador + 1000
         
 
     if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO' and tipo_viaje[v] == 'retiro_sai':
@@ -218,7 +218,7 @@ def objective_function(v, j, tipo_viaje, tipo_tracker):
         r_asociado = r_asociado - 1000
     
     if tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v] == 'retiro_sai':
-        r_asociado = r_asociado + 2000
+        r_asociado = r_asociado - 1000
     
     if (tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO'):
         r_externo = r_externo - 7000
@@ -274,7 +274,7 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
         
     # Set the objective function
     m1.setRealParam('limits/gap', 0.01)
-    m1.setParam('limits/solutions', 10)
+    m1.setParam('limits/solutions', 4)
     #m1.setObjective(1 , sense="maximize")
     
     
@@ -288,8 +288,28 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
         sense="maximize"
     )
     
+    # Resolver el modelo y medir el tiempo de resolución
+    start_time = time.time()
+    m1.optimize()
+    end_time = time.time()
+
+    # Obtener el tiempo de resolución en segundos
+    solve_time = end_time - start_time
+    print("Demoro " + str(solve_time/60) + " minutos")
+       
+    # Obtener la mejor solución encontrada
+    sol = m1.getBestSol()
     
-    return m1, x
+    # Obtener los valores de las variables x en la solución
+    x_values = {}
+    if sol is not None:
+        for var in x:
+            x_values[var] = m1.getSolVal(sol, x[var])
+    else:
+        print("No feasible solution found within the time limit.")
+    
+    return m1, x, x_values
+
 
     # Call the printSolution() function with the model as an argument
     #printSolution(m)
@@ -333,7 +353,7 @@ def timestamp_to_date(timestamp):
 
 
 def plotSolution(model, x, y, trios, Fv, df2, start, end, mostrar_info, export=False):
-    
+
     if True:#model.getStatus() == "optimal":
     
         #print("\nCost: %g" % model.getObjVal())
@@ -345,8 +365,8 @@ def plotSolution(model, x, y, trios, Fv, df2, start, end, mostrar_info, export=F
         start_to_end_times = []
         
         for (v, c, t) in trios:
-     
-            if model.getVal(x[v, c, t]) > 0.0001:
+         
+            if y[v, c, t] > 0.0001:
                 #print((v, c, t),model.getVal(x[v, c, t]))
                 travels.append(v)
                 trackers.append(c)
@@ -397,8 +417,9 @@ def plotSolution(model, x, y, trios, Fv, df2, start, end, mostrar_info, export=F
     datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
     print(datos.columns)
     print(datos)
-    cargar_modelo(datos)
     carta_gantt_trackers(datos, start, end, mostrar_info)
+    cargar_modelo(datos)
+    
     
     df = pd.DataFrame(df)
     df.to_excel(ruta_imagen + "\\static\\tmp\\planificacion.xlsx", index=False)
@@ -427,13 +448,13 @@ def secuencial_problem(asignados, tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_
         trios = combinations(i, trackers, tipo_viaje, tipo_tracker)
         print("definicion del problema")
   
-        m, x = problem3(asignados, tipo_viaje, tipo_tracker, trios, no_comp, i, Iv, trackers, False)
-        y ={}
+        m, x, x_values = problem3(asignados, tipo_viaje, tipo_tracker, trios, no_comp, i, Iv, trackers, False)
+        y = x_values
         print("ejecucion")
-        execute(m)
+        #execute(m)
         element = remove_last_element(trackers)
         
-        if m.getStatus() == "optimal":
+        if m.getStatus() == "optimal" or m.getStatus() == "feasible":
             try:
                 df = plotSolution(m, x, y, trios, Fv, df2, start, end, mostrar_info,  True)
             except:
@@ -462,6 +483,7 @@ def secuencial_problem(asignados, tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_
             print("problema final ejecucion")
             
             break
+
     df = plotSolution(m, x, y, trios, Fv, df2, start, end, mostrar_info,  True)
     directory = os.getcwd()
     delete(directory)
@@ -473,7 +495,7 @@ def secuencial_problem(asignados, tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_
     cargar_modelo(datos)
     carta_gantt_trackers(datos, start, end, mostrar_info)
     print("final")
-    
+
     try:  
         df = plotSolution(m1, x1, y1, trios, Fv, df2, start, end, mostrar_info,  True)
     except:

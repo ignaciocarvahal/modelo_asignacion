@@ -350,10 +350,10 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     
     # Crea la leyenda
     ax.legend(legend_labels, title="Tipo de Contenedor", loc="upper right", labels=['★', '★★'], title_fontsize=14)
+
     etapa_counts = datos['etapa'].value_counts()
     presentaciones_count = etapa_counts.get('presentacion', 0)
-    retiros_count = etapa_counts.get(
-        'retiro_full_val', 0) + etapa_counts.get('retiro_full_sai', 0)
+    retiros_count = etapa_counts.get('retiro_full_val', 0) + etapa_counts.get('retiro_full_sai', 0)
 
     ax.axvline(x=max_concurrent_time, color='red', linestyle='--',
                label='Max Concurrent Services: ' + max_concurrent_time_str)
@@ -569,44 +569,44 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     
     
     
-    
 
-    resumen('+56988876774',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+
+   # resumen('+56988876774',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
 
     
     try:
-        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
         time.sleep(60)
          
     except:
         print("fallo mensaje gantt")
   
     try:
-        resumen('+56944930665',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+        resumen('+56944930665',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
 
     try:
-        resumen('+56944073046',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+        resumen('+56944073046',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
         
     try:
-        resumen('+56990399048',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+        resumen('+56990399048',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
 
     try:
-        resumen('+56944057461',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+        resumen('+56944057461',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
 
     try:
-        resumen('+56944057281',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_porteadores, conteo_terceros)
+        resumen('+56944057281',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
