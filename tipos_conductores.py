@@ -50,30 +50,26 @@ def cargar_excel_como_df(nombre_archivo):
         return None
 
 def determinar_tipo_viaje(grupo):
-    espacio = 'contenedor de 20'
-    print(espacio)
+
     if any(grupo['etapa_tipo'] == 2) and (any((grupo['etapa_tipo'] == 3) & (grupo['comuna_nombre']=='Valparaíso')) or any((grupo['etapa_tipo'] == 1) & (grupo['comuna_nombre']=='Valparaíso'))):
-        #print('Puerto cruzado')
         return 'Puerto cruzado'
     
-    elif any(grupo['etapa_tipo'] == 2) and any(grupo['cont_tamano']==20):
-        print(grupo)
+    elif  any(grupo['cont_tamano']== str(20)):
         return 'viaje_20'
     
     elif any(grupo['etapa_tipo'] == 2):
-        #print('presentacion')
         return 'presentacion'
     
     elif any((grupo['etapa_tipo'] == 1) & (grupo['comuna_nombre']!='San Antonio')) :
-        #print('retiro_val')
         return 'retiro_val'
 
     elif any((grupo['etapa_tipo'] == 1) & (grupo['comuna_nombre']=='San Antonio')) :
-        #print('porteo')
         return 'retiro_sai'
     
     else:
         return 'otro_tipo'
+    
+
     
 def procesar_datos(df, fecha_filtro, fecha_referencia, fecha_referencia_fin):
     from datetime import datetime, timedelta
@@ -226,6 +222,15 @@ class Assignament:
                                       AND TO_DATE(fecha_hasta, 'DD-MM-YYYY') <= '{fecha_de_mañana_str}'
                                       AND tipo_fecha = 'ETAPA'
                                       ORDER BY usu_rut, TO_DATE(fecha_desde, 'DD-MM-YYYY');'''
+        
+        
+        query_trackers = f'''SELECT DISTINCT ON (usu_rut) nombre, ult_empt_tipo, usu_rut
+                                FROM public.timeline_programacion_conductores 
+                                WHERE tipo_fecha != 'SINDISPONIBILIDAD'  AND 
+                                      TO_DATE(fecha_desde, 'DD-MM-YYYY') >= '06-05-2024'
+                                      AND TO_DATE(fecha_hasta, 'DD-MM-YYYY') <= '06-06-2024'
+                                      AND tipo_fecha = 'ETAPA'
+                                      ORDER BY usu_rut, TO_DATE(fecha_desde, 'DD-MM-YYYY');'''
         rows = connectionDB(query_trackers)
         print("Datos recibidos")
         print(espacio)
@@ -254,13 +259,12 @@ class Assignament:
         print("Conductores disponibles creados: ", len(trackers))
         
         print("Agregamos conductores ficticios")
-        for j in range(30):
+        for j in range(70):
             if j % 2 or j % 3 or j % 5 == 0:
                 trackers.append((str(f'''Porteador {j}'''), str('PORTEADOR_ext'), 0, 0, str('99.999.999-9')))
             else:
-                trackers.append((str(f'''Tercero {j}'''), str('TERCERO'), 0, 0, str('99.999.999-9')))               
-        
-        
+                trackers.append((str(f'''Tercero {j}'''), str('TERCERO'), 0, 0, str('99.999.999-9'))) 
+                
         # Convertir la lista de tuplas a un DataFrame
         self.trackers = [x for x in trackers]
         self.tipo_tracker = pd.DataFrame(self.trackers, columns=['id', 'tipo_conductor', 'resp1', 'resp2', 'rut'])
@@ -302,6 +306,7 @@ class Assignament:
       
         print("tipo_viaje", self.df_visualization.head(5))
         self.tipo_viaje = procesar_datos(self.df_visualization, self.fecha_formateada, self.start_date, self.end_date) 
+        print(self.tipo_viaje)
         print("Horas por etapa fijadas")
         print(espacio)
         
@@ -316,9 +321,9 @@ class Assignament:
         
         
         print("Seleccionar cantidad de camioneros que entran al modelo")
-        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 12
+        n_truckers_ini = initializator(self.df, self.fecha_formateada) + 16
         self.trackers = self.trackers[:n_truckers_ini]
-        print("Camioneros seleccionados para el modelo")
+        print("Camioneros seleccionados para el modelo: ", str(n_truckers_ini))
         print(espacio)
         
         
@@ -385,10 +390,11 @@ class Assignament:
 
 
 
-"""
+
 #Input date string
-start_string = '2024-05-28 00:00:00'
-end_string = '2024-05-28 23:59:00'
+start_string = '2024-06-03 00:00:00' 
+
+end_string = '2024-06-03 23:59:00' 
 
 
 # Convert to a pandas datetime object
@@ -402,6 +408,7 @@ assignament.reset()
 df, n_camiones, total_camioneros = assignament.execute()
 
 
+"""
 debo crear una query que rankee por llegada 
 
 el ultimo que llega es el ultimo que sale 

@@ -10,7 +10,7 @@ import schedule
 import time
 import datetime
 from tipos_conductores import Assignament
-from programacion_ws import excel_to_df, insertar_dataframe_en_data_demurrage
+#from programacion_ws import excel_to_df, insertar_dataframe_en_data_demurrage
 
 def model_execution():
     # Obtener la fecha actual
@@ -27,9 +27,9 @@ def model_execution():
     assignament.reset()
 
     df, n_camiones, total_camioneros = assignament.execute()
-    df = excel_to_df()
+    #df = excel_to_df()
     #print(df.columns)
-    insertar_dataframe_en_data_demurrage(df)
+    #insertar_dataframe_en_data_demurrage(df)
     # print("numero de camioneros", n_camiones)
 
 def model_execution_today():
@@ -45,9 +45,9 @@ def model_execution_today():
 
     df, n_camiones, total_camioneros = assignament.execute()
     # print("numero de camioneros", n_camiones)
-    df = excel_to_df()
+    #df = excel_to_df()
     #print(df.columns)
-    insertar_dataframe_en_data_demurrage(df)
+    #insertar_dataframe_en_data_demurrage(df)
 
 def job():
     

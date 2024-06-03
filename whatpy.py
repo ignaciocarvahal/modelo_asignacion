@@ -214,6 +214,10 @@ def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros
             else:
                 print("Máximo número de intentos alcanzado. No se pudo enviar el mensaje.")
   
+
+
+def envio_grafico():
+    return 
   
 #pruebas
 #resumen('+56988876774', 77, 77, 77, '00:00', 77, 77,  '2024-05-16 00:00:00', 2, 3)

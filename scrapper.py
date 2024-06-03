@@ -104,7 +104,7 @@ def download_dpw():
 
         for element in elementos:
             time.sleep(1)
-            print(element.text)
+            #print(element.text)
             element.click()
             time.sleep(1)
         
@@ -222,7 +222,7 @@ def download_sti():
     
     # Obtener la URL actual
     current_url_sti = driver.current_url
-    print(current_url_sti)
+    #print(current_url_sti)
     
     #tabla = wait.until(EC.presence_of_element_located((By.XPATH, '//html/body/div/div/div[@class="texto"]/table/tbody')))
     
@@ -237,7 +237,7 @@ def download_sti():
     arrivals = tree.xpath('//tr/td[4]')
     
     NAVES = query_NAVES()
-    print(len(NAVES))
+    #print(len(NAVES))
     lista_df = []
     count = 0
     # Imprimir los enlaces
@@ -247,7 +247,7 @@ def download_sti():
             text = link.text_content()
             if esta_dentro_del_rango(str(arrival.text_content())):
                 if tiene_similitud_con_lista(str(text), NAVES):
-                    print(str(100*count/len(NAVES))[:4]+"%")
+                    #print(str(100*count/len(NAVES))[:4]+"%")
                     download_page = "https://www.stiport.com" + str(href)
                     enlace = driver.get(download_page)
                     time.sleep(1)
@@ -266,12 +266,12 @@ def download_sti():
                             
                             # Encuentra el número de fila con la mejor similitud
                             numero_de_fila = encontrar_fila_con_similitud(df1, patron)
-                            print("asdfasdf", numero_de_fila)
+                            #print("asdfasdf", numero_de_fila)
                             df = pd.read_excel(archivo_ruta, header=numero_de_fila)
                             df["NAVE"] = str(text.strip())
                             df["ETA"] = str(arrival.text_content()) #lista_df.append(df)
                             
-                            print("jpña")
+                       
                             # Reemplaza las barras diagonales con guiones bajos en arrival.text_content()
                             #arrival_text = re.sub(r'[/\\]', '_', arrival.text_content())
                             
@@ -279,7 +279,7 @@ def download_sti():
                             file_path = directorio_actual + '\\secuencias\\sti\\' + str(text.strip()) + '.xlsx'
 
 
-                            print(file_path)
+                     
 
                             
                             #print(directorio_actual + '\\secuencias\\sti\\' +  descapitalize_and_remove_spaces(str(text)) + '.xlsx')

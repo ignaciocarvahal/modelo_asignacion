@@ -102,7 +102,7 @@ def date_filter(df1, fecha_referencia, fecha_referencia_fin):
         df['hora_presentacion'] = pd.to_datetime(df['hora_presentacion'], format='%d-%m-%Y %H:%M')
     except:
         print("hora del planeta de los simios")
-        print(df['hora_presentacion'].iloc[:10])
+        #print(df['hora_presentacion'].iloc[:10])
     
 
     # Crear la columna 'hora_llegada_timestamp' como timestamps
@@ -224,7 +224,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             
             
             hora_llegada_deposito = hora_salida[idx] + timedelta(minutes=tiempo_minutos[idx]) + timedelta(minutes=T_viajes_devolucion_VAL)
-            print("llegada_deposito: ", hora_llegada_deposito, deposito)
+            #print("llegada_deposito: ", hora_llegada_deposito, deposito)
             #creando instancia de devolucion de vacio
             df_visualization["id_modelo"].append(str(idservice[idx]) + "-p")
             df_visualization["id"].append(idservice[idx])
@@ -244,7 +244,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             
             hora_llegada_deposito = hora_salida[idx] + timedelta(minutes=tiempo_minutos[idx]) + timedelta(minutes=T_viajes_devolucion_STGO)
             
-            print("llegada_deposito: ", hora_llegada_deposito, deposito)
+            #print("llegada_deposito: ", hora_llegada_deposito, deposito)
             
             #creando instancia de devolucion de vacio
             df_visualization["id_modelo"].append(str(idservice[idx]) + "-p")
@@ -331,7 +331,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
             df_visualization["etapa_tipo"].append(etapa_tipo[idx])
     
     #print(len(df_visualization["id"]), len(df_visualization["cont_tamano"]), len(df_visualization["peso_cont"]))
-    print(len(df_visualization["id"]), len(df_visualization["fk_etapa"]), len(df_visualization["etapa"]), len(df_visualization["DT inicio"]), len(df_visualization["DT final"]), len(df_visualization["cont_tamano"]), len(df_visualization["peso_cont"]), len(df_visualization["comuna_nombre"]), len(df_visualization["etapa_tipo"]))
+    #print(len(df_visualization["id"]), len(df_visualization["fk_etapa"]), len(df_visualization["etapa"]), len(df_visualization["DT inicio"]), len(df_visualization["DT final"]), len(df_visualization["cont_tamano"]), len(df_visualization["peso_cont"]), len(df_visualization["comuna_nombre"]), len(df_visualization["etapa_tipo"]))
 
 ############################################################# retiros desde portuarios ###########################3
     #import numpy as np
@@ -343,7 +343,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
     comuna = comuna + list(df2['comuna'])
     #etapa_tipo = etapa_tipo + list(np.ones(len(df2['fecha'])))
     #print(len(etapa_tipo))
-    print(len(idservice))
+   
     cont_tamano = cont_tamano + list(df2['cont_tamano'])
     peso_cont = peso_cont + list(df2['contenedor_peso'])
     fk_etapa = fk_etapa + list(df2["fk_etapa"])
@@ -405,18 +405,12 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
     #print(len(df_visualization["id"]), len(df_visualization["cont_tamano"]), len(df_visualization["peso_cont"]))
     
     # Convert dictionary to DataFrame
-    print(len(df_visualization["id"]), len(df_visualization["fk_etapa"]), len(df_visualization["etapa"]), len(df_visualization["DT inicio"]), len(df_visualization["DT final"]), len(df_visualization["cont_tamano"]), len(df_visualization["peso_cont"]), len(df_visualization["comuna_nombre"]), len(df_visualization["etapa_tipo"]))
+    #print(len(df_visualization["id"]), len(df_visualization["fk_etapa"]), len(df_visualization["etapa"]), len(df_visualization["DT inicio"]), len(df_visualization["DT final"]), len(df_visualization["cont_tamano"]), len(df_visualization["peso_cont"]), len(df_visualization["comuna_nombre"]), len(df_visualization["etapa_tipo"]))
     df_visualization = pd.DataFrame(df_visualization)
     df_visualization = df_visualization.drop_duplicates()
     
 
-    
-    #print(df)
-    
-    #print(len(hora_salida))
-    #print(len(hora_llegada))
-    print("_------------------{")
-    #print(df_portuarios)
+ 
     df_model = pd.DataFrame()
 
     df_model["id"] = idservice
@@ -435,7 +429,7 @@ import pandas as pd
 
 def group_by_id(df):
     # Imprimir el DataFrame filtrado print(df_filtrado)
-    print("group_by", df.columns)
+    #print("group_by", df.columns)
     #df['fk_servicio_etapa'] = = df['id'].astype(str) + df['etapa'].astype(str)
     grouped_df = df.groupby('id')
 

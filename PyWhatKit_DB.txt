@@ -37998,3 +37998,734 @@ Time: 8:44
 Phone Number: +56944057281
 Message: *PLANIFICACIÓN* 2024-05-29 00:00:00 *CAMIONES FALTANTES: 10* (0 terceros y 10 porteadores) *Requerimiento estimado* *Minimo 74 transportistas.* Minimo 9 chasis de veinte + multi. Minimo 7 chasis de veinte *Camiones Disponibles* Propios: 28 Asociado: 46 TOTAL: 74 *Servicios Solicitados:* Presentaciones: 67 Retiros: 110 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 22DWI COORDINACIÓN 30
 --------------------
+Date: 29/5/2024
+Time: 12:0
+Phone Number: +56944073046
+Message: *PLANIFICACIÓN* 2024-05-29 00:00:00 *CAMIONES FALTANTES: 4* (0 terceros y 4 porteadores) *Requerimiento estimado* *Minimo 75 transportistas.* Minimo 9 chasis de veinte + multi. Minimo 7 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 46 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 67 Retiros: 109 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 22DWI COORDINACIÓN 30
+--------------------
+Date: 29/5/2024
+Time: 12:14
+Phone Number: +56998900893
+Message: *PLANIFICACIÓN* 2024-05-29 00:00:00 *CAMIONES FALTANTES: 4* (0 terceros y 4 porteadores) *Requerimiento estimado* *Minimo 82 transportistas.* Minimo 9 chasis de veinte + multi. Minimo 7 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 46 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 67 Retiros: 109 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 22DWI COORDINACIÓN 30
+--------------------
+Date: 29/5/2024
+Time: 13:20
+Phone Number: +56998900893
+Message: *PLANIFICACIÓN* 2024-05-29 00:00:00 *CAMIONES FALTANTES: 2* (0 terceros y 2 porteadores) *Requerimiento estimado* *Minimo 82 transportistas.* Minimo 9 chasis de veinte + multi. Minimo 7 chasis de veinte *Camiones Disponibles* Propios: 26 Asociado: 46 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 67 Retiros: 111 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 22DWI COORDINACIÓN 30
+--------------------
+Date: 29/5/2024
+Time: 15:52
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-29_hora_1452.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 29/5/2024
+Time: 15:55
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-29_hora_1452.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 29/5/2024
+Time: 23:41
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-29_hora_2243.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 29/5/2024
+Time: 23:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-29_hora_2243.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 29/5/2024
+Time: 23:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-29_hora_2243.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 2:25
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 31 transportistas.* Minimo 0 chasis de veinte + multi. Minimo 0 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 45 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 1418 Retiros: 2531 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 15DWI COORDINACIÓN 31
+--------------------
+Date: 30/5/2024
+Time: 3:10
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 11* (0 terceros y 11 porteadores) *Requerimiento estimado* *Minimo 79 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 45 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 74 Retiros: 97 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 15DWI COORDINACIÓN 31
+--------------------
+Date: 30/5/2024
+Time: 3:12
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 11* (0 terceros y 11 porteadores) *Requerimiento estimado* *Minimo 79 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 45 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 74 Retiros: 97 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 15DWI COORDINACIÓN 31
+--------------------
+Date: 30/5/2024
+Time: 10:38
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 11* (1 terceros y 10 porteadores) *Requerimiento estimado* *Minimo 82 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 45 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 73 Retiros: 97 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 14DWI COORDINACIÓN 31
+--------------------
+Date: 30/5/2024
+Time: 10:40
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 11* (1 terceros y 10 porteadores) *Requerimiento estimado* *Minimo 82 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 45 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 73 Retiros: 97 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 14DWI COORDINACIÓN 31
+--------------------
+Date: 30/5/2024
+Time: 12:40
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 8* (1 terceros y 7 porteadores) *Requerimiento estimado* *Minimo 81 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 45 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 73 Retiros: 101 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 14DWI COORDINACIÓN 31
+--------------------
+Date: 30/5/2024
+Time: 12:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-30_hora_312.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 12:42
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 8* (1 terceros y 7 porteadores) *Requerimiento estimado* *Minimo 81 transportistas.* Minimo 4 chasis de veinte + multi. Minimo 1 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 45 TOTAL: 72 *Servicios Solicitados:* Presentaciones: 73 Retiros: 101 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 14DWI COORDINACIÓN 31
+--------------------
+Date: 30/5/2024
+Time: 12:44
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-30_hora_312.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 13:26
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-30_hora_312.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 13:27
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-30_hora_312.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 13:55
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 49 transportistas.* Minimo 3 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 44 TOTAL: 71 *Servicios Solicitados:* Presentaciones: 59 Retiros: 19 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 35
+--------------------
+Date: 30/5/2024
+Time: 13:57
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-30_hora_312.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 14:49
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 30 transportistas.* Minimo 0 chasis de veinte + multi. Minimo 0 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 44 TOTAL: 71 *Servicios Solicitados:* Presentaciones: 1824 Retiros: 732 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 40 DIEGO GONZALEZ 14DWI COORDINACIÓN 36TNM COORDINACIÓN 1
+--------------------
+Date: 30/5/2024
+Time: 14:51
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-30_hora_312.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 15:40
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-05-30 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 30 transportistas.* Minimo 0 chasis de veinte + multi. Minimo 0 chasis de veinte *Camiones Disponibles* Propios: 27 Asociado: 44 TOTAL: 71 *Servicios Solicitados:* Presentaciones: 2016 Retiros: 732 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 45 DIEGO GONZALEZ 14DWI COORDINACIÓN 36TNM COORDINACIÓN 1
+--------------------
+Date: 30/5/2024
+Time: 15:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-30\30_5_corrio_2024-05-30_hora_312.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 15:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_1542.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 15:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_1542.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 15:52
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_1552.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 15:53
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_1553.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 22:52
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_2252.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 22:53
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_2253.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 23:4
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_234.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 23:5
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_235.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 23:7
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_237.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 30/5/2024
+Time: 23:11
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-30_hora_238.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 11:53
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1152.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 12:40
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1240.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 13:23
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1323.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 13:45
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1345.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 13:46
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1346.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 14:25
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1425.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 14:25
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1425.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 14:27
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1427.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 14:27
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1427.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 15:18
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 58 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 36 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 15:20
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1518.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 15:28
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 58 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 36 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 15:30
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1528.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 15:30
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 58 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 36 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 15:32
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1530.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 15:40
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 53 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 35 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 15:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1540.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 15:42
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 53 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 35 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 15:44
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1542.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 16:22
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 52 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 38 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 16:24
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1622.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 16:24
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 52 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 38 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 16:26
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1624.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 16:39
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 50 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 38 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 16:41
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1639.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 16:41
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 50 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 43 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 52 Retiros: 38 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 38
+--------------------
+Date: 31/5/2024
+Time: 16:43
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_1641.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 21:59
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-05-31_hora_1859.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 22:17
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 42 TOTAL: 64 *Servicios Solicitados:* Presentaciones: 54 Retiros: 98 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 40
+--------------------
+Date: 31/5/2024
+Time: 22:19
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_2217.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 22:19
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 42 TOTAL: 64 *Servicios Solicitados:* Presentaciones: 54 Retiros: 98 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 40
+--------------------
+Date: 31/5/2024
+Time: 22:21
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_2219.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 22:21
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 42 TOTAL: 64 *Servicios Solicitados:* Presentaciones: 54 Retiros: 98 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 40
+--------------------
+Date: 31/5/2024
+Time: 22:23
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_2221.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 31/5/2024
+Time: 22:23
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 60 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 42 TOTAL: 64 *Servicios Solicitados:* Presentaciones: 54 Retiros: 98 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 15 DIEGO GONZALEZ 1DWI COORDINACIÓN 40
+--------------------
+Date: 31/5/2024
+Time: 22:25
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-05-31_hora_2223.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 0:39
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 59 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 42 TOTAL: 64 *Servicios Solicitados:* Presentaciones: 55 Retiros: 98 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 14 DIEGO GONZALEZ 1DWI COORDINACIÓN 41
+--------------------
+Date: 1/6/2024
+Time: 0:41
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-01_hora_039.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 0:41
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 59 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 22 Asociado: 42 TOTAL: 64 *Servicios Solicitados:* Presentaciones: 55 Retiros: 98 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 14 DIEGO GONZALEZ 1DWI COORDINACIÓN 41
+--------------------
+Date: 1/6/2024
+Time: 0:43
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-01_hora_041.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 13:26
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 55 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 23 Asociado: 42 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 55 Retiros: 98 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 1DWI COORDINACIÓN 41TNM COORDINACIÓN 1
+--------------------
+Date: 1/6/2024
+Time: 13:28
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-01_hora_1326.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 13:28
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 55 transportistas.* Minimo 8 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 23 Asociado: 42 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 55 Retiros: 98 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 1DWI COORDINACIÓN 41TNM COORDINACIÓN 1
+--------------------
+Date: 1/6/2024
+Time: 13:30
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-01_hora_1328.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 18:49
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 3* (2 terceros y 1 porteadores) *Requerimiento estimado* *Minimo 73 transportistas.* Minimo 7 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 23 Asociado: 42 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 77 Retiros: 116 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 1DWI COORDINACIÓN 43TNM COORDINACIÓN 5
+--------------------
+Date: 1/6/2024
+Time: 18:51
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-01_hora_1849.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 18:51
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 3* (2 terceros y 1 porteadores) *Requerimiento estimado* *Minimo 73 transportistas.* Minimo 7 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 23 Asociado: 42 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 77 Retiros: 116 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 1DWI COORDINACIÓN 43TNM COORDINACIÓN 5
+--------------------
+Date: 1/6/2024
+Time: 18:53
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-01_hora_1851.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 21:24
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 5* (0 terceros y 5 porteadores) *Requerimiento estimado* *Minimo 75 transportistas.* Minimo 7 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 23 Asociado: 42 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 78 Retiros: 118 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 1DWI COORDINACIÓN 43TNM COORDINACIÓN 5
+--------------------
+Date: 1/6/2024
+Time: 21:26
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-01_hora_2124.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 21:26
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 5* (0 terceros y 5 porteadores) *Requerimiento estimado* *Minimo 75 transportistas.* Minimo 7 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 23 Asociado: 42 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 78 Retiros: 118 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 1DWI COORDINACIÓN 43TNM COORDINACIÓN 5
+--------------------
+Date: 1/6/2024
+Time: 21:28
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-01_hora_2126.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 22:40
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-02 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 5 transportistas.* Minimo 0 chasis de veinte + multi. Minimo 0 chasis de veinte *Camiones Disponibles* Propios: 23 Asociado: 45 TOTAL: 68 *Servicios Solicitados:* Presentaciones: 5 Retiros: 0 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_serviciosDWI COORDINACIÓN 5
+--------------------
+Date: 1/6/2024
+Time: 22:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-02\2_6_corrio_2024-06-01_hora_2240.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 22:50
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 1/6/2024
+Time: 22:52
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-01_hora_2250.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 22:52
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 1/6/2024
+Time: 22:54
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-01_hora_2252.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 22:54
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 1/6/2024
+Time: 22:56
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-01_hora_2254.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 1/6/2024
+Time: 22:56
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 1/6/2024
+Time: 22:58
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-01_hora_2256.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 0:1
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 0:3
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_01.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 0:3
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 0:5
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_03.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 0:5
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 0:7
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_05.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 0:7
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 57 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 0:9
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_07.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 15:30
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-05-31\31_5_corrio_2024-06-02_hora_1530.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 17:27
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 2* (2 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 52 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 48 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 17:29
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1727.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 17:29
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 2* (2 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 52 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 48 Retiros: 10 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 17:31
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1729.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 17:35
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-01 00:00:00 *CAMIONES FALTANTES: 18* (3 terceros y 15 porteadores) *Requerimiento estimado* *Minimo 68 transportistas.* Minimo 7 chasis de veinte + multi. Minimo 5 chasis de veinte *Camiones Disponibles* Propios: 23 Asociado: 42 TOTAL: 65 *Servicios Solicitados:* Presentaciones: 50 Retiros: 50 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 30 DIEGO GONZALEZ 1DWI COORDINACIÓN 43TNM COORDINACIÓN 5
+--------------------
+Date: 2/6/2024
+Time: 17:37
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-01\1_6_corrio_2024-06-02_hora_1735.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:12
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 18:14
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1812.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:14
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 63 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 18:16
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1814.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:38
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 62 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 18:40
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1838.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:40
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 62 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 18:42
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1840.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:42
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 62 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 18:44
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1842.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:44
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 62 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 18:46
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1844.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:55
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 62 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 22
+--------------------
+Date: 2/6/2024
+Time: 18:57
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1855.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:57
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 62 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 23
+--------------------
+Date: 2/6/2024
+Time: 18:59
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1857.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 18:59
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1859.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------
+Date: 2/6/2024
+Time: 19:0
+Phone Number: +56988876774
+Message: *PLANIFICACIÓN* 2024-06-03 00:00:00 *CAMIONES FALTANTES: 0* (0 terceros y 0 porteadores) *Requerimiento estimado* *Minimo 62 transportistas.* Minimo 5 chasis de veinte + multi. Minimo 3 chasis de veinte *Camiones Disponibles* Propios: 31 Asociado: 45 TOTAL: 76 *Servicios Solicitados:* Presentaciones: 70 Retiros: 44 *Servicios Solicitados por ejecutivo:* nombre_completo cantidad_de_servicios LILIAN ARGUEDAS 35 DIEGO GONZALEZ 14DWI COORDINACIÓN 23
+--------------------
+Date: 2/6/2024
+Time: 19:2
+Phone Number: +56988876774
+Image: C:\Users\Usuario\Desktop\modelo_asignacion/static\tmp\2024-06-03\3_6_corrio_2024-06-02_hora_1859.png
+Caption: Aquí tienes la imagen que solicitaste
+--------------------

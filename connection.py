@@ -87,7 +87,7 @@ def connectionDB_todf(query):
 def connectionDW_todf(query):
 
     # Datos de conexión
-    host = "3.91.152.225"
+    host = "3.86.83.8"
     port = "5432"  # Puerto predeterminado de PostgreSQL
     database = "dw"  # Reemplazar por el nombre real de la base de datos
     user = "postgres"
