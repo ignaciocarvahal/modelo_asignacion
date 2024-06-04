@@ -12,7 +12,7 @@ import paramiko
 from connection import *
 import psycopg2
 from datetime import datetime
-from enviar_imagen import *
+
 
 def subir_datos_modelo(n_chasis_20, n_multis, n_camiones, peak, peak_20):
     # Datos de conexión
@@ -567,22 +567,25 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     
 
     
-    # Llamar a la función y guardar la última imagen en una variable
-    ultima_imagen = obtener_ultima_imagen(start)
 
-
-
+    
     try:
         resumen('+56988876774',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
         
-        time.sleep(60)
-        
-        enviar_imagen_whatsapp("+56988876774", ultima_imagen)
+        time.sleep(30)
+
          
     except:
         print("fallo mensaje gantt")  
     
-    enviar_imagen_whatsapp("+56988876774", ultima_imagen)
+    try:
+        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        
+        time.sleep(30)
+        
+         
+    except:
+        print("fallo mensaje gantt")  
     
     
     
@@ -590,7 +593,7 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     
 
 
-"""
+
     try:
         resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
         time.sleep(60)
@@ -629,12 +632,12 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
         print("fallo gantt mensahe")
 
  
-
+"""
 """
 """
 # Input date string
-start_string = '2024-05-30 00:00:00'
-end_string = '2024-05-30 23:59:00'
+start_string = '2024-06-05 00:00:00'
+end_string = '2024-06-05 23:59:00'
 
 # Convert to a pandas datetime object
 start_date = pd.to_datetime(start_string)
@@ -651,7 +654,9 @@ df_visualization = pd.read_excel(
 
 mostrar_info = False
 
+
 carta_gantt_trackers(datos, start_date, end_date, mostrar_info)
+
 """
 
 '''

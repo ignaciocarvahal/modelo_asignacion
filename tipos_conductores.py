@@ -391,10 +391,11 @@ class Assignament:
 
 
 
-#Input date string
-start_string = '2024-06-03 00:00:00' 
 
-end_string = '2024-06-03 23:59:00' 
+#Input date string
+start_string = '2024-06-05 00:00:00' 
+
+end_string = '2024-06-05 23:59:00' 
 
 
 # Convert to a pandas datetime object
@@ -406,7 +407,6 @@ assignament = Assignament(60*0, start_date, end_date, '', False, False)
 assignament.reset()
 
 df, n_camiones, total_camioneros = assignament.execute()
-
 
 """
 debo crear una query que rankee por llegada 

@@ -8,6 +8,7 @@ import pywhatkit as kit
 import datetime
 import time
 from connection import * 
+from enviar_imagen import *
 
 def message(numero_destino):
     mensaje = "¡Hola! el modelo está listo! : https://transportesnm-my.sharepoint.com/:f:/g/personal/icarvajal_transportesnm_cl/EnsvZlQ1NtRBrfsuZCoFUcoBvtYB8GGYXYh65y6PpPXwtg?e=vhm4Hr"
@@ -160,6 +161,13 @@ def obtener_datos_mensaje(fecha):
     
     
     
+    
+    
+    
+    
+    
+  
+    
 
 def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros, hora_peak, cantidad_chasis, cantidad_chasis_20, fecha, n_terceros, n_porteadores):
 
@@ -213,12 +221,15 @@ def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros
                 time.sleep(5)  # Esperar 5 segundos antes de reintentar
             else:
                 print("Máximo número de intentos alcanzado. No se pudo enviar el mensaje.")
+                
+        # Llamar a la función y guardar la última imagen en una variable
+        ultima_imagen = obtener_ultima_imagen(start)
+
+
+        enviar_imagen_whatsapp(numero_destino, ultima_imagen)  
   
 
 
-def envio_grafico():
-    return 
-  
 #pruebas
 #resumen('+56988876774', 77, 77, 77, '00:00', 77, 77,  '2024-05-16 00:00:00', 2, 3)
 

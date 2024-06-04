@@ -50,19 +50,15 @@ def enviar_imagen_whatsapp(numero, ruta_imagen):
     
     # Enviar la imagen usando pywhatkit
     try:
-        kit.sendwhats_image(numero, ruta_imagen, caption="Aquí tienes la imagen que solicitaste")
+        kit.sendwhats_image(numero, ruta_imagen, caption="Modelo con balanceo y pre-modelo de factibilidad")
         print("Imagen enviada con éxito a", numero)
     except Exception as e:
         print("Ocurrió un error al enviar la imagen:", str(e))
 
 
-"""
+
 # Llamar a la función y guardar la última imagen en una variable
-ultima_imagen = obtener_ultima_imagen()
+#ultima_imagen = obtener_ultima_imagen()
 
 
-numero_destino = "+56988876774"  # Reemplaza con el número de teléfono destino
 
-
-enviar_imagen_whatsapp(numero_destino, ultima_imagen)
-"""

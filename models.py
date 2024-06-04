@@ -17,6 +17,7 @@ from gantt import *
 import ast
 from cargar_modelo import cargar_modelo
 from query_control_retiros import *
+from modelos_factibles import contador_tipos_conductor, contador_tipos_viajes, n_asociados_por_control_presentaciones, n_asociados_por_control_retiros
 
 
 ##############################################################################
@@ -73,33 +74,8 @@ def separar_viajes(tipo_viajes):
             presentacion_ids.append(id_viaje)
         
     return presentacion_ids, retiro_ids
-    '''
-    #si es propio puede hacer cualquier viaje 
-    if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO':
-        return True
- 
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO' and tipo_viaje[v]=='viaje_20':
-        return False
 
-    #si es asociado no puede ir a retirar a valparaiso ni tampoco hacer viajes de 20
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO':
-        return True
-    
 
-    #si es porteador o porteador externo solo puede ir a retiros de sai 
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR'  and tipo_viaje[v]=='retiro_sai':
-        return True
-    
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext' and tipo_viaje[v]=='retiro_sai':
-        return True
-    
-    #si es tercero no hace de viajes de 20 ni portea en valpo, ni hace puerto cruzado 
-    elif tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO' and  tipo_viaje[v] != 'retiro_val' and tipo_viaje[v] != 'Puerto cruzado':
-        return True
-    
-    else:
-        return False
-    '''
 def combinations(i, camioneros, tipo_viaje, tipo_tracker):
     # Aquí definimos todas las combinaciones de los viajes programados y los trackers que pueden hacerlo
     trios = []
@@ -179,12 +155,7 @@ def setMaxTime(model, max_time):
 
 def objective_function(v, j, tipo_viaje, tipo_tracker,  df_control_retiros):
     
-  
-    
 
-    
-    
-    
     resultado = 0 
     r_propio = 0
     r_asociado = 0
@@ -192,23 +163,8 @@ def objective_function(v, j, tipo_viaje, tipo_tracker,  df_control_retiros):
     r_porteador_ext = 0
     r_externo = 0
     
-    """
-    if tipo_tracker[ast.literal_eval(j)[0]] == 'PROPIO':
-        
-        r_propio = r_propio + 10000
-        
-    if tipo_tracker[ast.literal_eval(j)[0]] == 'ASOCIADO':
-        r_asociado = r_asociado 
-      
-    if tipo_tracker[ast.literal_eval(j)[0]] == 'TERCERO':
-        r_externo = r_externo - 5000
     
-    if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR':
-        r_porteador = r_porteador + 5000
-        
-    if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext':
-        r_porteador_ext = r_porteador_ext - 3000
-    """
+
     if tipo_tracker[ast.literal_eval(j)[0]] == 'PORTEADOR_ext':
         r_porteador_ext = r_porteador_ext - 3000
         
@@ -272,6 +228,22 @@ def objective_function(v, j, tipo_viaje, tipo_tracker,  df_control_retiros):
 
 def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timestop=False):
     
+    print()
+    limite_mayor = 0.7
+    limite_menor = 0.5
+    n_retiros, n_presentaciones = contador_tipos_viajes(i, tipo_viaje)
+    n_cumplen, n_no_cumplen, n_desastre, n_propios, n_asociados, n_porteadores = contador_tipos_conductor(camioneros, tipo_tracker, limite_mayor, limite_menor)
+    
+    print("---------------------------------------------------------------------")
+    print(n_retiros, n_presentaciones)
+    print(n_cumplen, n_no_cumplen, n_desastre, n_propios, n_asociados, n_porteadores)
+    print("---------------------------------------------------------------------")
+
+    min_presentaciones_asociados_cumplen, min_presentaciones_asociados_no_cumplen = n_asociados_por_control_presentaciones(n_presentaciones, n_cumplen, n_no_cumplen, n_propios)
+    min_retiros_desastre, min_retiros_no_cumplen = n_asociados_por_control_retiros(n_retiros, n_porteadores, n_cumplen, n_no_cumplen, n_desastre)
+    
+    print(min_presentaciones_asociados_cumplen, min_presentaciones_asociados_no_cumplen)
+    print(min_retiros_desastre, min_retiros_no_cumplen)
     presentaciones, retiros = separar_viajes(tipo_viaje)
     
     # Create an empty model
@@ -291,20 +263,20 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
 
 
     
-    for trio in trios:
+    #for trio in trios:
         #print((trio[0], eval(trio[1])[-1]), asignados)
-        if validador_asignados(asignados, trio[0], eval(trio[1])[-1]):
+        #if validador_asignados(asignados, trio[0], eval(trio[1])[-1]):
         #if (trio[0], eval(trio[1])[-1]) in asignados.items():
         
-            print(trio)
+            #print(trio)
             #m1.addCons(x[trio]  == 1)
             
     #print(asignados.items())
         
     df_control_retiros = query_control_porteos()
 
-    T = 0.8
-    T2 = 0.5
+    T = limite_mayor
+    T2 = limite_menor
     
     # Add the constraint
 
@@ -312,7 +284,7 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
         
 
         if eval(c)[1] == 'PROPIO':
-            print( eval(c)[1] )
+            #print( eval(c)[1] )
             #todos los propios deben viajar 
             m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in presentaciones and validator(v, c, tipo_viaje, tipo_tracker))  >= 1 )
 
@@ -326,35 +298,41 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
             #m1.addCons( c_retiros + scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker)) - T2*c_presentaciones -  T2*scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in presentaciones and validator(v, c, tipo_viaje, tipo_tracker))  >= 1 )
             
             #se prioriza la segunda vuelta del propio
-            m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in presentaciones and validator(v, c, tipo_viaje, tipo_tracker))  == 1 )
+            m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in presentaciones and validator(v, c, tipo_viaje, tipo_tracker))  <= 2 )
+            #si hay presentaciones le damos una a los asociados
+            
 
             if c_presentaciones != 0:
                 r = c_retiros/c_presentaciones
             else:
+                
                 r = c_retiros/1
                 
             #pregunta: 
             if r > T:
                 
-                print(eval(c)[0], r, 0.8)
+                
+                #print(eval(c)[0], r, 0.8)
                 #si cumple no debe hacer más que un retiro al día 
                 
-                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker))  <=1 )
-                
+                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker))  <= 1 )
+                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in presentaciones and validator(v, c, tipo_viaje, tipo_tracker))  >= min_presentaciones_asociados_cumplen )
                 
                 
             elif r>T2 and r<= T:
                
-                print(eval(c)[0], r, 0.5)
+                #print(eval(c)[0], r, 0.5)
                 #si no cumple, debe mantenerse o mejorar
-                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker))  >= 1 )
+                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker))  >= min_retiros_no_cumplen )
                 m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker))  <= 2 )
-
+                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in presentaciones and validator(v, c, tipo_viaje, tipo_tracker))  >= min_presentaciones_asociados_no_cumplen )
                 
             else:
-                print(eval(c)[0], r, 0)
+                #print(eval(c)[0], r, 0)
                 #si esta en un nivel inaceptable debe retirar dos veces
-                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker))  == 2 )
+                
+                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker))  >= min_retiros_desastre )
+                m1.addCons( scip.quicksum(x[(v, c, t)] for v, t in i.items() if v in retiros and validator(v, c, tipo_viaje, tipo_tracker))  <= 2 )
                 
                 
           
@@ -593,7 +571,7 @@ def secuencial_problem(asignados, tipo_viaje, tipo_tracker, df2, i, Fv, Iv, max_
     datos.to_excel(directory + '\\static\\tmp\\planificacion2.xlsx')
 
     cargar_modelo(datos)
-    carta_gantt_trackers(datos, start, end, mostrar_info)
+    #carta_gantt_trackers(datos, start, end, mostrar_info)
     print("final")
 
     try:  

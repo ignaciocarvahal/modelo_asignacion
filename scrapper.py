@@ -137,9 +137,10 @@ def query_NAVES():
         LEFT JOIN public.taller_equipos AS tract_1 ON cond_eta_1.fk_tracto = tract_1.id
         LEFT JOIN public.servicios_etapas AS eta_0 ON eta_1.fk_etapa_anterior = eta_0.id
     WHERE
-        ser.estado = 1
-        AND eta_1.tipo = 1
-        AND TO_DATE(eta_1.fecha, 'DD-MM-YYYY') > (CURRENT_DATE - INTERVAL '3 month')
+        --ser.estado = 1
+        --AND eta_1.tipo = 1
+        --AND 
+        TO_DATE(eta_1.fecha, 'DD-MM-YYYY') > (CURRENT_DATE - INTERVAL '3 month')
     ORDER BY
         servicio_nave_nombre; """
                                     
@@ -292,7 +293,7 @@ def download_sti():
                     count += 1
 
         else:
-            print(count)
+            
             break
     
     driver.quit()

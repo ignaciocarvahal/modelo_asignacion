@@ -95,7 +95,7 @@ except:
     print("fallo el modelo")
     
 try: 
-    schedule.every().day.at("17:30").do(job)
+    schedule.every().day.at("17:03").do(job)
 except:
     print("fallo el modelo")
     

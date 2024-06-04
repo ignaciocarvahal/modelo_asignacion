@@ -334,7 +334,7 @@ def filter_containers(input_df, contenedores):
     # Combinar los DataFrames basado en la columna 'contenedores'
     merged_df = input_df.merge(contenedores, on='contenedor')
     merged_df = merged_df.drop_duplicates(subset='contenedor')
-    print(merged_df)
+
     return merged_df
     
 
