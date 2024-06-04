@@ -126,8 +126,7 @@ def n_asociados_por_control_presentaciones(n_total_presentaciones, n_cumplen, n_
     model.addCons( n_total_presentaciones - n_propios >= x["c_min_presentaciones_asociados_cumplen"]*n_cumplen + x["c_min_presentaciones_asociados_no_cumplen"]*n_no_cumplen)
     
 
-    # Set the objective fu
-    nction
+    # Set the objective function
     model.setRealParam('limits/gap', 0.01)
     model.setParam('limits/solutions', 3)
     #m1.setObjective(1 , sense="maximize")
