@@ -54,7 +54,7 @@ def determinar_tipo_viaje(grupo):
     if any(grupo['etapa_tipo'] == 2) and (any((grupo['etapa_tipo'] == 3) & (grupo['comuna_nombre']=='Valparaíso')) or any((grupo['etapa_tipo'] == 1) & (grupo['comuna_nombre']=='Valparaíso'))):
         return 'Puerto cruzado'
     
-    elif  any(grupo['cont_tamano']== str(20)):
+    elif  any(grupo['cont_tamano']== str(20)) and any(grupo['etapa_tipo'] == 2):
         return 'viaje_20'
     
     elif any(grupo['etapa_tipo'] == 2):
@@ -227,8 +227,8 @@ class Assignament:
         query_trackers = f'''SELECT DISTINCT ON (usu_rut) nombre, ult_empt_tipo, usu_rut
                                 FROM public.timeline_programacion_conductores 
                                 WHERE tipo_fecha != 'SINDISPONIBILIDAD'  AND 
-                                      TO_DATE(fecha_desde, 'DD-MM-YYYY') >= '06-05-2024'
-                                      AND TO_DATE(fecha_hasta, 'DD-MM-YYYY') <= '06-06-2024'
+                                      TO_DATE(fecha_desde, 'DD-MM-YYYY') >= '{fecha_de_hoy_str}'
+                                      AND TO_DATE(fecha_hasta, 'DD-MM-YYYY') <= '{fecha_de_mañana_str}'
                                       AND tipo_fecha = 'ETAPA'
                                       ORDER BY usu_rut, TO_DATE(fecha_desde, 'DD-MM-YYYY');'''
         rows = connectionDB(query_trackers)
@@ -306,7 +306,7 @@ class Assignament:
       
         print("tipo_viaje", self.df_visualization.head(5))
         self.tipo_viaje = procesar_datos(self.df_visualization, self.fecha_formateada, self.start_date, self.end_date) 
-        print(self.tipo_viaje)
+        #print(self.tipo_viaje)
         print("Horas por etapa fijadas")
         print(espacio)
         
@@ -393,9 +393,9 @@ class Assignament:
 
 
 #Input date string
-start_string = '2024-06-05 00:00:00' 
+start_string = '2024-06-05 17:00:00' 
 
-end_string = '2024-06-05 23:59:00' 
+end_string = '2024-06-06 23:59:00' 
 
 
 # Convert to a pandas datetime object

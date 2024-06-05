@@ -106,4 +106,4 @@ def identificador_depositos(nombre_deposito):
     
     return json_cierre_depositos[empresa_a_revisar][ciudad_a_revisar]
 
-#print(identificador_depositos('MEDLOG VAL'))
+print(identificador_depositos('MEDLOG VAL'))

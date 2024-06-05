@@ -33,7 +33,7 @@ def message(numero_destino):
 def obtener_datos_mensaje(fecha):
     
     # Convertir la cadena a un objeto datetime
-    fecha_objeto = datetime.strptime(fecha, "%Y-%m-%d %H:%M:%S")
+    fecha_objeto = datetime.strptime(str(fecha), "%Y-%m-%d %H:%M:%S")
     #print(fecha_objeto)
     # Formatear la fecha en el nuevo formato
     fecha = str(fecha_objeto.strftime("%d-%m-%Y"))
@@ -204,6 +204,11 @@ def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros
     {presentaciones_por_comercial}
 
                """
+               
+    # Llamar a la función y guardar la última imagen en una variable
+    ultima_imagen = obtener_ultima_imagen(fecha)
+    enviar_imagen_whatsapp(numero_destino, ultima_imagen) 
+    
     max_intentos = 4
     
     for intento in range(max_intentos):
@@ -222,11 +227,7 @@ def resumen(numero_destino, numero_camiones, total_presentaciones, total_retiros
             else:
                 print("Máximo número de intentos alcanzado. No se pudo enviar el mensaje.")
                 
-        # Llamar a la función y guardar la última imagen en una variable
-        ultima_imagen = obtener_ultima_imagen(start)
 
-
-        enviar_imagen_whatsapp(numero_destino, ultima_imagen)  
   
 
 

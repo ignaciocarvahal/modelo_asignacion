@@ -229,7 +229,7 @@ def datos_asignacion(datos, start, end, mostrar_info):
 
     # Crear una lista para contar cuántos servicios están ocurriendo en cada momento
     concurrent_services_20_pesados = []
-    datos_20_pesados = datos[datos["tipo_cont"] == "20 pesado"]
+    datos_20_pesados = datos[datos["tipo_cont"] == "20 pesado"][ datos["etapa"] == "presentacion"]
 
     # Recorrer cada momento y contar cuántos servicios están ocurriendo en ese momento
     for time in service_times:
@@ -251,14 +251,22 @@ def datos_asignacion(datos, start, end, mostrar_info):
     # Crear una lista para contar cuántos servicios están ocurriendo en cada momento
     concurrent_services_20_pesados_livianos = []
     datos_20_pesados_livianos = datos[datos["tipo_cont"].isin(
-        ["20 pesado", "20 liviano"])]
+        [ "20 liviano"])][ datos["etapa"] == "presentacion"]
 
+
+    concurrent_services_20_retiros = []
+    datos_20_retiros = datos[datos["tipo_cont"].isin(
+        ["20 pesado", "20 liviano"])][ datos["etapa"].isin(["retiro_full_sai"])]
+    
     # Recorrer cada momento y contar cuántos servicios están ocurriendo en ese momento
     for time in service_times:
         concurrent_20_pesados_livianos = ((datos_20_pesados_livianos['DT inicio'] <= time) & (
             datos_20_pesados_livianos['DT final'] > time)).sum()
-        concurrent_services_20_pesados_livianos.append(
-            concurrent_20_pesados_livianos)
+        concurrent_services_20_pesados_livianos.append(concurrent_20_pesados_livianos)
+        
+        concurrent_20_retiros = ((datos_20_retiros['DT inicio'] <= time) & (
+            datos_20_retiros['DT final'] > time)).sum()
+        concurrent_services_20_retiros.append(concurrent_20_retiros)
 
     # Encontrar el punto con el máximo de servicios ocurriendo simultáneamente
     max_concurrent_index_20_pesados_livianos = np.argmax(
@@ -271,12 +279,12 @@ def datos_asignacion(datos, start, end, mostrar_info):
         '%H:%M')
     
     
-    return datos, last_service_end_time, tracker_positions, trackers, max_concurrent_time, max_concurrent_time_str, max_concurrent_time_20_pesados, max_concurrent_time_20_pesados_livianos, concurrent_services_20_pesados_livianos, concurrent_services_20_pesados, max_concurrent_time_str_20, conteo_porteadores, conteo_terceros
+    return datos, last_service_end_time, tracker_positions, trackers, max_concurrent_time, max_concurrent_time_str, max_concurrent_time_20_pesados, max_concurrent_time_20_pesados_livianos, concurrent_services_20_pesados_livianos, concurrent_services_20_pesados, max_concurrent_time_str_20, conteo_porteadores, conteo_terceros, concurrent_services_20_retiros
     
     
     
 def carta_gantt_trackers(datos, start, end, mostrar_info):
-    datos, last_service_end_time, tracker_positions, trackers, max_concurrent_time, max_concurrent_time_str,max_concurrent_time_20_pesados, max_concurrent_time_20_pesados_livianos, concurrent_services_20_pesados_livianos, concurrent_services_20_pesados, max_concurrent_time_str_20, conteo_porteadores, conteo_terceros = datos_asignacion(datos, start, end, mostrar_info)
+    datos, last_service_end_time, tracker_positions, trackers, max_concurrent_time, max_concurrent_time_str,max_concurrent_time_20_pesados, max_concurrent_time_20_pesados_livianos, concurrent_services_20_pesados_livianos, concurrent_services_20_pesados, max_concurrent_time_str_20, conteo_porteadores, conteo_terceros, concurrent_services_20_retiros = datos_asignacion(datos, start, end, mostrar_info)
     
     # Plot the vertical red line
     fig, ax = plt.subplots(1, 1, figsize=(
@@ -380,16 +388,17 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
     ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+1, "fecha: " + str(start) + "  corrio:" +
             str(day) + " " + str(hora) + ":" + str(minutos), color='black', ha='left', va='top', fontsize=27)
     ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+3, "Minimo " + str(len(trackers)) + " transportistas.", color='black', ha='left', va='top', fontsize=20)
-    ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+4, "Minimo " + str(np.max(concurrent_services_20_pesados_livianos)) + " chasis de veinte + multi. ", color='black', ha='left', va='top', fontsize=20)
-    ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+5, "Minimo " + str(np.max(concurrent_services_20_pesados)) + " chasis de veinte", color='black', ha='left', va='top', fontsize=20)
+    ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+4, "Minimo " + str(np.max(concurrent_services_20_pesados_livianos)) + " viajes livianos ", color='black', ha='left', va='top', fontsize=20)
+    ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+5, "Minimo " + str(np.max(concurrent_services_20_pesados)) + " viajes pesados", color='black', ha='left', va='top', fontsize=20)
+    ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+6, "Minimo " + str(np.max(concurrent_services_20_retiros)-1) + " retiros de 20 pies", color='black', ha='left', va='top', fontsize=20)
 
     
     
     
     
-    ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+6,
-            f"Presentaciones: {presentaciones_count}", color='black', ha='left', va='top', fontsize=20)
     ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+7,
+            f"Presentaciones: {presentaciones_count}", color='black', ha='left', va='top', fontsize=20)
+    ax.text(pd.Timestamp(start) + timedelta(hours=5), len(trackers)+8,
             f"Retiros: {retiros_count}", color='black', ha='left', va='top', fontsize=20)
 
     ax.xaxis.set_major_locator(mdates.HourLocator(
@@ -565,21 +574,24 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
   
     subir_datos_modelo(n_chasis_20, n_multis, n_camiones, peak, peak_20)
     
+    
 
     
 
     
     try:
-        resumen('+56988876774',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        resumen('+56988876774',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), start, conteo_terceros, conteo_porteadores)
         
         time.sleep(30)
 
          
     except:
         print("fallo mensaje gantt")  
-    
+        
+        
+    """
     try:
-        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), start, conteo_terceros, conteo_porteadores)
         
         time.sleep(30)
         
@@ -595,45 +607,46 @@ def carta_gantt_trackers(datos, start, end, mostrar_info):
 
 
     try:
-        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        resumen('+56998900893',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), start, conteo_terceros, conteo_porteadores)
         time.sleep(60)
          
     except:
         print("fallo mensaje gantt")
   
     try:
-        resumen('+56944930665',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        resumen('+56944930665',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), start, conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
 
     try:
-        resumen('+56944073046',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        resumen('+56944073046',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), start, conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
         
     try:
-        resumen('+56990399048',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        resumen('+56990399048',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), start, conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
 
     try:
-        resumen('+56944057461',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        resumen('+56944057461',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), start, conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
 
     try:
-        resumen('+56944057281',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)), str(start), conteo_terceros, conteo_porteadores)
+        resumen('+56944057281',str(len(trackers)), presentaciones_count, retiros_count, max_concurrent_time_str,  str(np.max(concurrent_services_20_pesados_livianos)), str(np.max(concurrent_services_20_pesados)),  
+                start, conteo_terceros, conteo_porteadores)
         time.sleep(60)
     except:
         print("fallo gantt mensahe")
 
  
 """
-"""
+
 """
 # Input date string
 start_string = '2024-06-05 00:00:00'
@@ -658,7 +671,6 @@ mostrar_info = False
 carta_gantt_trackers(datos, start_date, end_date, mostrar_info)
 
 """
-
 '''
 directory = os.getcwd()
 datos = pd.read_excel(directory + '\\static\\tmp\\planificacion2.xlsx')  # Asegúrate de que el nombre del archivo sea correcto

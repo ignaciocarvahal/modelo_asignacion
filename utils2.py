@@ -418,9 +418,7 @@ def time_filler(df1, df_portuarios, T_estimado_retiros=40,  T_estimado_presentac
     df_model['hora_salida'] = hora_salida
     df_model['hora_llegada'] = hora_llegada
     df_model = df_model.drop_duplicates()
-    print("model", len(df_model))
-    print("port", len(df_portuarios)-1)
-    print("vis", len(df_visualization))
+    #print("vis", len(df_visualization))
     
     return df_model, df_visualization 
 

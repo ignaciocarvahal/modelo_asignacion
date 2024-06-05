@@ -281,11 +281,12 @@ def contador_tipos_viajes(viajes, tipo_viaje):
     for v, t in viajes.items():
         if tipo_viaje[v] == 'retiro_sai':
             n_retiros += 1
-        if tipo_viaje[v] == 'presentacion':
+        if tipo_viaje[v] != "retiro_val" and tipo_viaje[v] != "retiro_sai":
             n_presentaciones += 1
     
     return n_retiros, n_presentaciones
         
+
         
         
 #n_retiros, n_presentaciones = contador_tipos_conductor(viajes, tipo_viaje)

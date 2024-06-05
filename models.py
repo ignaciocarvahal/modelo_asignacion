@@ -68,7 +68,7 @@ def separar_viajes(tipo_viajes):
     retiro_ids = []
     
     for id_viaje, tipo in tipo_viajes.items():
-        if tipo == "retiro_val" or tipo == "retiro_sai":
+        if tipo == "retiro_val" or tipo == "retiro_sai" and tipo != "viaje_20":
             retiro_ids.append(id_viaje)
         else:
             presentacion_ids.append(id_viaje)
@@ -229,7 +229,7 @@ def objective_function(v, j, tipo_viaje, tipo_tracker,  df_control_retiros):
 def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioneros, timestop=False):
     
     print()
-    limite_mayor = 0.7
+    limite_mayor = 0.8
     limite_menor = 0.5
     n_retiros, n_presentaciones = contador_tipos_viajes(i, tipo_viaje)
     n_cumplen, n_no_cumplen, n_desastre, n_propios, n_asociados, n_porteadores = contador_tipos_conductor(camioneros, tipo_tracker, limite_mayor, limite_menor)
@@ -244,6 +244,7 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
     
     print(min_presentaciones_asociados_cumplen, min_presentaciones_asociados_no_cumplen)
     print(min_retiros_desastre, min_retiros_no_cumplen)
+    
     presentaciones, retiros = separar_viajes(tipo_viaje)
     
     # Create an empty model
@@ -252,6 +253,7 @@ def problem3(asignados, tipo_viaje, tipo_tracker,trios, no_comp, i, Iv, camioner
         setMaxTime(m1, 3000)  # Establece el tiempo máximo a 60 segundos
     else: 
         pass
+    
     
     # Add a variable for each possible assignment
     x = {}
